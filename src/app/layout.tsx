@@ -4,6 +4,8 @@ import { MantineProvider } from '@mantine/core';
 // import { Notifications } from '@mantine/notifications';
 import "./globals.css";
 import '@mantine/core/styles.css';
+import StyledComponentsRegistry from "@ap/lib/registry";
+import { FloatingWhatsapp } from "@ap/components/Floating";
 
 const mulish = Mulish({ subsets: ["latin"] });
 // const geistSans = localFont({
@@ -44,7 +46,6 @@ export const metadata: Metadata = {
 const ExtendedMetadata = () => (
   <>
     <meta name='googlebot' content="NOODP"></meta>
-    
   </>
 )
 
@@ -54,14 +55,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={mulish.className}
       >
         <MantineProvider>
-          {children}
+          <StyledComponentsRegistry>
+            {children}
           {/* <Notifications /> */}
+          </StyledComponentsRegistry>
         </MantineProvider>
+        <FloatingWhatsapp />
       </body>
     </html>
   );

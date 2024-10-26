@@ -8,10 +8,13 @@ const HeaderWrapper = styled.div`
   width: 100%;
   background-color: transparent;
   padding: 16px;
+  z-index: 1000;
 `;
 
 const StyledHeader = styled.div`
   width: 100%;
+  height: 70.02px;
+  max-height: 70.02px;
   display: grid;
   grid-template-columns: 1fr 3fr;
   background-color: #fff;

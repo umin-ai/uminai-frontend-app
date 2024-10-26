@@ -1,5 +1,7 @@
+import Footer from "@ap/components/Footer";
 import Header from "@ap/components/Header";
 import Promotions from "@ap/components/Promotions";
+import WhyChooseUs from "@ap/components/WhyChooseUs";
 import { Space } from "@mantine/core";
 import Image from "next/image";
 
@@ -9,9 +11,11 @@ export default function Home() {
     <div className="flex flex-col w-full h-[100vh]">
       <Header />
       <Space h={120} />
+      <WhyChooseUs />
       <Promotions />
       {/* Hello
       <div>hello</div> */}
+      <Footer />
     </div>
   )
 };

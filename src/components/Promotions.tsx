@@ -9,7 +9,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   width: 100%;
   padding: 0px 16px;
-  min-height: 300px;
+  min-height: 680px;
 `;
 
 const WrapperInternal = styled.div`

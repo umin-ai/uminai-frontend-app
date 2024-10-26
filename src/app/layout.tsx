@@ -41,6 +41,25 @@ export const metadata: Metadata = {
     ],
     type: "website",
   },
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      url: '/icons/icon32.png'
+    },
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '16x16',
+      url: '/icons/icon16.png'
+    },
+    {
+      rel: 'mask-icon',
+      color: '#e6007d',
+      url: '/icons/safari-pinned-tab.svg',
+    }
+  ]
 };
 
 const ExtendedMetadata = () => (

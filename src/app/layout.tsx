@@ -20,7 +20,7 @@ const mulish = Mulish({ subsets: ["latin"] });
 // });
 
 export const metadata: Metadata = {
-  title: "Astro Malaysia TV Packages with Astro Fibre | Astro Official Authorised Dealer",
+  title: "Promotion Astro Malaysia TV Packages with Astro Fibre",
   description: "Sign up for the all-new Astro today to watch the latest TV shows, movies, sports with Astro Fibre, enjoy world-class streaming apps all in one place!",
   keywords: "astro, astro tv, astro package, astro shop, broadband, astro subscription, platinum pack, entertainment plus pack, entertainment pack, primary pack, astro netflix, netflix malaysia, astro disney, disney hotstar, broadband, high speed, fastest internet, astro channel, astro go",
   authors: { name: "Astro Official Authorised Dealer" },

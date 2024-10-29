@@ -6,6 +6,7 @@ import "./globals.css";
 import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
 import { FloatingWhatsapp } from "@ap/components/Floating";
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google' 
 
 const mulish = Mulish({ subsets: ["latin"] });
 // const geistSans = localFont({
@@ -75,6 +76,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <GoogleTagManager gtmId='GTM-5X974MSK'/>
+      <GoogleAnalytics gaId='G-17YD4R7PBH'/>
       <body
         className={mulish.className}
       >

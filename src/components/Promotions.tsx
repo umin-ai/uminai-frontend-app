@@ -10,7 +10,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   width: 100%;
   padding: 0px 16px;
-  min-height: 680px;
+  min-height: 780px;
 `;
 
 const WrapperInternal = styled.div`
@@ -21,14 +21,16 @@ const WrapperInternal = styled.div`
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
   border-radius: 12px;
   align-items: center;
+  padding-top: 32px;
   padding-bottom: 32px;
   // justify-content: center;
 `;
 
 const StyledText = styled.span`
   font-size: 24px;
-  font-weight: 600;
-  padding: 16px 0px;
+  font-weight: 800;
+  // padding: 16px 0px;
+  line-height: 1;
 `;
 
 export default function Promotions() {
@@ -37,6 +39,8 @@ export default function Promotions() {
     <Wrapper>
       <WrapperInternal>
         <StyledText>Astro Promotions</StyledText>
+        <span className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</span>
+
         <div className="w-full flex flex-row items-center justify-center gap-12">
           {promotions.map((promotion, index) => (
             <Card

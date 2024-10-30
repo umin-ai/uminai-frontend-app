@@ -5,6 +5,13 @@ import WhyChooseUs from "@ap/components/WhyChooseUs";
 import { Space } from "@mantine/core";
 import Image from "next/image";
 
+const Starter = () => {
+  return (
+    <div className="flex flex-col items-center py-4 w-full bg-[#00075E] text-white mb-8 mt-4">
+      <span className="text-[32px] font-bold">FREE Installation!</span>
+    </div>
+  );
+}
 // Astro Promotions One Page Web Design
 export default function Home() {
   return (
@@ -12,6 +19,7 @@ export default function Home() {
       <Header />
       <Space h={120} />
       <WhyChooseUs />
+      <Starter />
       <Promotions />
       {/* Hello
       <div>hello</div> */}

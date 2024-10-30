@@ -1,5 +1,6 @@
 'use client';
 
+import usePromotions, { PromotionInfo } from "@ap/hooks/usePromotions";
 import { Divider, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
@@ -31,14 +32,19 @@ const StyledText = styled.span`
 `;
 
 export default function Promotions() {
+  const { promotions } = usePromotions();
   return (
     <Wrapper>
       <WrapperInternal>
         <StyledText>Astro Promotions</StyledText>
-        <div className="w-full flex flex-row items-center justify-center gap-5">
-          <Card />
-          <Card />
-          <Card />
+        <div className="w-full flex flex-row items-center justify-center gap-12">
+          {promotions.map((promotion, index) => (
+            <Card
+              key={index}
+              {...promotion}
+            />
+          ))}
+
         </div>
 
       </WrapperInternal>
@@ -49,14 +55,18 @@ export default function Promotions() {
 const StyledCard = styled.div`
   width: 100%;
   max-width: 330px;
+
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
   // background-color: red;
-  border-radius: 22px;
+  border-radius: 36px;
   align-items: center;
   justify-content: center;
   padding-bottom: 16px;
+  overflow: hidden;
 `;
 
 const CardHeader = styled.div`
@@ -83,8 +93,10 @@ const DescriptionArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 16px;
+  justify-content: start;
+  padding: 8px 16px;
+  height: 120px;
+  max-height: 120px;
 `;
 
 const WhatsIncluded = styled.div`
@@ -169,26 +181,31 @@ const SeeAllChannels = styled.div`
   border-radius: 12px;
   margin-top: 12px;
 `;
-function Card() {
-  const { channels } = useGetChannels();
-  console.log(channels);
+
+interface ICardProps extends PromotionInfo {
+}
+const Card = (
+  { priority, title, packageInfo, description, price, originalPrice, iconUrl }: ICardProps
+) => {
+  // const { channels } = useGetChannels();
+  // console.log(channels);
 
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <StyledCard>
       <CardHeader>
-        <IconImage src='/images/home-card-primary.png'
-          alt='astro.com.my' width={100} height={0}
+        <IconImage src={iconUrl || '/images/home-card-primary.png'}
+          alt={`astro promotion - ${title}`} width={100} height={0}
         />
-        <span className="text-lg font-bold text-neutral-800">Primary Pack</span>
+        <span className="text-lg font-bold text-neutral-800">{title}</span>
       </CardHeader>
       <Divider color="red" w={'100%'}/>
       <DescriptionArea>
         <span className="text-lg font-bold text-neutral-800">
-          1 app 85 channels
+          {packageInfo}
         </span>
         <span className="text-center mt-1">
-          The must-watch local and international content made for everyone in the family
+          {description}
         </span>
       </DescriptionArea>
       <BigImageArea>
@@ -218,11 +235,13 @@ function Card() {
       </SeeAllChannels>
       <Divider className="my-2" color="red" w={'100%'}/>
       <div className="font-extrabold">
-        <span className="text-2xl">RM41.99</span>
+        <span className="text-2xl">RM{price}</span>
         <span>/month</span>
+        {originalPrice > 0 && (
         <span className="ml-1.5 text-sm font-normal text-neutral-400">
-          <s>RM59.99</s>
+          <s>RM{originalPrice}</s>
         </span>
+        )}
       </div>
 
       <IWantButton className="mt-2">Get now</IWantButton>

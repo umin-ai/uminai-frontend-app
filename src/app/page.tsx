@@ -1,3 +1,4 @@
+import AllOtherPacks from "@ap/components/AllOtherPacks";
 import Footer from "@ap/components/Footer";
 import Header from "@ap/components/Header";
 import Promotions from "@ap/components/Promotions";
@@ -21,6 +22,8 @@ export default function Home() {
       <WhyChooseUs />
       <Starter />
       <Promotions />
+      <Space h={50} />
+      <AllOtherPacks />
       {/* Hello
       <div>hello</div> */}
       <Footer />

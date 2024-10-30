@@ -18,7 +18,7 @@ const StyledHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 26px;
   align-items: center;
   justify-content: space-between;
   overflow: hidden;

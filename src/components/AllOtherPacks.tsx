@@ -1,5 +1,6 @@
 'use client';
 
+import useGetAllOtherPacks from "@ap/hooks/useGetAllOtherPacks";
 import usePromotions, { PromotionInfo } from "@ap/hooks/usePromotions";
 import { Divider, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -34,27 +35,26 @@ const StyledText = styled.span`
   line-height: 1;
 `;
 
-export default function Promotions() {
-  const { promotions } = usePromotions();
+export default function AllOtherPacks() {
+  const { tvpacks } = useGetAllOtherPacks();
   return (
     <Wrapper>
       <WrapperInternal>
-        <StyledText>Astro Promotions</StyledText>
-        <span className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</span>
+        <StyledText>Astro Plus Pack</StyledText>
 
-        <div className="w-full flex flex-row items-center justify-center gap-12">
-          {promotions.map((promotion, index) => (
+        <div className="w-full flex flex-row items-center justify-center gap-12 mt-6">
+          {tvpacks.map((tvpack, index) => (
             <Card
               key={index}
-              {...promotion}
+              {...tvpack}
             />
           ))}
 
         </div>
-
       </WrapperInternal>
     </Wrapper>
   )
+
 }
 
 const StyledCard = styled.div`
@@ -253,27 +253,4 @@ const Card = (
 
     </StyledCard>
   )
-}
-
-const useGetChannels = () => {
-  const [channels, setChannels] = useState<{} | null>(null);
-  const onGetChannels = async () => {
-    try {
-      const result = await fetch('https://contenthub-api.eco.astro.com.my/channel/min.json');
-      const data = await result.json();
-      const { response } = data;
-      setChannels(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    if (!channels)
-      onGetChannels();
-}, []);
-
-  return {
-    channels
-  }
 }

@@ -18,7 +18,7 @@ const InternalWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  border-radius: 12px;
+  border-radius: 32px;
   border: 1px solid #dcdcdc;
   overflow: hidden;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4)

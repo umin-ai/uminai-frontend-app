@@ -21,23 +21,23 @@ const mulish = Mulish({ subsets: ["latin"] });
 // });
 
 export const metadata: Metadata = {
-  title: "Promotion Astro Malaysia TV Packages with Astro Fibre",
-  description: "Sign up for the all-new Astro today to watch the latest TV shows, movies, sports with Astro Fibre, enjoy world-class streaming apps all in one place!",
+  title: "Special Deal | Astro Malaysia TV Packages Now Available",
+  description: "Experience the new Astro! Get the latest TV shows, movies, live sports, and premium streaming apps with Astro Fibre all in one easy subscription. Enjoy top-quality entertainment in one place, let's get started!",
   keywords: "astro, astro tv, astro package, astro shop, broadband, astro subscription, platinum pack, entertainment plus pack, entertainment pack, primary pack, astro netflix, netflix malaysia, astro disney, disney hotstar, broadband, high speed, fastest internet, astro channel, astro go",
-  authors: { name: "Astro Official Authorised Dealer" },
+  authors: { name: "astro-promotions.com Astro Authorised Dealer" },
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
-    title: "TV Packages with Astro Fibre",
-    description: "Discover Astro's official packages for fibre internet and TV services.",
+    title: "Special Deal | Astro Malaysia TV Packages Now Available",
+    description: "Experience the new Astro in astro-promotions.com! Get the latest TV shows, movies, live sports, and premium streaming apps with Astro Fibre all in one easy subscription. Enjoy top-quality entertainment in one place, let's get started!",
     url: "https://astro.com.my",
-    siteName: "Astro Official Authorised Dealer",
+    siteName: "Special Deal | Astro Malaysia TV Packages Now Available",
     images: [
       {
-        url: "https://astro-promotions.com/images/astro-tv-fibre-packages.jpg",
+        url: "https://astro-promotions.com/images/acm-pack-primarypack.jpg",
         width: 800,
         height: 600,
-        alt: "Astro TV and Fibre Packages",
+        alt: "Astro TV and Fibre Packages in https://astro-promotions.com",
       },
     ],
     type: "website",

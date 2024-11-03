@@ -1,13 +1,7 @@
 import { useState } from "react";
+import { PromotionInfo } from "./usePromotions";
 
-export interface AstroPackInfo {
-  priority: number
-  title: string;
-  packageInfo: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  iconUrl?: string;
+export interface AstroPackInfo extends PromotionInfo{
 }
 
 
@@ -20,6 +14,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 99.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
+    supportedChannels: ["BASE", "SPORTS_PACK"]
   },
   {
     priority: 2,
@@ -29,6 +25,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 129.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
+    supportedChannels: ["BASE", "SPORTS_PACK"]
   },
   {
     priority: 3,
@@ -38,6 +36,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 129.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
+    supportedChannels: ["BASE", "SPORTS_PACK"]
   },
   {
     priority: 4,
@@ -47,6 +47,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 129.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
+    supportedChannels: ["BASE", "SPORTS_PACK"]
   }
 ]
 export default function useGetAllOtherPacks() {

@@ -222,7 +222,7 @@ const SeeAllChannels = styled.div`
 interface ICardProps extends PromotionInfo {
 }
 const Card = (
-  { priority, title, packageInfo, description, price, originalPrice, iconUrl }: ICardProps
+  { priority, title, packageInfo, description, price, originalPrice, iconUrl, supportedApps, supportedChannels }: ICardProps
 ) => {
   // const { channels } = useGetChannels();
   // console.log(channels);

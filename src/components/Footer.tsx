@@ -1,5 +1,6 @@
 'use client';
 
+import Script from "next/script";
 import styled from "styled-components"
 
 const Wrapper = styled.div`
@@ -28,6 +29,10 @@ export default function Footer() {
     <Wrapper>
       <ColumnArea>
         <Column>
+          <Script src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" />
+          <div className="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="67265e7b87d79fb6e7319cbe" data-style-height="52px" data-style-width="100%">
+            <a href="https://www.trustpilot.com/review/astro-promotions.com" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
           <span>Contact Sales</span>
           <span>Astro Promotions Sales</span>
           <span>Sales: +6018-3991009</span>

@@ -16,6 +16,7 @@
     "@mantine/modals": "^7.13.4",
     "@next/third-parties": "^15.0.2",
     "astro-promotions": "file:",
+    "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",

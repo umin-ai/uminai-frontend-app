@@ -60,18 +60,50 @@ export default function AllOtherPacks() {
 const StyledCard = styled.div`
   width: 100%;
   max-width: 330px;
-
   height: 100%;
-
   display: flex;
   flex-direction: column;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
-  // background-color: red;
   border-radius: 36px;
   align-items: center;
   justify-content: center;
   padding-bottom: 16px;
-  overflow: hidden;
+  // overflow: hidden;
+  background-color: #fff;
+  position: relative; // Set to relative to contain the ::before element
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 36px;
+    padding: 2px;
+    background: linear-gradient(
+      90deg,
+      #e6007d,
+      #FEBF0E,
+      #e6007d,
+      #FEBF0E
+    );
+    background-size: 300% 100%;
+    animation: gradientSlide 5s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes gradientSlide {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 `;
 
 const CardHeader = styled.div`
@@ -80,7 +112,7 @@ const CardHeader = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 36px;
   gap: 8px;
   overflow: hidden;
 `;

@@ -6,6 +6,10 @@ import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ModalViewer from "./ModalViewer";
+import CustomModal from "./CustomModal";
+import useGetChannelList from "@ap/hooks/useGetChannelList";
+import { Image as MImage } from '@mantine/core';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,6 +40,7 @@ const StyledText = styled.span`
 
 export default function Promotions() {
   const { promotions } = usePromotions();
+  const { channels } = useGetChannelList();
   return (
     <Wrapper>
       <WrapperInternal>
@@ -51,7 +56,7 @@ export default function Promotions() {
           ))}
 
         </div>
-
+        <MImage w={100} src="https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/29_144.png" alt="channeler"  />
       </WrapperInternal>
     </Wrapper>
   )
@@ -72,6 +77,12 @@ const StyledCard = styled.div`
   justify-content: center;
   padding-bottom: 16px;
   overflow: hidden;
+
+  // hover to move up a bit
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(8px);
+  }
 `;
 
 const CardHeader = styled.div`
@@ -219,13 +230,20 @@ const Card = (
         />
         {/* <BigImageFilter /> */}
       </BigImageArea>
-      <Modal
+
+      <CustomModal
+        centered
         opened={opened}
         onClose={close}
         title="Primary Pack"
-        size="md"
+        size="50%"
+        radius={'22px'}
         padding="md"
-      />
+        w={'70%'}
+        className="w-full"
+      >
+        <ModalViewer />
+      </CustomModal>
 
       <SeeAllChannels>
         <ClickableText onClick={open}>See all channels</ClickableText>

@@ -8,7 +8,7 @@ const HeaderWrapper = styled.div`
   width: 100%;
   background-color: transparent;
   padding: 16px;
-  z-index: 1000;
+  z-index: 100;
 `;
 
 const StyledHeader = styled.div`
@@ -42,6 +42,8 @@ const ListGoTo = styled.div`
 
   span {
     cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
   }
 
   background-image: linear-gradient(135deg,#e6007d,#e72f3b);

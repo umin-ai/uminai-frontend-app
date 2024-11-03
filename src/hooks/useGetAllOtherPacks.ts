@@ -14,8 +14,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 99.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
-    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
-    supportedChannels: ["BASE", "SPORTS_PACK"]
+    supportedApps: ["BEIN_SPORTS_CONNECTED", "ASTRO_GO"],
+    supportedChannels: ["SPORTS_PACK", "BASE"]
   },
   {
     priority: 2,
@@ -25,8 +25,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 129.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
-    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
-    supportedChannels: ["BASE", "SPORTS_PACK"]
+    supportedApps: ["NETFLIX", "ASTRO_GO", "BEIN_SPORTS_CONNECTED"],
+    supportedChannels: ["BASE", "SPORTS_PACK", "KOREAN", "HORROR"]
   },
   {
     priority: 3,
@@ -36,8 +36,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 129.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
-    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
-    supportedChannels: ["BASE", "SPORTS_PACK"]
+    supportedApps: ["NETFLIX", "DISNEY_PLUS_HOTSTAR", "HBO_GO", "ASTRO_GO"],
+    supportedChannels: ["BASE", "SPORTS_PACK", "KOREAN", "HORROR"]
   },
   {
     priority: 4,
@@ -47,8 +47,8 @@ const MockPacks: AstroPackInfo[] = [
     price: 129.99,
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
-    supportedApps: ["ASTRO_GO", "ASTRO_GO_EXCLUSIVE"],
-    supportedChannels: ["BASE", "SPORTS_PACK"]
+    supportedApps: ["NETFLIX", "BBC_PLAYER", "ASTRO_GO"],
+    supportedChannels: ["BASE", "KOREAN", "HORROR", "VARIETY", "KIDS", "ASIAN_FAVOURITES"]
   }
 ]
 export default function useGetAllOtherPacks() {

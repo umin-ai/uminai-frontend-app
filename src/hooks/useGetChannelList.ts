@@ -92,6 +92,34 @@ const useGetChannelList = ({
             category: "VARIETY",
             allChannels: responseValues,
           })
+        } else if (channel === 'SPORTS_PACK') {
+          const responseValues = Object.values(response).filter((c: any) => SPORT_PACKS.includes(c.subtitle))  as ChannelProps[];
+          resultAppendable.push({
+            category: "SPORTS_PACK",
+            allChannels: responseValues,
+          })
+
+        } else if (channel === 'KOREAN') {
+          const responseValues = Object.values(response).filter((c: any) => KOREAN.includes(c.subtitle))  as ChannelProps[];
+          resultAppendable.push({
+            category: "KOREAN",
+            allChannels: responseValues,
+          })
+
+        } else if (channel === 'HORROR') {
+          const responseValues = Object.values(response).filter((c: any) => HORROR.includes(c.subtitle))  as ChannelProps[];
+          resultAppendable.push({
+            category: "HORROR",
+            allChannels: responseValues,
+          })
+
+        } else if (channel === 'KIDS') {
+          const responseValues = Object.values(response).filter((c: any) => KIDS.includes(c.subtitle))  as ChannelProps[];
+          resultAppendable.push({
+            category: "KIDS",
+            allChannels: responseValues,
+          })
+
         } else if (channel === 'ASIAN_FAVOURITES') {
           // const responseValues = Object.values(response).filter((c: any) => ASIAN_FAVOURITES.includes(c.subtitle))  as ChannelProps[];
           let multipackChannelsValues: MultipackChannels[] = [];
@@ -176,4 +204,13 @@ const ASIAN_FAVOURITES = [{
   type: 'Indian Favorites',
   channels: ['CH221', 'CH212', 'CH214', 'CH215', 'CH216', 'CH217']
 }]
+
+const SPORT_PACKS = ['CH805', 'CH810', 'CH811', 'CH812', 'CH814', 'CH815', 'CH817', 'CH820', 'CH821', 'CH822', 'CH823', 'CH824', 'CH825', 'CH826']
+
+const KOREAN = ['CH395', 'CH396'];
+
+const HORROR = ['CH404'];
+
+const KIDS = ['CH615', 'CH616', 'CH617', 'CH618', 'CH620', 'CH612'];
+
 export default useGetChannelList;

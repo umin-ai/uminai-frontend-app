@@ -110,19 +110,49 @@ const ModalViewer = ({
           ))}
         </CategorySelector>
         <WrapperForGrid>
-        <span className="font-bold">{currentCategory?.allChannels.length} Channels</span>
-        <Divider color="#e6007d" className="mt-1 mb-2"/>
-        <ChildGridChannelViewer>
-          {currentCategory?.allChannels?.map((channelInfo, index) => (
-              <ChannelChildCard key={index} className="flex">
-                <MImage w={70} src={channelInfo.imageUrl} alt="channeler" />
-                <ChannelChildCardDesc>
-                  <span className="text-md font-bold">{channelInfo.subtitle}</span>
-                  <span className="max-w-[130px] overflow-hidden whitespace-nowrap text-ellipsis">{channelInfo.title}</span>
-                </ChannelChildCardDesc>
-              </ChannelChildCard>
-          ))}
-        </ChildGridChannelViewer>
+          {currentCategory && !currentCategory.isMultiPack ?
+          <>
+            <span className="font-bold">{currentCategory?.allChannels.length} Channels</span>
+            <Divider color="#e6007d" className="mt-1 mb-2"/>
+            <ChildGridChannelViewer>
+              {currentCategory?.allChannels?.map((channelInfo, index) => (
+                  <ChannelChildCard key={index} className="flex">
+                    <MImage w={70} src={channelInfo.imageUrl} alt="channeler" />
+                    <ChannelChildCardDesc>
+                      <span className="text-md font-bold">{channelInfo.subtitle}</span>
+                      <span className="max-w-[130px] overflow-hidden whitespace-nowrap text-ellipsis">{channelInfo.title}</span>
+                    </ChannelChildCardDesc>
+                  </ChannelChildCard>
+              ))}
+            </ChildGridChannelViewer>
+          </>
+        : currentCategory && currentCategory.isMultiPack ?
+          <>
+           {/* <span>Multi Pack</span>
+            <Divider color="#e6007d" className="mt-1 mb-2"/> */}
+            {/* {currentCategory?.multiPackChannels} */}
+            <div className="flex flex-col gap-5">
+              {currentCategory.multiPackChannels?.map((c, index) => (
+                <div key={index}>
+                  <span className="font-bold">{c.type}</span>
+                  <Divider color="#e6007d" className="mt-1 mb-2"/>
+                  <ChildGridChannelViewer>
+                    {c.allChannels.map((channelInfo, index) => (
+                      <ChannelChildCard key={index} className="flex">
+                        <MImage className="max-h-[50px]" w={70} src={channelInfo.imageUrl} alt="channeler" />
+                        <ChannelChildCardDesc>
+                          <span className="text-md font-bold">{channelInfo.subtitle}</span>
+                          <span className="max-w-[130px] overflow-hidden whitespace-nowrap text-ellipsis">{channelInfo.title}</span>
+                        </ChannelChildCardDesc>
+                      </ChannelChildCard>
+                    ))}
+                  </ChildGridChannelViewer>
+                </div>
+              ))}
+            </div>
+          </>
+        : <>Not found</>}
+
         </WrapperForGrid>
       </InternalWrapper>
     </Wrapper>

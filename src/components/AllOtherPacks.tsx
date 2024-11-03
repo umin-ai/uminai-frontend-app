@@ -7,6 +7,9 @@ import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { WhatsIncludedIconSearch } from "./WhatsIncludedSearch";
+import ModalViewer from "./ModalViewer";
+import CustomModal from "./CustomModal";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -141,7 +144,7 @@ const WhatsIncluded = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   // padding: 16px;
   gap: 8px;
 `;
@@ -211,7 +214,8 @@ const SeeAllChannels = styled.div`
   width: 92%;
   flex-direction: column;
   align-items: center;
-  padding-top: 4px;
+  padding-top: 12px;
+  padding: 12px 10px;
   padding-bottom: 12px;
   background-color: rgb(246 246 248/1);
   gap: 8px;
@@ -251,25 +255,39 @@ const Card = (
         />
         {/* <BigImageFilter /> */}
       </BigImageArea>
-      <Modal
+
+      <CustomModal
+        centered
         opened={opened}
         onClose={close}
-        title="Primary Pack"
-        size="md"
+        title={<span className="w-full ml-1 font-bold">{title}</span>}
+        size="80%"
+        radius={'22px'}
         padding="md"
-      />
+        w={'100%'}
+        className="w-full z-50"
+      >
+        <ModalViewer apps={supportedApps} channels={supportedChannels} />
+      </CustomModal>
 
       <SeeAllChannels>
-        <ClickableText onClick={open}>See all channels</ClickableText>
         <WhatsIncluded>
-          <WhatsIncludedIcon src='/images/astro-go-256.png'
-            width={100} height={0} alt="astro.com.my"
-          />
-          <WhatsIncludedIcon src='/images/icon_base.png'
-            width={100} height={0} alt="astro.com.my"
-          />
+          <span className="min-w-[62px]">App</span>
+          {supportedApps.map((app, index) => (
+            <WhatsIncludedIconSearch key={index} channel={app} />
+          ))}
         </WhatsIncluded>
+        <WhatsIncluded>
+          <span>Channel</span>
+          <div className="w-full flex items-start justify-start overflow-x-scroll gap-2">
+          {supportedChannels.map((channel, index) => (
+              <WhatsIncludedIconSearch key={index} channel={channel} />
+          ))}
+          </div>
+        </WhatsIncluded>
+        <ClickableText onClick={open}>See all channels</ClickableText>
       </SeeAllChannels>
+
       <Divider className="my-2" color="red" w={'100%'}/>
       <div className="font-extrabold">
         <span className="text-2xl">RM{price}</span>

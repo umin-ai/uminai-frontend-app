@@ -52,6 +52,9 @@ const AbsoluteBackImage = styled.div`
   width: 100%;
   height: 100%;
   z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: start;
 `;
 
 const BadgePlacement = styled.div`
@@ -69,7 +72,7 @@ export default function Promotions() {
   return (
     <Wrapper>
       <AbsoluteBackImage>
-        <MImage className="w-full" src="/images/drop-back-p1.png" alt="backimage" />
+        <MImage className="w-full max-w-[1896px]" src="/images/drop-back-p1.png" alt="backimage" />
       </AbsoluteBackImage>
       <WrapperInternal>
         <BadgePlacement>
@@ -260,12 +263,12 @@ const Card = (
         centered
         opened={opened}
         onClose={close}
-        title="Primary Pack"
+        title={<span className="w-full ml-1 font-bold">{title}</span>}
         size="80%"
         radius={'22px'}
         padding="md"
         w={'100%'}
-        className="w-full"
+        className="w-full z-50"
       >
         <ModalViewer apps={supportedApps} channels={supportedChannels} />
       </CustomModal>
@@ -283,13 +286,6 @@ const Card = (
           {supportedChannels.map((channel, index) => (
             <WhatsIncludedIconSearch key={index} channel={channel} />
           ))}
-          
-          {/* <WhatsIncludedIcon src='/icons/astro-go-256.png'
-            width={100} height={0} alt="astro.com.my"
-          />
-          <WhatsIncludedIcon src='/icons/icon_base.png'
-            width={100} height={0} alt="astro.com.my"
-          /> */}
         </WhatsIncluded>
         <ClickableText onClick={open}>See all channels</ClickableText>
       </SeeAllChannels>

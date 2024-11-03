@@ -15,8 +15,12 @@ export const WhatsIncludedIconSearch = ({ channel, size }: { channel: string, si
     switch (channel) {
       case 'ASTRO_GO':
         return '/icons/astro-go-256.png';
+      case 'BEIN_SPORTS_CONNECTED':
+        return '/icons/beinsportsconnect_app_icon.png';
       case 'DISNEY_PLUS_HOTSTAR':
         return '/icons/d-h_app_logo-256x256.png';
+      case 'NETFLIX':
+        return '/icons/netflix-256.png';
       case 'HBO_GO':
         return '/icons/hbo_go_v2.png';
       case 'BBC_PLAYER':
@@ -29,10 +33,16 @@ export const WhatsIncludedIconSearch = ({ channel, size }: { channel: string, si
         return '/icons/icon_movies.png';
       case 'ASIAN_FAVOURITES':
         return '/icons/icon_asian-favourites.png';
+      case 'KOREAN':
+        return '/icons/icon_korean.png';
       case 'VARIETY':
         return '/icons/icon_variety.png';
       case 'KIDS':
         return '/icons/icon_kids.png';
+      case 'SPORTS_PACK':
+        return '/icons/icon_sports.png';
+      case 'HORROR':
+        return '/icons/icon_horror.png';
       default:
         return '/icons/icon_base.png';
     }
@@ -48,8 +58,12 @@ export const whatsIncludedText = ({ channel }: { channel: string }) => {
   switch (channel) {
     case 'ASTRO_GO':
       return 'Astro Go';
+    case 'BEIN_SPORTS_CONNECTED':
+      return 'Bein Sports Connected';
     case 'DISNEY_PLUS_HOTSTAR':
       return 'Disney+ Hotstar';
+    case 'NETFLIX':
+      return 'Netflix';
     case 'HBO_GO':
       return 'HBO Go';
     case 'BBC_PLAYER':
@@ -62,10 +76,16 @@ export const whatsIncludedText = ({ channel }: { channel: string }) => {
       return 'Movies Pack';
     case 'ASIAN_FAVOURITES':
       return 'Asian Favourites';
+    case 'KOREAN':
+      return 'Korean';
     case 'VARIETY':
       return 'Variety';
     case 'KIDS':
       return 'Kids';
+    case 'SPORTS_PACK':
+      return 'Sports Pack';
+    case 'HORROR':
+      return 'Horror';
     default:
       return 'Base';
   }

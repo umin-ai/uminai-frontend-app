@@ -226,7 +226,7 @@ const SeeAllChannels = styled.div`
 interface ICardProps extends PromotionInfo {
 }
 const Card = (
-  { priority, title, packageInfo, description, price, originalPrice, iconUrl, supportedApps, supportedChannels }: ICardProps
+  { priority, title, bigImage, packageInfo, description, price, originalPrice, iconUrl, supportedApps, supportedChannels }: ICardProps
 ) => {
   // const { channels } = useGetChannels();
   // console.log(channels);
@@ -250,7 +250,7 @@ const Card = (
         </span>
       </DescriptionArea>
       <BigImageArea>
-        <BigImage src='/images/acm-pack-primarypack.jpg'
+        <BigImage src={bigImage ? bigImage : '/images/acm-pack-primarypack.jpg'}
           width={300} height={0} alt="astro.com.my"
         />
         {/* <BigImageFilter /> */}
@@ -272,13 +272,13 @@ const Card = (
 
       <SeeAllChannels>
         <WhatsIncluded>
-          <span className="min-w-[62px]">App</span>
+          <span className="min-w-[62px] font-bold">App</span>
           {supportedApps.map((app, index) => (
             <WhatsIncludedIconSearch key={index} channel={app} />
           ))}
         </WhatsIncluded>
         <WhatsIncluded>
-          <span>Channel</span>
+          <span className="font-bold">Channel</span>
           <div className="w-full flex items-start justify-start overflow-x-scroll gap-2">
           {supportedChannels.map((channel, index) => (
               <WhatsIncludedIconSearch key={index} channel={channel} />

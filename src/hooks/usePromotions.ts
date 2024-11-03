@@ -3,6 +3,7 @@ import { useState } from "react";
 export interface PromotionInfo {
   priority: number
   title: string;
+  bigImage?: string;
   packageInfo: string;
   description: string;
   price: number;
@@ -16,6 +17,7 @@ const MockPromotions: PromotionInfo[] = [
   {
     priority: 1,
     title: "Primary Pack",
+    bigImage: "/images/acm-pack-primarypack.jpg",
     packageInfo: "1 app 85+ channels",
     description: "Enjoy must-watch local and international content crafted for the whole family.",
     price: 41.99,
@@ -28,6 +30,7 @@ const MockPromotions: PromotionInfo[] = [
     priority: 2,
     title: "Entertainment Pack",
     packageInfo: "2 apps 100+ channels",
+    bigImage: "/images/acm-pack-entertainmentpack.jpg",
     description: "The best in entertainment, featuring Asian and global favorites alongside kids",
     price: 62.99,
     originalPrice: 89.99,
@@ -38,6 +41,7 @@ const MockPromotions: PromotionInfo[] = [
   {
     priority: 3,
     title: "Movies Pack",
+    bigImage: "/images/acm-pack-moviespack.jpg",
     packageInfo: " 3 app and 90+ channels",
     description: "Explore award-winning films and original series at the ultimate home for movies, featuring Disney+ Hotstar and HBO",
     price: 66.49,

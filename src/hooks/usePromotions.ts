@@ -8,8 +8,9 @@ export interface PromotionInfo {
   price: number;
   originalPrice: number;
   iconUrl?: string;
+  supportedApps: string[];
+  supportedChannels: string[];
 }
-
 
 const MockPromotions: PromotionInfo[] = [
   {
@@ -20,6 +21,8 @@ const MockPromotions: PromotionInfo[] = [
     price: 41.99,
     originalPrice: 59.99,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO"],
+    supportedChannels: ["BASE"]
   },
   {
     priority: 2,
@@ -29,6 +32,8 @@ const MockPromotions: PromotionInfo[] = [
     price: 62.99,
     originalPrice: 89.99,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO", "BBC_PLAYER"],
+    supportedChannels: ["BASE", "VARIETY", "KIDS", "ASIAN_FAVOURITES"]
   },
   {
     priority: 3,
@@ -38,6 +43,8 @@ const MockPromotions: PromotionInfo[] = [
     price: 66.49,
     originalPrice: 94.99,
     iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["ASTRO_GO", "DISNEY_PLUS_HOTSTAR", "HBO_GO"],
+    supportedChannels: ["BASE", "MOVIES_PACK"]
   }
 ]
 export default function usePromotions() {

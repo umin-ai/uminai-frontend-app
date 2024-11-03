@@ -4,12 +4,12 @@ import usePromotions, { PromotionInfo } from "@ap/hooks/usePromotions";
 import { Divider, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import ModalViewer from "./ModalViewer";
 import CustomModal from "./CustomModal";
-import useGetChannelList from "@ap/hooks/useGetChannelList";
 import { Image as MImage } from '@mantine/core';
+import { WhatsIncludedIconSearch } from "./WhatsIncludedSearch";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -40,8 +40,7 @@ const StyledText = styled.span`
 
 export default function Promotions() {
   const { promotions } = usePromotions();
-  // const { channels } = useGetChannelList();
-    const { channels } = useGetChannels();
+    // const { channels } = useGetChannels();
     // console.log(channels);
   return (
     <Wrapper>
@@ -122,19 +121,12 @@ const WhatsIncluded = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   // padding: 16px;
   gap: 8px;
 `;
 
-const WhatsIncludedIcon = styled(Image)`
-  border-radius: 8px;
-  width: 40px;
-  height: auto;
-  justify-self: center;
-  // padding: 16px 0px;
-  border: 1px solid #dcdcdc;
-`;
+
 
 const BigImageArea = styled.div`
   width: 100%;
@@ -192,7 +184,8 @@ const SeeAllChannels = styled.div`
   width: 92%;
   flex-direction: column;
   align-items: center;
-  padding-top: 4px;
+  padding-top: 12px;
+  padding: 12px 10px;
   padding-bottom: 12px;
   background-color: rgb(246 246 248/1);
   gap: 8px;
@@ -203,7 +196,7 @@ const SeeAllChannels = styled.div`
 interface ICardProps extends PromotionInfo {
 }
 const Card = (
-  { priority, title, packageInfo, description, price, originalPrice, iconUrl }: ICardProps
+  { priority, title, packageInfo, description, price, originalPrice, iconUrl, supportedApps, supportedChannels }: ICardProps
 ) => {
   // const { channels } = useGetChannels();
   // console.log(channels);
@@ -238,25 +231,37 @@ const Card = (
         opened={opened}
         onClose={close}
         title="Primary Pack"
-        size="50%"
+        size="80%"
         radius={'22px'}
         padding="md"
-        w={'70%'}
+        w={'100%'}
         className="w-full"
       >
-        <ModalViewer />
+        <ModalViewer apps={supportedApps} channels={supportedChannels} />
       </CustomModal>
 
       <SeeAllChannels>
-        <ClickableText onClick={open}>See all channels</ClickableText>
+        
         <WhatsIncluded>
-          <WhatsIncludedIcon src='/images/astro-go-256.png'
-            width={100} height={0} alt="astro.com.my"
-          />
-          <WhatsIncludedIcon src='/images/icon_base.png'
-            width={100} height={0} alt="astro.com.my"
-          />
+          <span className="min-w-[62px]">App</span>
+          {supportedApps.map((app, index) => (
+            <WhatsIncludedIconSearch key={index} channel={app} />
+          ))}
         </WhatsIncluded>
+        <WhatsIncluded>
+          <span>Channel</span>
+          {supportedChannels.map((channel, index) => (
+            <WhatsIncludedIconSearch key={index} channel={channel} />
+          ))}
+          
+          {/* <WhatsIncludedIcon src='/icons/astro-go-256.png'
+            width={100} height={0} alt="astro.com.my"
+          />
+          <WhatsIncludedIcon src='/icons/icon_base.png'
+            width={100} height={0} alt="astro.com.my"
+          /> */}
+        </WhatsIncluded>
+        <ClickableText onClick={open}>See all channels</ClickableText>
       </SeeAllChannels>
       <Divider className="my-2" color="red" w={'100%'}/>
       <div className="font-extrabold">
@@ -275,26 +280,37 @@ const Card = (
   )
 }
 
-const useGetChannels = () => {
-  const [channels, setChannels] = useState<{} | null>(null);
-  const onGetChannels = async () => {
-    try {
-      const result = await fetch('https://contenthub-api.eco.astro.com.my/channel/min.json');
-      const data = await result.json();
-      const { response } = data;
-      console.log('response', response);
-      setChannels(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+const BASE_CHANNELS = ['CH101', 'CH102', 'CH103', 'CH104', 'CH105', 'CH106', 'CH107', 'CH108', 'CH114', 'CH116', 
+  'CH122', 'CH146', 'CH147', 'CH148', 'CH149', 'CH201', 'CH202', 'CH203', 'CH221', 'CH222', 
+  'CH223', 'CH300', 'CH305', 'CH306', 'CH308', 'CH309', 'CH310', 'CH311', 'CH316', 'CH317', 
+  'CH319', 'CH320', 'CH321', 'CH325', 'CH326', 'CH333', 'CH335', 'CH392', 'CH393', 'CH398', 
+  'CH110', 'CH501', 'CH502', 'CH503', 'CH549', 'CH550', 'CH603', 'CH611', 'CH701', 'CH703', 
+  'CH706', 'CH707', 'CH708', 'CH709', 'CH712', 'CH801', 'CH802', 'CH803', 'CH804', 'CH852', 
+  'CH853', 'CH854', 'CH855', 'CH856', 'CH857', 'CH858', 'CH859', 'CH860', 'CH861', 'CH862', 
+  'CH863', 'CH864', 'CH865', 'CH866', 'CH867', 'CH868', 'CH869', 'CH870', 'CH871', 'CH872', 
+  'CH873', 'CH874', 'CH875', 'CH876', 'CH877']
+ 
 
-  useEffect(() => {
-    if (!channels)
-      onGetChannels();
-}, []);
+// const useGetChannels = () => {
+//   const [channels, setChannels] = useState<{} | null>(null);
+//   const onGetChannels = async () => {
+//     try {
+//       const result = await fetch('https://contenthub-api.eco.astro.com.my/channel/min.json');
+//       const data = await result.json();
+//       const { response } = data;
+//       const responseValues = Object.values(response).filter((c: any) => BASE_CHANNELS.includes(c.subtitle));
+//       setChannels(responseValues);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
 
-  return {
-    channels
-  }
-}
+//   useEffect(() => {
+//     if (!channels)
+//       onGetChannels();
+// }, []);
+
+//   return {
+//     channels
+//   }
+// }

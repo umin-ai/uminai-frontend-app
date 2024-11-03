@@ -40,7 +40,9 @@ const StyledText = styled.span`
 
 export default function Promotions() {
   const { promotions } = usePromotions();
-  const { channels } = useGetChannelList();
+  // const { channels } = useGetChannelList();
+    const { channels } = useGetChannels();
+    // console.log(channels);
   return (
     <Wrapper>
       <WrapperInternal>
@@ -280,6 +282,7 @@ const useGetChannels = () => {
       const result = await fetch('https://contenthub-api.eco.astro.com.my/channel/min.json');
       const data = await result.json();
       const { response } = data;
+      console.log('response', response);
       setChannels(response);
     } catch (error) {
       console.error(error);

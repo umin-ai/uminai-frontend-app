@@ -8,8 +8,8 @@ import Image from "next/image";
 
 const Starter = () => {
   return (
-    <div className="flex flex-col items-center py-4 w-full bg-[#00075E] text-white mb-8 mt-4">
-      <span className="text-[32px] font-bold">FREE Installation!</span>
+    <div className="flex flex-col items-center py-4 w-full bg-[#00075E] text-white mb-0 mt-4">
+      <span className="text-[32px] font-extrabold">Hot Deals!</span>
     </div>
   );
 }

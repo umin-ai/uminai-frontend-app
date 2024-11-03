@@ -13,15 +13,22 @@ import { WhatsIncludedIconSearch } from "./WhatsIncludedSearch";
 
 const Wrapper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
   padding: 0px 16px;
-  min-height: 780px;
+  min-height: 850px;
+  position: relative;
+  padding-top: 32px;
 `;
 
 const WrapperInternal = styled.div`
+  position: relative;
   width: 100%;
+  max-width: 1200px;
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
   border-radius: 32px;
   align-items: center;
@@ -38,13 +45,37 @@ const StyledText = styled.span`
   line-height: 1;
 `;
 
+const AbsoluteBackImage = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+`;
+
+const BadgePlacement = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 32px;
+  display: flex;
+  gap: 8px;
+`;
 export default function Promotions() {
   const { promotions } = usePromotions();
     // const { channels } = useGetChannels();
     // console.log(channels);
   return (
     <Wrapper>
+      <AbsoluteBackImage>
+        <MImage className="w-full" src="/images/drop-back-p1.png" alt="backimage" />
+      </AbsoluteBackImage>
       <WrapperInternal>
+        <BadgePlacement>
+          <MImage src="/icons/badge-hot.png" alt='astro-hot-deals' />
+          <MImage src="/icons/badge-limited.png" alt='astro-limited-deals' />
+        </BadgePlacement>
         <StyledText>Astro Promotions</StyledText>
         <span className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</span>
 
@@ -57,7 +88,6 @@ export default function Promotions() {
           ))}
 
         </div>
-        <MImage w={100} src="https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/29_144.png" alt="channeler"  />
       </WrapperInternal>
     </Wrapper>
   )

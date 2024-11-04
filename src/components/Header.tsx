@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
@@ -55,8 +56,8 @@ export default function Header() {
       <StyledHeader>
         <ImageCustom src='/images/astro-reseller.png' alt="astro.com.my" width={300} height={0}/>
         <ListGoTo>
-          <span>Promotions</span>
-          <span>Astro Packages</span>
+          <Link href={'#promotions'}><span>Promotions</span></Link>
+          <Link href={'#astro-packages'}><span>Astro Packages</span></Link>
           <span>Contact</span>
         </ListGoTo>
       </StyledHeader>

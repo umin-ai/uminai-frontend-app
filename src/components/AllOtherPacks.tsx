@@ -41,7 +41,7 @@ const StyledText = styled.span`
 export default function AllOtherPacks() {
   const { tvpacks } = useGetAllOtherPacks();
   return (
-    <Wrapper>
+    <Wrapper id="astro-packages">
       <WrapperInternal>
         <StyledText>Astro Plus Pack</StyledText>
 

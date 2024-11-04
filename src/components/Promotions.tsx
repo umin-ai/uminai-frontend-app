@@ -70,7 +70,7 @@ export default function Promotions() {
     // const { channels } = useGetChannels();
     // console.log(channels);
   return (
-    <Wrapper>
+    <Wrapper id="promotions">
       <AbsoluteBackImage>
         <MImage className="w-full max-w-[1896px]" src="/images/drop-back-p1.png" alt="backimage" />
       </AbsoluteBackImage>

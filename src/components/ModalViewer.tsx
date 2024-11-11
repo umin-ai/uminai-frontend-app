@@ -1,8 +1,9 @@
 import useGetChannelList, { ChannelInfo } from "@ap/hooks/useGetChannelList";
-import { Divider, Image as MImage } from '@mantine/core';
+import { Divider, Image as MImage, Select } from '@mantine/core';
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WhatsIncludedIconSearch, whatsIncludedText } from "./WhatsIncludedSearch";
+import useScreenType from "react-screentype-hook";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,9 @@ const InternalWrapper = styled.div`
   display: grid;
   gap: 16px;
   grid-template-columns: 2fr 8fr;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const CategorySelector = styled.div`
@@ -51,6 +55,9 @@ const WrapperForGrid = styled.div`
 const ChildGridChannelViewer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
   // height: 500px;
   grid-row-gap: 16px;
 `;
@@ -60,6 +67,11 @@ const ChannelChildCard = styled.div`
   max-height: 50px;
   display: grid;
   grid-template-columns: 0.7fr 1fr;
+  @media (max-width: 768px) {
+
+    max-width: 220px;
+    gap: 8px;
+  }
   align-items: center;
   gap: 0px;
 `;
@@ -71,6 +83,13 @@ const ChannelChildCardDesc = styled.div`
   justify-content: start;
   // gap: 8px;
 `;
+
+const MImageCustom = styled(MImage)`
+  @media (max-width: 768px) {
+    min-width: 30px !important;
+    max-width: 50px !important;
+  }
+`
 const ModalViewer = ({
   apps,
   channels
@@ -90,14 +109,26 @@ const ModalViewer = ({
     }
   }, [loadChannels])
 
+  const screenType = useScreenType();
+
+  const onChangeHandler = (value: string) => {
+    const selectedCategory = loadChannels?.find((channelInfo) => channelInfo.category === value)
+    setCurrentCategory(selectedCategory)
+  } 
   return (
     <Wrapper>
-      {/* {Object.values(data).map((item: any, index: number) => (
-        <div>
-          {item.subtitle}
-        </div>
-      ))} */}
       <InternalWrapper>
+        {screenType.isMobile ?
+          <Select 
+            placeholder="Select a category"
+            data={loadChannels?.map((channelInfo) => ({
+              label: whatsIncludedText({channel: channelInfo.category}),
+              value: channelInfo.category
+            }))}
+            value={currentCategory?.category}
+            onChange={(_value, option) => onChangeHandler(option.value)}
+          />
+        :
         <CategorySelector>
           {loadChannels?.map((channelInfo, index) => (
             <CategoryButton key={index} onClick={() => setCurrentCategory(channelInfo)} isactive={currentCategory?.category === channelInfo.category}>
@@ -109,6 +140,8 @@ const ModalViewer = ({
             </CategoryButton>
           ))}
         </CategorySelector>
+        }
+
         <WrapperForGrid>
           {currentCategory && !currentCategory.isMultiPack ?
           <>
@@ -117,7 +150,7 @@ const ModalViewer = ({
             <ChildGridChannelViewer>
               {currentCategory?.allChannels?.map((channelInfo, index) => (
                   <ChannelChildCard key={index} className="flex">
-                    <MImage w={70} src={channelInfo.imageUrl} alt="channeler" />
+                    <MImageCustom w={70} src={channelInfo.imageUrl} alt="channeler" />
                     <ChannelChildCardDesc>
                       <span className="text-md font-bold">{channelInfo.subtitle}</span>
                       <span className="max-w-[130px] overflow-hidden whitespace-nowrap text-ellipsis">{channelInfo.title}</span>

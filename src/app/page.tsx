@@ -1,3 +1,4 @@
+'use client';
 import AllOtherPacks from "@ap/components/AllOtherPacks";
 import Footer from "@ap/components/Footer";
 import Header from "@ap/components/Header";
@@ -5,20 +6,30 @@ import Promotions from "@ap/components/Promotions";
 import WhyChooseUs from "@ap/components/WhyChooseUs";
 import { Space } from "@mantine/core";
 import Image from "next/image";
+import { isMobile } from "react-device-detect";
+import styled from "styled-components";
 
 const Starter = () => {
   return (
-    <div className="flex flex-col items-center py-4 w-full bg-[#00075E] text-white mb-0 mt-4">
+    <div className="flex flex-col items-center py-4 w-full bg-[#00075E] text-white mb-0 mt-0">
       <span className="text-[32px] font-extrabold">Hot Deals!</span>
     </div>
   );
 }
 // Astro Promotions One Page Web Design
+
+const Spacer = styled(Space)`
+  height: 120px;
+  @media (max-width: 768px) {
+    height: 95px !important;
+    min-height: 95px !important;
+  };
+`;
 export default function Home() {
   return (
     <div className="flex flex-col w-full h-[100vh]">
       <Header />
-      <Space h={120} />
+      <Spacer h={120} />
       <WhyChooseUs />
       <Starter />
       <Promotions />

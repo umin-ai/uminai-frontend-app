@@ -43,6 +43,10 @@ export const WhatsIncludedIconSearch = ({ channel, size }: { channel: string, si
         return '/icons/icon_sports.png';
       case 'HORROR':
         return '/icons/icon_horror.png';
+      case 'NEWS_DOCUMENTARY':
+        return '/icons/icon_news-documentaries.png';
+      case 'SPORTS_PACK_EXTRA':
+        return '/icons/icon_sports-extra.png';
       default:
         return '/icons/icon_base.png';
     }
@@ -86,6 +90,10 @@ export const whatsIncludedText = ({ channel }: { channel: string }) => {
       return 'Sports Pack';
     case 'HORROR':
       return 'Horror';
+    case 'NEWS_DOCUMENTARY':
+      return 'News & Documentary';
+    case 'SPORTS_PACK_EXTRA':
+      return 'Sports Extra';
     default:
       return 'Base';
   }

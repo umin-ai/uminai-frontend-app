@@ -18,6 +18,17 @@ const CustomModal = styled(Modal)`
     font-size: 16px; // Example custom body font size
     color: #333; // Example custom body color
   }
+
+  @media (max-width: 768px) {
+    .mantine-Modal-inner {
+      width: 100% !important; // Example custom width
+      padding-inline: unset !important; // Example custom padding
+      padding: 0px 12px !important; // Example custom padding
+    }
+    .mantine-Modal-content {
+      flex: 1 !important; // Example custom flex
+    }
+  }
 `;
 
 export default CustomModal;

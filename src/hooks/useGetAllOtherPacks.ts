@@ -28,7 +28,7 @@ const MockPacks: AstroPackInfo[] = [
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
     supportedApps: ["NETFLIX", "ASTRO_GO", "BEIN_SPORTS_CONNECTED"],
-    supportedChannels: ["BASE", "SPORTS_PACK", "KOREAN", "HORROR"]
+    supportedChannels: ["SPORTS_PACK", "KOREAN", "HORROR", "BASE"]
   },
   {
     priority: 3,
@@ -40,7 +40,7 @@ const MockPacks: AstroPackInfo[] = [
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
     supportedApps: ["NETFLIX", "DISNEY_PLUS_HOTSTAR", "HBO_GO", "ASTRO_GO"],
-    supportedChannels: ["BASE", "SPORTS_PACK", "KOREAN", "HORROR"]
+    supportedChannels: ["SPORTS_PACK", "KOREAN", "HORROR", "BASE"]
   },
   {
     priority: 4,
@@ -52,7 +52,55 @@ const MockPacks: AstroPackInfo[] = [
     originalPrice: 0,
     iconUrl: "/images/home-card-primary.png",
     supportedApps: ["NETFLIX", "BBC_PLAYER", "ASTRO_GO"],
-    supportedChannels: ["BASE", "KOREAN", "HORROR", "VARIETY", "KIDS", "ASIAN_FAVOURITES"]
+    supportedChannels: ["KOREAN", "HORROR", "VARIETY", "KIDS", "ASIAN_FAVOURITES", "BASE"]
+  },
+  {
+    priority: 5,
+    title: "Premium Pack 1",
+    bigImage: "/images/acm-pack-premiumpack1.jpg",
+    packageInfo: "4 apps and 105+ channels",
+    description: "Explore a top-tier selection of movies and sports, along with access to multiple streaming apps.",
+    price: 109.99,
+    originalPrice: 129.99,
+    iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["DISNEY_PLUS_HOTSTAR", "HBO_GO", "BEIN_SPORTS_CONNECTED", "ASTRO_GO"],
+    supportedChannels: ["MOVIES_PACK", "SPORTS_PACK", "BASE" ]
+  },
+  {
+    priority: 6,
+    title: "Premium Pack 2",
+    bigImage: "/images/acm-pack-premiumpack2.png",
+    packageInfo: "4 apps and 115+ channels",
+    description: "Enhance your home entertainment with a premium variety of shows, sports, and access to multiple streaming apps.",
+    price: 149.99,
+    originalPrice: 0,
+    iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["NETFLIX", "DISNEY_PLUS_HOTSTAR", "HBO_GO", "BBC_PLAYER", "ASTRO_GO"],
+    supportedChannels: ["MOVIES_PACK", "KOREAN", "HORROR", "VARIETY", "KIDS", "ASIAN_FAVOURITES", "BASE"]
+  },
+  {
+    priority: 7,
+    title: "Premium Pack 3",
+    bigImage: "/images/acm-pack-premiumpack3.jpg",
+    packageInfo: "5 apps and 110+ channels",
+    description: "Enjoy an elevated experience with premium movies, diverse content, and access to multiple streaming apps.",
+    price: 154.99,
+    originalPrice: 0,
+    iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["NETFLIX", "DISNEY_PLUS_HOTSTAR", "HBO_GO", "BBC_PLAYER", "HBO_GO", "ASTRO_GO"],
+    supportedChannels: ["MOVIES_PACK", "KOREAN", "HORROR", "VARIETY", "KIDS", "ASIAN_FAVOURITES", "BASE"]
+  },
+  {
+    priority: 8,
+    title: "Platinum Pack",
+    bigImage: "/images/acm-pack-platinum.jpg",
+    packageInfo: "6 apps and 150+ channels",
+    description: "Experience the ultimate all-in-one entertainment with movies, sports, Netflix, and a wide range of streaming apps.",
+    price: 194.99,
+    originalPrice: 0,
+    iconUrl: "/images/home-card-primary.png",
+    supportedApps: ["NETFLIX", "DISNEY_PLUS_HOTSTAR", "BEIN_SPORTS_CONNECTED", "HBO_GO", "BBC_PLAYER", "HBO_GO", "ASTRO_GO"],
+    supportedChannels: ["MOVIES_PACK", "KOREAN", "HORROR", "VARIETY", "NEWS_DOCUMENTARY", "KIDS", "ASIAN_FAVOURITES", "SPORTS_PACK", "SPORTS_PACK_EXTRA", "BASE"]
   }
 ]
 export default function useGetAllOtherPacks() {

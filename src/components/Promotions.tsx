@@ -10,6 +10,7 @@ import ModalViewer from "./ModalViewer";
 import CustomModal from "./CustomModal";
 import { Image as MImage } from '@mantine/core';
 import { WhatsIncludedIconSearch } from "./WhatsIncludedSearch";
+import { isMobile } from "react-device-detect";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -17,6 +18,9 @@ const Wrapper = styled.div`
   justify-content: center;
   padding: 0px 16px;
   min-height: 850px;
+  @media (max-width: 768px) {
+   min-height: unset;
+  }
   position: relative;
   padding-top: 32px;
 `;
@@ -34,6 +38,10 @@ const WrapperInternal = styled.div`
   align-items: center;
   padding-top: 32px;
   padding-bottom: 32px;
+
+  @media (max-width: 768px) {
+    padding-top: 16px;
+  }
   overflow: hidden;
   // justify-content: center;
 `;
@@ -43,6 +51,11 @@ const StyledText = styled.span`
   font-weight: 800;
   // padding: 16px 0px;
   line-height: 1;
+
+  @media (max-width: 768px) {
+    margin-top: 42px;
+    font-size: 20px;
+  }
 `;
 
 const AbsoluteBackImage = styled.div`
@@ -64,6 +77,56 @@ const BadgePlacement = styled.div`
   padding: 32px;
   display: flex;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+
+
+const CardGrid = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 768px) {
+    display: flex;
+    padding: 2px 26px;
+    overflow-x: scroll;
+    min-height: 660px;
+    align-items: start;
+
+    // minimal style scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: #e5e7eb transparent;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #e5e7eb;
+      border-radius: 4px;
+    }
+      
+  }
+  // gap: 16px;
+  justify-items: center;
+  align-items: center;
+  column-gap: 32px;
+  row-gap: 62px;
+`;
+
+
+const PromotionsDescription = styled.span`
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  padding: 0px 16px;
 `;
 export default function Promotions() {
   const { promotions } = usePromotions();
@@ -80,17 +143,17 @@ export default function Promotions() {
           <MImage src="/icons/badge-limited.png" alt='astro-limited-deals' />
         </BadgePlacement>
         <StyledText>Astro Promotions</StyledText>
-        <span className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</span>
-
-        <div className="w-full flex flex-row items-center justify-center gap-12">
+        <PromotionsDescription className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</PromotionsDescription>
+        {/* <GridWrapper> */}
+        <CardGrid className="">
           {promotions.map((promotion, index) => (
             <Card
               key={index}
               {...promotion}
             />
           ))}
-
-        </div>
+        </CardGrid>
+        {/* </GridWrapper> */}
       </WrapperInternal>
     </Wrapper>
   )
@@ -101,6 +164,11 @@ const StyledCard = styled.div`
   max-width: 330px;
 
   height: 100%;
+
+  @media (max-width: 768px) {
+    min-width: 330px;
+    max-height: 641.22px;
+  }
 
   display: flex;
   flex-direction: column;
@@ -226,6 +294,33 @@ const SeeAllChannels = styled.div`
   margin-top: 12px;
 `;
 
+const ScrollableArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  overflow-x: scroll;
+  scrollbar-width: thin; /* Uses a thin scrollbar in Firefox */
+  scrollbar-color: #d4d4d4 transparent;
+
+  /* For WebKit-based browsers (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 6px; /* Increase width slightly for visibility */
+    height: 6px; /* Adjust height for horizontal scrollbars, if any */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // background-color: #e5e7eb;
+    border-radius: 32px;
+    border: 2px solid transparent; /* Add some padding around for better visuals */
+    background-clip: content-box; /* Prevents the border color from overlaying */
+  }
+`;
 interface ICardProps extends PromotionInfo {
 }
 const Card = (

@@ -381,10 +381,10 @@ const Card = (
         </span>
         )}
       </div>
-
+      
       <IWantButton className="mt-2" 
         onClick={() => window.open(
-          `https://web.whatsapp.com/send?phone=60128800015&text=Interested%20With%20Astro%20${title}`,
+          `https://api.whatsapp.com/send/?phone=60128800015&text=Hello,+I+am+interested+in+Astro+${title}&type=phone_number`,
           '_blank' // <- This is what makes it open in a new window.
       )}>Get now</IWantButton>
 

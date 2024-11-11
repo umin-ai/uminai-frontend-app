@@ -173,7 +173,7 @@ export default function WhyChooseUs() {
             <UnfocusedTextV2>RM41.99/month</UnfocusedTextV2>
           </ContextArea>
           <ClickHereButton className="mt-3"
-            onClick={() => window.open('https://web.whatsapp.com/send?phone=60128800015&text=Interested%20With%20Astro%20$Promotions', '_blank')}
+            onClick={() => window.open('https://api.whatsapp.com/send/?phone=60128800015&text=Hello,+I+am+interested+with+Astro+Promotions&type=phone_number', '_blank')}
           >Get now!</ClickHereButton>
         </PromotedDescription>
         {/* <div className="min-w-[500px] max-w-[500px] flex w-full"> */}

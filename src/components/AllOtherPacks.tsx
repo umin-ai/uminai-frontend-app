@@ -5,7 +5,6 @@ import usePromotions, { PromotionInfo } from "@ap/hooks/usePromotions";
 import { Divider, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WhatsIncludedIconSearch } from "./WhatsIncludedSearch";
 import ModalViewer from "./ModalViewer";

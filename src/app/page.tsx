@@ -1,12 +1,12 @@
 'use client';
 import AllOtherPacks from "@ap/components/AllOtherPacks";
+import AstroFibre from "@ap/components/AstroFibre";
+import FAQ from "@ap/components/FAQ";
 import Footer from "@ap/components/Footer";
 import Header from "@ap/components/Header";
 import Promotions from "@ap/components/Promotions";
 import WhyChooseUs from "@ap/components/WhyChooseUs";
 import { Space } from "@mantine/core";
-import Image from "next/image";
-import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 
 const Starter = () => {
@@ -37,6 +37,8 @@ export default function Home() {
       <AllOtherPacks />
       {/* Hello
       <div>hello</div> */}
+      {/* <AstroFibre />
+      <FAQ /> */}
       <Footer />
     </div>
   )

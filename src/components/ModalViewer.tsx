@@ -1,10 +1,11 @@
+'use client';
 import useGetChannelList, { ChannelInfo } from "@ap/hooks/useGetChannelList";
 import { Divider, Image as MImage, Select } from '@mantine/core';
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { WhatsIncludedIconSearch, whatsIncludedText } from "./WhatsIncludedSearch";
-import useScreenType from "react-screentype-hook";
-import Image from "next/image";
+// @ts-ignore
+// import useScreenType from "react-screentype-hook";
 
 const Wrapper = styled.div`
   display: flex;
@@ -103,6 +104,30 @@ const TextEllipsis = styled.span`
     max-width: 100px;
   }
 `;
+
+const useScreenWidth = () => {
+  const [screenWidth, setScreenWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Check if window is defined (ensures this is run only on the client side)
+    if (typeof window !== 'undefined') {
+      const handleResize = () => {
+        setScreenWidth(window.innerWidth);
+      };
+
+      // Set initial screen width
+      setScreenWidth(window.innerWidth);
+
+      // Add resize event listener
+      window.addEventListener('resize', handleResize);
+
+      // Clean up event listener on unmount
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
+  return screenWidth;
+};
 const ModalViewer = ({
   apps,
   channels
@@ -114,6 +139,9 @@ const ModalViewer = ({
     channels: channels
   })
 
+  const screenWidth = useScreenWidth();
+  const isMobile = useMemo(() => screenWidth && screenWidth < 768, [screenWidth]);
+
   const [currentCategory, setCurrentCategory] = useState<ChannelInfo | undefined>(undefined);
 
   useEffect(() => {
@@ -122,8 +150,6 @@ const ModalViewer = ({
     }
   }, [loadChannels])
 
-  const screenType = useScreenType();
-
   const onChangeHandler = (value: string) => {
     const selectedCategory = loadChannels?.find((channelInfo) => channelInfo.category === value)
     setCurrentCategory(selectedCategory)
@@ -131,7 +157,7 @@ const ModalViewer = ({
   return (
     <Wrapper>
       <InternalWrapper>
-        {screenType.isMobile ?
+        {isMobile ?
           <Select 
             placeholder="Select a category"
             data={loadChannels?.map((channelInfo) => ({

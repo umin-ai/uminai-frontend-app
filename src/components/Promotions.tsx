@@ -10,7 +10,6 @@ import ModalViewer from "./ModalViewer";
 import CustomModal from "./CustomModal";
 import { Image as MImage } from '@mantine/core';
 import { WhatsIncludedIconSearch } from "./WhatsIncludedSearch";
-import { isMobile } from "react-device-detect";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -112,7 +111,6 @@ const CardGrid = styled.div`
       background-color: #e5e7eb;
       border-radius: 4px;
     }
-      
   }
   // gap: 16px;
   justify-items: center;
@@ -130,8 +128,7 @@ const PromotionsDescription = styled.span`
 `;
 export default function Promotions() {
   const { promotions } = usePromotions();
-    // const { channels } = useGetChannels();
-    // console.log(channels);
+
   return (
     <Wrapper id="promotions">
       <AbsoluteBackImage>
@@ -145,7 +142,7 @@ export default function Promotions() {
         <StyledText>Astro Promotions</StyledText>
         <PromotionsDescription className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</PromotionsDescription>
         {/* <GridWrapper> */}
-        <CardGrid className="">
+        <CardGrid>
           {promotions.map((promotion, index) => (
             <Card
               key={index}

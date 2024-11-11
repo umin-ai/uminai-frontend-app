@@ -10,6 +10,9 @@ const Wrapper = styled.div`
   color: #fff;
   padding: 22px 48px;
   margin-top: 32px;
+  @media (max-width: 768px) {
+    padding: 22px 16px;
+  }
 `;
 
 const ColumnArea = styled.div`

@@ -76,15 +76,23 @@ const AbsoluteImage = styled.div`
   justify-content: space-between;
   top: 0;
   left: 0;
+  align-items: center;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+`;
+
+const CImage = styled(Image)`
+  width: 100%;
+  max-width: 1891px;
 `;
 export default function AllOtherPacks() {
   const { tvpacks } = useGetAllOtherPacks();
   return (
     <Wrapper id="astro-packages">
       <AbsoluteImage>
-        <Image src="/images/astro-packs1.png" alt="astro.com.my" width={1920} height={1080} />
-        <Image src="/images/astro-packs-mid2.png" alt="astro.com.my" width={1920} height={1080} />
-        <Image src="/images/astro-packs2.png" alt="astro.com.my" width={1920} height={1080} />
+        <CImage src="/images/astro-packs1.png" alt="astro.com.my" width={1920} height={1080} />
+        <CImage src="/images/astro-packs-mid2.png" alt="astro.com.my" width={1920} height={1080} />
+        <CImage src="/images/astro-packs2.png" alt="astro.com.my" width={1920} height={1080} />
       </AbsoluteImage>
       <WrapperInternal>
         <StyledText>Astro Plus Pack</StyledText>
@@ -374,7 +382,11 @@ const Card = (
         )}
       </div>
 
-      <IWantButton className="mt-2">Get now</IWantButton>
+      <IWantButton className="mt-2" 
+        onClick={() => window.open(
+          `https://web.whatsapp.com/send?phone=60128800015&text=Interested%20With%20Astro%20${title}`,
+          '_blank' // <- This is what makes it open in a new window.
+      )}>Get now</IWantButton>
 
     </StyledCard>
   )

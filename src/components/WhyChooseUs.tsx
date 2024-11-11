@@ -151,7 +151,9 @@ export default function WhyChooseUs() {
           </span>
           <UnfocusedTextV2>RM41.99/month</UnfocusedTextV2>
           </div>
-          <ClickHereButton className="mt-3">Get now!</ClickHereButton>
+          <ClickHereButton className="mt-3"
+            onClick={() => window.open('https://web.whatsapp.com/send?phone=60128800015&text=Interested%20With%20Astro%20$Promotions', '_blank')}
+          >Get now!</ClickHereButton>
         </PromotedDescription>
         {/* <div className="min-w-[500px] max-w-[500px] flex w-full"> */}
           <CarouselViewer/>

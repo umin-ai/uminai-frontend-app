@@ -392,7 +392,11 @@ const Card = (
         )}
       </div>
 
-      <IWantButton className="mt-2">Get now</IWantButton>
+      <IWantButton className="mt-2" 
+        onClick={() => window.open(
+          `https://web.whatsapp.com/send?phone=60128800015&text=Interested%20With%20Astro%20${title}`,
+          '_blank' // <- This is what makes it open in a new window.
+      )}>Get now</IWantButton>
 
     </StyledCard>
   )

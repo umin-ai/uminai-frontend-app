@@ -5,6 +5,7 @@ import FAQ from "@ap/components/FAQ";
 import Footer from "@ap/components/Footer";
 import Header from "@ap/components/Header";
 import Promotions from "@ap/components/Promotions";
+import WhatOurCustomersSaying from "@ap/components/WhatOurCustomersSaying";
 import WhyChooseUs from "@ap/components/WhyChooseUs";
 import { Space } from "@mantine/core";
 import styled from "styled-components";
@@ -39,6 +40,7 @@ export default function Home() {
       <div>hello</div> */}
       {/* <AstroFibre />
       <FAQ /> */}
+      <WhatOurCustomersSaying />
       <Footer />
     </div>
   )

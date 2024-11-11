@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { WhatsIncludedIconSearch, whatsIncludedText } from "./WhatsIncludedSearch";
 import useScreenType from "react-screentype-hook";
+import Image from "next/image";
 
 const Wrapper = styled.div`
   display: flex;
@@ -66,10 +67,10 @@ const ChannelChildCard = styled.div`
   max-width: 230px;
   max-height: 50px;
   display: grid;
-  grid-template-columns: 0.7fr 1fr;
+  grid-template-columns: 0.5fr 1fr;
   @media (max-width: 768px) {
 
-    max-width: 220px;
+    max-width: 200px;
     gap: 8px;
   }
   align-items: center;
@@ -84,12 +85,24 @@ const ChannelChildCardDesc = styled.div`
   // gap: 8px;
 `;
 
-const MImageCustom = styled(MImage)`
+const MImageCustom = styled.img`
+  max-width: 50px;
   @media (max-width: 768px) {
     min-width: 30px !important;
     max-width: 50px !important;
   }
 `
+
+const TextEllipsis = styled.span`
+  max-width: 130px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @media (max-width: 768px) {
+    max-width: 100px;
+  }
+`;
 const ModalViewer = ({
   apps,
   channels
@@ -150,10 +163,10 @@ const ModalViewer = ({
             <ChildGridChannelViewer>
               {currentCategory?.allChannels?.map((channelInfo, index) => (
                   <ChannelChildCard key={index} className="flex">
-                    <MImageCustom w={70} src={channelInfo.imageUrl} alt="channeler" />
+                    <MImageCustom src={channelInfo.imageUrl} alt="channeler" />
                     <ChannelChildCardDesc>
                       <span className="text-md font-bold">{channelInfo.subtitle}</span>
-                      <span className="max-w-[130px] overflow-hidden whitespace-nowrap text-ellipsis">{channelInfo.title}</span>
+                      <TextEllipsis>{channelInfo.title}</TextEllipsis>
                     </ChannelChildCardDesc>
                   </ChannelChildCard>
               ))}

@@ -72,13 +72,17 @@ const BigTitleArea = styled.div`
   gap: 8px;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 4px;
+  }
 `;
 
 const UnfocusedText = styled.span`
   font-size: 28px;
   font-weight: 700;
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -87,7 +91,7 @@ const UnfocusedTextV2 = styled.span`
   font-weight: 700;
   line-height: 1em;
   @media (max-width: 768px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
@@ -98,7 +102,7 @@ const FocusedText = styled.span`
   color: transparent;
   background-clip: text;
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 18px;
   }
 `;
 
@@ -130,6 +134,23 @@ const WavesAbsolute = styled.div`
   }
 `;
 
+const Context = styled.span`
+  font-weight: 700;
+  font-size: 18px;
+`;
+
+const ContextArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+`;
+
 export default function WhyChooseUs() {
   return (
     <Wrapper id='why'>
@@ -142,15 +163,15 @@ export default function WhyChooseUs() {
             <UnfocusedText>LIMITED TIME:</UnfocusedText>
             <FocusedText>JUALAN JIMAT BESAR</FocusedText>
           </BigTitleArea>
-          <div className="flex flex-row items-end">
-          <span className="font-[700] text-lg underline">
-            Primary Pack&nbsp;
-          </span>
-          <span>
-            at only&nbsp;
-          </span>
-          <UnfocusedTextV2>RM41.99/month</UnfocusedTextV2>
-          </div>
+          <ContextArea>
+            <Context className="underline">
+              Primary Pack&nbsp;
+            </Context>
+            <span>
+              at only&nbsp;
+            </span>
+            <UnfocusedTextV2>RM41.99/month</UnfocusedTextV2>
+          </ContextArea>
           <ClickHereButton className="mt-3"
             onClick={() => window.open('https://web.whatsapp.com/send?phone=60128800015&text=Interested%20With%20Astro%20$Promotions', '_blank')}
           >Get now!</ClickHereButton>

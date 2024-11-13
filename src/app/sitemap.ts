@@ -7,6 +7,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '#promotions',
     '#astro-packages',
+    '#contactus',
+    '#astr-fibre',
   ];
 
   return routes.map((route) => ({

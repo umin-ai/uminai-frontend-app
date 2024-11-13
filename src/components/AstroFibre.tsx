@@ -141,7 +141,7 @@ const PromotedPack = () => {
         <span className="text-2xl font-bold text-center">500 Mbps for only RM90/month</span>
         <span>Valid from 24 Nov 2023 to 30 Nov 2024</span>
         {/* Youtube video */}
-        <YoutubeIframe className="mt-2" width="1028" src="https://www.youtube.com/embed/Wo6Sgw_tP-E" title="Astro Fibre: Seisi keluarga meriah sebab rumah dikuasakan WiFi Kencang! (90s)" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen />
+        <YoutubeIframe className="mt-2" width="1028" src="https://www.youtube.com/embed/Wo6Sgw_tP-E" title="Astro Fibre: Seisi keluarga meriah sebab rumah dikuasakan WiFi Kencang! (90s)" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
         <ClickHereButton className="mt-5 mb-2"
             onClick={() => window.open('https://api.whatsapp.com/send/?phone=60128800015&text=Hello,+I+am+interested+with+Astro+Fibre+RM90+Promotion&type=phone_number', '_blank')}
           >Subscribe Now!</ClickHereButton>

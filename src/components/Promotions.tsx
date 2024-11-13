@@ -93,7 +93,7 @@ const CardGrid = styled.div`
   }
   @media (max-width: 768px) {
     display: flex;
-    padding: 2px 26px;
+    padding: 2px 8px;
     overflow-x: scroll;
     min-height: 660px;
     align-items: start;

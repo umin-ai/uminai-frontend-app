@@ -101,7 +101,7 @@ const TextEllipsis = styled.span`
   text-overflow: ellipsis;
 
   @media (max-width: 768px) {
-    max-width: 100px;
+    max-width: 90px;
   }
 `;
 

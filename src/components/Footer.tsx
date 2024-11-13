@@ -85,7 +85,7 @@ export default function Footer() {
         <Column id="show-border-mobile">
           <FocusedText>Contact Sales</FocusedText>
           <MainText>Astro Promotions Sales</MainText>
-          <MainText>Sales (Whatsapp): +012-880 0015</MainText>
+          <MainText>Sales (Whatsapp): +6012-880 0015</MainText>
           <FocusedText>Customer Support</FocusedText>
           <MainText>Dial: +603 95433838</MainText>
         </Column>

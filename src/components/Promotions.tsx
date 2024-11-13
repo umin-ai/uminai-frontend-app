@@ -140,7 +140,8 @@ export default function Promotions() {
           <MImage src="/icons/badge-limited.png" alt='astro-limited-deals' />
         </BadgePlacement>
         <StyledText>Astro Promotions</StyledText>
-        <PromotionsDescription className="mb-6 mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</PromotionsDescription>
+        <PromotionsDescription className="mt-5 text-lg font-semibold">Enjoy <span className="font-extrabold text-2xl">30% OFF</span> on Primary, Entertainment and Movies Pack today. Limited Time Only!</PromotionsDescription>
+        <span className="mb-6">All Packages Includes <span onClick={() => window.location.href = '#ultra_box'} className="text-blue-500 cursor-pointer">Ultra Box*</span></span>
         {/* <GridWrapper> */}
         <CardGrid>
           {promotions.map((promotion, index) => (

@@ -85,6 +85,14 @@ const CImage = styled(Image)`
   width: 100%;
   max-width: 1891px;
 `;
+
+const PromotionsDescription = styled.span`
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  padding: 0px 16px;
+`;
+
 export default function AllOtherPacks() {
   const { tvpacks } = useGetAllOtherPacks();
   return (
@@ -96,6 +104,9 @@ export default function AllOtherPacks() {
       </AbsoluteImage>
       <WrapperInternal>
         <StyledText>Astro Plus Pack</StyledText>
+        <PromotionsDescription className="mt-5 text-lg font-semibold">Get exclusive shows! Unlock more entertainment for upgraded package</PromotionsDescription>
+
+        <span className="mb-0">All Packages Includes <span onClick={() => window.location.href = '#ultra_box'} className="text-blue-500 cursor-pointer">Ultra Box*</span></span>
 
         <CardGrid className="mt-6">
           {tvpacks.map((tvpack, index) => (

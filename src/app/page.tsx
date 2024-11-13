@@ -3,6 +3,7 @@ import AllOtherPacks from "@ap/components/AllOtherPacks";
 import AstroFibre from "@ap/components/AstroFibre";
 import FAQ from "@ap/components/FAQ";
 import Footer from "@ap/components/Footer";
+import FreeInstallation from "@ap/components/FreeInstallation";
 import Header from "@ap/components/Header";
 import Promotions from "@ap/components/Promotions";
 import WhatOurCustomersSaying from "@ap/components/WhatOurCustomersSaying";
@@ -41,6 +42,8 @@ export default function Home() {
       {/* <AstroFibre />
       <FAQ /> */}
       <WhatOurCustomersSaying />
+      <FreeInstallation />
+      <AstroFibre />
       <Footer />
     </div>
   )

@@ -92,7 +92,7 @@ export default function Footer() {
         <Column id='show-border'>
           <FocusedText>Emails</FocusedText>
           <MainText>sales@astro-promotions.com</MainText>
-          <MainText>admin@astro-promotions.com</MainText>
+          {/* <MainText>admin@astro-promotions.com</MainText> */}
         </Column>
         <Column id='show-border'>
           <FocusedText>Official Link</FocusedText>

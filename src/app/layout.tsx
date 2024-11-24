@@ -9,11 +9,12 @@ import Repeater from "@ap/components/Repeater";
 import Floater from "@ap/components/Floater";
 import { Siders } from "@ap/components/FixedSiders";
 import CallToActionFloater from "@ap/components/CallToActionFloater";
+import Head from "next/head";
 
 const orbitron = Orbitron({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "HODL100K",
+  title: "Official HODL100K",
   description: "Official Website of HODL100K",
   keywords: "HODL100K, HODL, 100K, Official HOLDK100K, Crypto",
   authors: { name: "Prof. Hodl Sr." },
@@ -22,11 +23,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Official Website of HODL100K",
     description: "HODL100K, HODL, 100K, Official HOLDK100K, Crypto",
-    url: "https://hodl100k.com",
+    url: "https://hodl100k.xyz",
     siteName: "Official Website of HODL100K",
     images: [
       {
-        url: "https://hodl100k.com/images/Sample.png",
+        url: "https://hodl100k.xyz/images/Sample.png",
         width: 1184,
         height: 709,
         alt: "Official Website of HODL100K",
@@ -68,6 +69,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        <link rel='icon' href='/icons/icon16.png' type='image/png' sizes='16x16' />
+        <link rel='icon' href='/icons/icon32.png' type='image/png' sizes='32x32' />
+      </Head>
       <body
         className={orbitron.className}
       >

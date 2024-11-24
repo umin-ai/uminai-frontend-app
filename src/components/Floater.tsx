@@ -18,7 +18,7 @@ const FloaterWrapperTop = styled.div`
   gap: 10px;
 
   @media (max-width: 768px) {
-    bottom: 15%;
+    top: 1.5%;
   }
 `;
 

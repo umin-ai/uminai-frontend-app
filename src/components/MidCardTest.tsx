@@ -160,8 +160,9 @@ const ButtonArea = styled.div`
 
   @media (max-width: 768px) {
     max-width: 360px;
-    max-height: 70px;
-    padding: 12px 26px;
+    max-height: 50px;
+    padding: 8px 26px;
+    border-radius: 12px;
   }
 
   span {
@@ -193,7 +194,7 @@ const ButtonArea = styled.div`
     }
 
     &.darken {
-      background-color: #d9d9d9;
+      background-color: #c1c1c1;
     }
     span {
       color: #000;
@@ -356,7 +357,7 @@ const InputStyled = styled.input`
   }
 
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 
@@ -414,7 +415,7 @@ const TicketImg = styled(NImage)`
 const ButtonPlacement = styled.div`
   position: absolute;
   display: flex;
-  bottom: 0;
+  bottom: 3.2%;
   justify-content: center;
   align-items: end;
   width: 100%;

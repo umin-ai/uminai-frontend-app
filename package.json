@@ -1,5 +1,5 @@
 {
-  "name": "astro-promotions",
+  "name": "hodl100k",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,12 +15,13 @@
     "@mantine/hooks": "^7.13.4",
     "@mantine/modals": "^7.13.4",
     "@next/third-parties": "^15.0.2",
-    "astro-promotions": "file:",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
+    "hodl100k": "file:",
     "jotai": "^2.10.1",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
+    "react-animated-cursor": "^2.11.2",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "react-screentype-hook": "^1.0.18",
     "styled-components": "^6.1.13"

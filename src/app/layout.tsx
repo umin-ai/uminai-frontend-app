@@ -1,43 +1,35 @@
 import type { Metadata } from "next";
-import { Mulish } from "next/font/google";
+import { Orbitron } from "next/font/google";
 import { MantineProvider } from '@mantine/core';
-// import { Notifications } from '@mantine/notifications';
 import "./globals.css";
 import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
-import { FloatingWhatsapp } from "@ap/components/Floating";
-import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google' 
+import AnimatedCursor from "react-animated-cursor";
+import Repeater from "@ap/components/Repeater";
+import Floater from "@ap/components/Floater";
+import { Siders } from "@ap/components/FixedSiders";
+import CallToActionFloater from "@ap/components/CallToActionFloater";
 
-const mulish = Mulish({ subsets: ["latin"] });
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+const orbitron = Orbitron({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Special Deal | Astro Malaysia TV Packages Now Available",
-  description: "Experience the new Astro! Get the latest TV shows, movies, live sports, and premium streaming apps with Astro Fibre all in one easy subscription. Enjoy top-quality entertainment in one place, let's get started!",
-  keywords: "astro, astro tv, astro package, astro shop, broadband, astro subscription, platinum pack, entertainment plus pack, entertainment pack, primary pack, astro netflix, netflix malaysia, astro disney, disney hotstar, broadband, high speed, fastest internet, astro channel, astro go",
-  authors: { name: "astro-promotions.com Astro Authorised Dealer" },
+  title: "HODL100K",
+  description: "Official Website of HODL100K",
+  keywords: "HODL100K, HODL, 100K, Official HOLDK100K, Crypto",
+  authors: { name: "Prof. Hodl Sr." },
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
-    title: "Special Deal | Astro Malaysia TV Packages Now Available",
-    description: "Experience the new Astro in astro-promotions.com! Get the latest TV shows, movies, live sports, and premium streaming apps with Astro Fibre all in one easy subscription. Enjoy top-quality entertainment in one place, let's get started!",
-    url: "https://astro.com.my",
-    siteName: "Special Deal | Astro Malaysia TV Packages Now Available",
+    title: "Official Website of HODL100K",
+    description: "HODL100K, HODL, 100K, Official HOLDK100K, Crypto",
+    url: "https://hodl100k.com",
+    siteName: "Official Website of HODL100K",
     images: [
       {
-        url: "https://astro-promotions.com/images/acm-pack-primarypack.jpg",
-        width: 800,
-        height: 600,
-        alt: "Astro TV and Fibre Packages in https://astro-promotions.com",
+        url: "https://hodl100k.com/images/Sample.png",
+        width: 1184,
+        height: 709,
+        alt: "Official Website of HODL100K",
       },
     ],
     type: "website",
@@ -76,18 +68,57 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <GoogleTagManager gtmId='GTM-5X974MSK'/>
-      <GoogleAnalytics gaId='G-17YD4R7PBH'/>
       <body
-        className={mulish.className}
+        className={orbitron.className}
       >
+        <AnimatedCursor       
+          innerSize={8}
+          outerSize={35}
+          innerScale={1}
+          outerScale={2}
+          outerAlpha={0}
+          showSystemCursor={false}
+          outerStyle={{
+            border: '3px solid #E7AE35'
+          }}
+          innerStyle={{
+            backgroundColor: '#E7AE35',
+          }}
+          clickables={[{
+            target: '.lefter',
+            innerSize: 10,
+            innerScale: 1,
+            outerScale: 1,
+            outerAlpha: 0,
+            innerStyle: {
+              backgroundColor: '#fff',
+            },
+            outerStyle: {
+              border: '3px solid #fff',
+            }
+          }, {
+            target: '.righter',
+            innerSize: 10,
+            innerScale: 1,
+            outerScale: 1,
+            outerAlpha: 0,
+            innerStyle: {
+              backgroundColor: '#fff',
+            },
+            outerStyle: {
+              border: '3px solid #fff',
+            }
+          }]}
+        />
         <MantineProvider>
           <StyledComponentsRegistry>
-            {children}
+            <Repeater children={children}/>
+            <Siders />
+            <Floater />
+            <CallToActionFloater />
           {/* <Notifications /> */}
           </StyledComponentsRegistry>
         </MantineProvider>
-        <FloatingWhatsapp />
       </body>
     </html>
   );

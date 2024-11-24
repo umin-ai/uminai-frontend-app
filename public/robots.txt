@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://astro-promotions.com/sitemap.xml
+Sitemap: https://hodl100k.com/sitemap.xml

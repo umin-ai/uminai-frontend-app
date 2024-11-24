@@ -1,14 +1,9 @@
 'use client';
-import AllOtherPacks from "@ap/components/AllOtherPacks";
-import AstroFibre from "@ap/components/AstroFibre";
-import FAQ from "@ap/components/FAQ";
-import Footer from "@ap/components/Footer";
-import FreeInstallation from "@ap/components/FreeInstallation";
-import Header from "@ap/components/Header";
-import Promotions from "@ap/components/Promotions";
-import WhatOurCustomersSaying from "@ap/components/WhatOurCustomersSaying";
-import WhyChooseUs from "@ap/components/WhyChooseUs";
+import { Siders } from "@ap/components/FixedSiders";
+import { MidCard } from "@ap/components/MidCard";
+import { MidCardTest } from "@ap/components/MidCardTest";
 import { Space } from "@mantine/core";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Starter = () => {
@@ -27,24 +22,15 @@ const Spacer = styled(Space)`
     min-height: 95px !important;
   };
 `;
+
+
 export default function Home() {
   return (
-    <div className="flex flex-col w-full h-[100vh]">
-      <Header />
-      <Spacer h={120} />
-      <WhyChooseUs />
-      <Starter />
-      <Promotions />
-      <Space h={50} />
-      <AllOtherPacks />
-      {/* Hello
-      <div>hello</div> */}
-      {/* <AstroFibre />
-      <FAQ /> */}
-      <WhatOurCustomersSaying />
-      <FreeInstallation />
-      <AstroFibre />
-      <Footer />
+    <div className="flex flex-col w-full h-[100vh] relative">
+
+
+      {/* <MidCard /> */}
+      <MidCardTest />
     </div>
   )
 };

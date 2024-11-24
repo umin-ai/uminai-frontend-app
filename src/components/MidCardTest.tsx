@@ -102,6 +102,9 @@ const TicketCenter = styled.div`
   // align-items: center;
   padding-top: 140px;
 
+  .spanarea {
+    display: none;
+  }
   @media (max-width: 768px) {
     padding-top: 70px;
     flex-direction: column;

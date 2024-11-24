@@ -4,11 +4,29 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 
+const FloaterWrapperTop = styled.div`
+  position: fixed;
+  width: 100%;
+  background-color: transparent;
+  top: 1.5%;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    bottom: 15%;
+  }
+`;
+
 const FloaterWrapper = styled.div`
   position: fixed;
   width: 100%;
   background-color: transparent;
-  bottom: 5%;
+  bottom: 1.5%;
   left: 0;
   z-index: 5;
   display: flex;
@@ -122,31 +140,35 @@ export default function Floater() {
   }, [nextRouter]);
 
   return (
-    <FloaterWrapper>
-      <FloaterInsider>
-        <span
-          onClick={() => nextNavigate.push("/")}
-          className={currentLocation === "/" ? "active" : "null"}
-        >Ticket</span>
-        <span
-          onClick={() => nextNavigate.push("/value")}
-          className={currentLocation === "/value" ? "active" : "null"}
-        >Value</span>
-        <span
-          onClick={() => nextNavigate.push("/ultimate-goal")}
-          className={currentLocation === "/ultimate-goal" ? "active" : "null"}
-        >Ultimate Goal</span>
-      </FloaterInsider>
-      <FloaterInsiderSocial>
-        <span>Official Links:</span>
-        <ImageIcon
-          onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
-          src="/icons/tg.png" alt='tg' width={36} height={0}/>
-        <ImageIcon
-          onClick={() => window.open("https://twitter.com/hodl100k", "_blank")}
-          src="/icons/x.png" alt='x' width={36} height={0}/>
-        <span className="more">More to come</span>
-      </FloaterInsiderSocial>
-    </FloaterWrapper>
+    <>
+      <FloaterWrapperTop>
+        <FloaterInsider>
+          <span
+            onClick={() => nextNavigate.push("/")}
+            className={currentLocation === "/" ? "active" : "null"}
+          >Ticket</span>
+          <span
+            onClick={() => nextNavigate.push("/value")}
+            className={currentLocation === "/value" ? "active" : "null"}
+          >Value</span>
+          <span
+            onClick={() => nextNavigate.push("/ultimate-goal")}
+            className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+          >Ultimate Goal</span>
+        </FloaterInsider>
+      </FloaterWrapperTop>
+      <FloaterWrapper>
+        <FloaterInsiderSocial>
+          <span>Official Links:</span>
+          <ImageIcon
+            onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
+            src="/icons/tg.png" alt='tg' width={36} height={0}/>
+          <ImageIcon
+            onClick={() => window.open("https://twitter.com/hodl100k", "_blank")}
+            src="/icons/x.png" alt='x' width={36} height={0}/>
+          <span className="more">More to come</span>
+        </FloaterInsiderSocial>
+      </FloaterWrapper>
+    </>
   )
 }

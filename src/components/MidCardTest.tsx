@@ -37,7 +37,7 @@ const RealCard = styled.div`
   @media (max-width: 768px) {
     // max-width: 100%;
     // max-width: 360px;
-    max-height: 500px;
+    max-height: 450px;
   }
 `;
 
@@ -415,11 +415,16 @@ const TicketImg = styled(NImage)`
 const ButtonPlacement = styled.div`
   position: absolute;
   display: flex;
-  bottom: 3.2%;
+  bottom: 0%;
   justify-content: center;
   align-items: end;
   width: 100%;
   height: 100%;
   padding-bottom: 50px;
   pointer-events: all;
+
+  @media (max-width: 768px) {
+    bottom: 0%;
+    padding-bottom: 48px;
+  }
 `;

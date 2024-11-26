@@ -120,7 +120,7 @@ export const Siders = () => {
             onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
             src="/icons/tg.png" alt='tg' width={84} height={84}/>
           <IImage
-            onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
+            onClick={() => window.open("https://x.com/HODL100K", "_blank")}
             src="/icons/x.png" alt='x' width={84} height={84}/>
         </FlexIcons>
       </RightSiderWrapper>

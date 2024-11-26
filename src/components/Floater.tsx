@@ -164,7 +164,7 @@ export default function Floater() {
             onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
             src="/icons/tg.png" alt='tg' width={36} height={0}/>
           <ImageIcon
-            onClick={() => window.open("https://x.com/HODLCoin_com", "_blank")}
+            onClick={() => window.open("https://x.com/HODL100K", "_blank")}
             src="/icons/x.png" alt='x' width={36} height={0}/>
           <span className="more">More to come</span>
         </FloaterInsiderSocial>

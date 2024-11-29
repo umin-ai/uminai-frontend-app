@@ -139,7 +139,9 @@ export default function CAFloater() {
     <FloaterRightBottom2>
       <ContentFlex onClick={onClickCopy}>
         {isCopied ? <span>Copied!</span> : <span>COPY CA</span>}
-        <span>6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump</span>
+        <span onClick={() => {
+          window.open("https://pump.fun/coin/6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump");
+        }}>6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump</span>
       </ContentFlex>
     </FloaterRightBottom2>
   );

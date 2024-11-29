@@ -94,8 +94,8 @@ const CATopRight = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  padding: 50px 50px 0px 0px;
-  pointer-events: none;
+  padding: 40px 50px 0px 0px;
+  pointer-events: all;
   color: #E7AE35;
   font-size: 20px;
   font-weight: 700;
@@ -300,7 +300,9 @@ export const MidCardTest = () => {
         </ImageTopLeft>
         <CATopRight>
           <BorderedCA>
-            <span>CA: <span className="text-white">6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump</span></span>
+            <span>CA: <span 
+              onClick={() => window.open("https://pump.fun/coin/6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump", "_blank")}
+            className="text-white">6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump</span></span>
           </BorderedCA>
         </CATopRight>
         <ImageBottomLeft>

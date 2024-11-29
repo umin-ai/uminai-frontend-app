@@ -117,7 +117,7 @@ export const Siders = () => {
         <span className="font-black text-xl text-black">LINK</span>
         <FlexIcons>
           <IImage
-            onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
+            onClick={() => window.open("https://t.me/+cmF4poMG-GZkMzFk", "_blank")}
             src="/icons/tg.png" alt='tg' width={84} height={84}/>
           <IImage
             onClick={() => window.open("https://x.com/HODL100K", "_blank")}

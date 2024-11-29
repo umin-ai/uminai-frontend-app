@@ -10,6 +10,7 @@ import Floater from "@ap/components/Floater";
 import { Siders } from "@ap/components/FixedSiders";
 import CallToActionFloater from "@ap/components/CallToActionFloater";
 import Head from "next/head";
+import CAFloater from "@ap/components/CAFloater";
 
 const orbitron = Orbitron({ subsets: ['latin'] });
 
@@ -120,6 +121,7 @@ export default function RootLayout({
             <Repeater children={children}/>
             <Siders />
             <Floater />
+            <CAFloater />
             <CallToActionFloater />
           {/* <Notifications /> */}
           </StyledComponentsRegistry>

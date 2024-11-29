@@ -73,7 +73,7 @@ const ImageBottomRight = styled.div`
 `;
 
 const ImageLogo = styled(NImage)`
-  max-width: 398px;
+  max-width: 300px;
     @media (max-width: 768px) {
     max-width: 200px;
   }
@@ -89,6 +89,23 @@ const ImageTopLeft = styled.div`
     padding: 20px 0px 0px 20px;
   }
 `;
+
+const CATopRight = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 50px 50px 0px 0px;
+  pointer-events: none;
+  color: #E7AE35;
+  font-size: 20px;
+  font-weight: 700;
+  z-index: 5;
+  @media (max-width: 768px) {
+    padding: 20px 0px 0px 20px;
+    display: none;
+  }
+`;
+
 
 const TicketCenter = styled.div`
   margin-top: 0px;
@@ -213,6 +230,13 @@ const ButtonArea = styled.div`
   }
 `;
 
+const BorderedCA = styled.div`
+  padding: 12px 12px;
+  pointer-events: none;
+  display: flex;
+  border: 1px solid #E7AE35;
+`;
+
 export const MidCardTest = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [username, setUsername] = useState<string>("");
@@ -274,6 +298,11 @@ export const MidCardTest = () => {
         <ImageTopLeft>
           <ImageLogo src="/icons/HODL100K.png" alt="HODL100K" width={398} height={398} />
         </ImageTopLeft>
+        <CATopRight>
+          <BorderedCA>
+            <span>CA: <span className="text-white">6AQW7Ed9rBRFrFZ1ivD7jcfcG9gtb3xYu1vCKwoJpump</span></span>
+          </BorderedCA>
+        </CATopRight>
         <ImageBottomLeft>
           <ImageSpaceShip
             src="/images/spaceship_inner.png"

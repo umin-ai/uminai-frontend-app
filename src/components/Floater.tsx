@@ -36,7 +36,7 @@ const FloaterWrapper = styled.div`
   gap: 10px;
 
   @media (max-width: 768px) {
-    bottom: 15%;
+    bottom: 13%;
   }
 `;
 
@@ -129,6 +129,26 @@ const ImageIcon = styled(Image)`
   }
 `;
 
+const FloaterWrapperTopCA = styled.div`
+  position: fixed;
+  width: 100%;
+  background-color: transparent;
+  top: 1.5%;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  z-index: 5;
+
+  @media (max-width: 768px) {
+    top: 1.5%;
+  }
+`;
+
 export default function Floater() {
   // check current page location nextjs
   const [currentLocation, setCurrentLocation] = useState("");
@@ -161,7 +181,7 @@ export default function Floater() {
         <FloaterInsiderSocial>
           <span>Official Links:</span>
           <ImageIcon
-            onClick={() => window.open("https://t.me/PROJECT_HODL_TG", "_blank")}
+            onClick={() => window.open("https://t.me/+cmF4poMG-GZkMzFk", "_blank")}
             src="/icons/tg.png" alt='tg' width={36} height={0}/>
           <ImageIcon
             onClick={() => window.open("https://x.com/HODL100K", "_blank")}

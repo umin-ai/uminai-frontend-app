@@ -15,17 +15,17 @@ import CAFloater from "@ap/components/CAFloater";
 const grandstander = Grandstander({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Official HODL100K",
-  description: "Official Website of HODL100K",
-  keywords: "HODL100K, HODL, 100K, Official HOLDK100K, Crypto",
-  authors: { name: "Prof. Hodl Sr." },
+  title: "Stanley The Cat Community Takeover",
+  description: "Community Site of Stanley The Cat",
+  keywords: "Stanley The Cat on Solana",
+  authors: { name: "Stanley The Cat" },
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
     title: "Official Website of HODL100K",
-    description: "HODL100K, HODL, 100K, Official HOLDK100K, Crypto",
-    url: "https://hodl100k.xyz",
-    siteName: "Official Website of HODL100K",
+    description: "Community Takeover of Stanley The Cat",
+    url: "https://stanleythecat.com",
+    siteName: "Stanley The Cat",
     images: [
       {
         url: "https://hodl100k.xyz/images/Sample.png",

@@ -127,7 +127,7 @@ export default function HowToBuy() {
             <span>How to Buy $STANLEY</span>
           </AboutTextArea>
           <FlexRowTextInfo>
-            <StanleyImgStep src='/images/stanley1.png' alt='1' width={300} height={0} />
+            <StanleyImgStep src='/images/1.png' alt='1' width={300} height={0} />
             <DescriptionTextArea>
               <span>
                 1. Getting your phantom or solflare wallet prepared
@@ -135,7 +135,7 @@ export default function HowToBuy() {
             </DescriptionTextArea>
           </FlexRowTextInfo>
           <FlexRowTextInfo>
-            <StanleyImgStep src='/images/stanley2.png' alt='1' width={300} height={0} />
+            <StanleyImgStep src='/images/2.png' alt='1' width={300} height={0} />
             <DescriptionTextArea>
               <span>
                 2. To have some Solana available in your wallet
@@ -143,7 +143,7 @@ export default function HowToBuy() {
             </DescriptionTextArea>
           </FlexRowTextInfo>
           <FlexRowTextInfo>
-            <StanleyImgStep src='/images/stanley3.png' alt='1' width={300} height={0} />
+            <StanleyImgStep src='/images/3.png' alt='1' width={300} height={0} />
             <DescriptionTextArea>
               <span>
                 3. Connect your wallet to Birdeye or Pump.Fun

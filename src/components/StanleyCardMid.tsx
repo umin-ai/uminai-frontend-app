@@ -322,6 +322,9 @@ export default function StanleyCardMid() {
 
           {!isMobile &&
             <>
+              <DiscoLightPosition1>
+                <Image src='/images/discolight.gif' alt='discoball' width={500} height={0}/>
+              </DiscoLightPosition1>
               <StanleyDiscoPosition1>
                 <Image src='/images/discostanley.gif' alt='stanley-disco' width={500} height={0}/>
               </StanleyDiscoPosition1>
@@ -354,7 +357,6 @@ export default function StanleyCardMid() {
             <source src={stanleyVidMobile} type="video/mp4" />
           </Video>
         }
-
         <PlayerPosition>
           <MP3PlayButton audioSrc="/audio/tellmewhy.mp3" isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
         </PlayerPosition>

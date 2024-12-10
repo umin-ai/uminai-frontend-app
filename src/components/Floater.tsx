@@ -1,4 +1,5 @@
 'use client';
+import useIsMobile from "@ap/hooks/useIsMobile";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,24 +23,6 @@ const FloaterWrapperTop = styled.div`
   }
 `;
 
-const FloaterWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  background-color: transparent;
-  bottom: 1.5%;
-  left: 0;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
-  @media (max-width: 768px) {
-    bottom: 13%;
-  }
-`;
-
 const FloaterInsider = styled.div`
   display: flex;
   justify-content: center;
@@ -53,9 +36,8 @@ const FloaterInsider = styled.div`
   // box-shadow: 0px 0px 5px 0px #000;
   
   @media (max-width: 768px) {
-    padding: 16px 25px;
-    width: 95%;
-
+    padding: 8px 16px;
+    width: 100%;
   }
   span {
     // spacing
@@ -216,6 +198,7 @@ export default function Floater() {
   const [currentLocation, setCurrentLocation] = useState("");
   const nextNavigate = useRouter();
   const nextRouter = usePathname();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setCurrentLocation(nextRouter);
@@ -230,24 +213,29 @@ export default function Floater() {
             className={currentLocation === "/" ? "active" : "null"}
           >Ticket</span> */}
           <TopLeftFlex>
-            <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
+            {!isMobile &&
+              <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
+            }
             <TopLeftImage src='/images/StanleyLogo.png' alt='stanley' width={700} height={0}/>
           </TopLeftFlex>
-          <FlexEndMenu>
-            <span
-              onClick={() => nextNavigate.push("/about")}
-              className={currentLocation === "/about" ? "active" : "null"}
-            >About</span>
-            <span
-              onClick={() => nextNavigate.push("/ultimate-goal")}
-              className={currentLocation === "/ultimate-goal" ? "active" : "null"}
-            >Where to buy</span>
-            <span
-              onClick={() => nextNavigate.push("/ultimate-goal")}
-              className={currentLocation === "/ultimate-goal" ? "active" : "null"}
-            >Socials</span>
-            <ButtonStyled>Join Telegram</ButtonStyled>
-          </FlexEndMenu>
+          {!isMobile &&
+            <FlexEndMenu>
+              <span
+                onClick={() => nextNavigate.push("/about")}
+                className={currentLocation === "/about" ? "active" : "null"}
+              >About</span>
+              <span
+                onClick={() => nextNavigate.push("/ultimate-goal")}
+                className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+              >Where to buy</span>
+              <span
+                onClick={() => nextNavigate.push("/ultimate-goal")}
+                className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+              >Socials</span>
+              <ButtonStyled>Join Telegram</ButtonStyled>
+            </FlexEndMenu>       
+          }
+
         </FloaterInsider>
       </FloaterWrapperTop>
       {/* <FloaterWrapper>

@@ -8,6 +8,11 @@ const JoinTheFamilyWrapper = styled.div`
   height: 100%;
   background-color: #FFFBD2;
   padding-top: 48px;
+
+  @media (max-width: 768px) {
+    min-height: unset;
+    padding-top: 0px;
+  }
 `;
 
 const FlexColumnArea = styled.div`
@@ -15,17 +20,29 @@ const FlexColumnArea = styled.div`
   flex-direction: column;
   gap: 20px;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 `;
 
 const BigTitle = styled.span`
   font-size: 48px;
   font-weight: 700;
   color: #73562C;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
 `;
 const SmallTitle = styled.span`
   font-size: 32px;
   font-weight: 700;
   color: #73562C;
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 const RowSocials = styled.div`
   margin-top: 48px;
@@ -33,6 +50,10 @@ const RowSocials = styled.div`
   gap: 48px;
   width: 100%;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    margin-top: 12px;
+  } 
 `;
 
 const SocialWrapper = styled.div`
@@ -70,6 +91,13 @@ const SupportTheCreator = styled.div`
     font-size: 32px;
     font-weight: 700;
     color: #73562C;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 12px;
+    padding: 16px;
+    text-align: center;
+    padding-bottom: 48px;
   }
 `;
 export default function JoinTheFamily() {

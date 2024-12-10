@@ -3,10 +3,14 @@ import Image from "next/image";
 import styled from "styled-components"
 
 const AboutWrapper = styled.div`
-  min-height: 500px;
+  // min-height: 500px;
   width: 100%;
   background-color: #FFFBD2;
   padding: 48px 48px;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 `;
 
 const AboutTextArea = styled.div`
@@ -16,6 +20,13 @@ const AboutTextArea = styled.div`
     font-weight: 700;
     color: #73562C;
     // text-shadow: 0 2px 1px #000;
+  }
+
+  @media (max-width: 768px) {
+    width: 300px;
+    span {
+      font-size: 22px;
+    }
   }
 `;
 
@@ -27,12 +38,27 @@ const DescriptionTextArea = styled.div`
     color: #73562C;
     // text-shadow: 0 2px 1px #000;
   }
+
+  @media (max-width: 768px) {
+    // width: 300px;
+    width: 100%;
+    
+      text-align: justify;
+    span {
+      font-size: 16px;
+    }
+  }
 `;
 
 const FlexRowTextInfo = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const FlexColumnTextInfo = styled.div`
@@ -44,6 +70,10 @@ const FlexColumnTextInfo = styled.div`
 const StanleyTongueImg = styled(Image)`
   border-radius: 50%;
   max-width: 350px;
+
+  @media (max-width: 768px) {
+    max-width: 200px;
+  }
 `;
 
 export default function About() {

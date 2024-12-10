@@ -20,6 +20,13 @@ const AboutTextArea = styled.div`
     color: #fff;
     // text-shadow: 0 2px 1px #000;
   }
+
+  @media (max-width: 768px) {
+    width: 300px;
+    span {
+      font-size: 22px;
+    }
+  }
 `;
 
 const DescriptionTextArea = styled.div`
@@ -29,6 +36,13 @@ const DescriptionTextArea = styled.div`
     font-weight: 700;
     color: #fff;
     // text-shadow: 0 2px 1px #000;
+  }
+
+    @media (max-width: 768px) {
+    width: 300px;
+    span {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -49,6 +63,10 @@ const StanleyImgStep = styled(Image)`
   max-width: 100px;
   height: 100%;
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    max-width: 50px;
+  }
 `;
 
 
@@ -66,12 +84,23 @@ const LaterStages = styled.div`
     font-weight: 700;
     line-height: 1;
   }
+
+  @media (max-width: 768px) {
+    span {
+      font-size: 32px;
+    }
+  }
 `;
 
 const ListedImg = styled(Image)`
   // max-width: 200px;
   width: fit-content;
   height: 50px;
+
+  @media (max-width: 768px) {
+    height: unset;
+    width: 155px;
+  }
 `;
 
 const ToBeListedFlex = styled.div`
@@ -80,6 +109,12 @@ const ToBeListedFlex = styled.div`
   gap: 40px;
   width: 100%;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
 `;
 
 export default function HowToBuy() {

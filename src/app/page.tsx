@@ -28,7 +28,7 @@ const BGStyleImg = styled(Image)`
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full h-[100vh] relative">
+    <div className="flex flex-col w-full h-[100vh] relative overflow-x-hidden">
       <BGStyleImg src='/images/BGBlueGrad.png' width={1920} height={0} alt='bg'/>
       <StanleyCardMid />
       <About />

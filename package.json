@@ -22,6 +22,7 @@
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-animated-cursor": "^2.11.2",
+    "react-audio-player": "^0.17.0",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "react-screentype-hook": "^1.0.18",
     "styled-components": "^6.1.13"

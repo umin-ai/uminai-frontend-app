@@ -12,7 +12,17 @@ const nextConfig: NextConfig = {
         destination: "/public/images/:path*",
       }
     ]
-  }
+  },
+  webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.(mp3|wav|ogg)$/i,
+      type: "asset/resource",
+      generator: {
+        filename: "static/media/[name].[hash][ext]",
+      },
+    });
+    return config;
+  },
 };
 
 export default nextConfig;

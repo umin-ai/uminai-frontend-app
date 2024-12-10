@@ -1,4 +1,8 @@
 'use client';
+import About from "@ap/components/About";
+import FooterArea from "@ap/components/Footer";
+import HowToBuy from "@ap/components/HowToBuy";
+import JoinTheFamily from "@ap/components/JoinTheFamily";
 import StanleyCardMid from "@ap/components/StanleyCardMid";
 import { Space } from "@mantine/core";
 import Image from "next/image";
@@ -27,8 +31,12 @@ export default function Home() {
     <div className="flex flex-col w-full h-[100vh] relative">
       <BGStyleImg src='/images/BGBlueGrad.png' width={1920} height={0} alt='bg'/>
       <StanleyCardMid />
+      <About />
+      <HowToBuy />
+      <JoinTheFamily />
       {/* <MidCard /> */}
       {/* <MidCardTest /> */}
+      <FooterArea />
     </div>
   )
 };

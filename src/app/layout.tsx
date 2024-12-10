@@ -71,13 +71,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <Head>
+      <meta name="referrer" content="no-referrer"></meta>
+
+        <meta http-equiv="X-IDM-Disable" content="true"></meta>
         <link rel='icon' href='/icons/icon16.png' type='image/png' sizes='16x16' />
         <link rel='icon' href='/icons/icon32.png' type='image/png' sizes='32x32' />
       </Head>
       <body
         className={grandstander.className}
       >
-        <AnimatedCursor       
+        {/* <AnimatedCursor       
           innerSize={8}
           outerSize={35}
           innerScale={1}
@@ -115,7 +118,7 @@ export default function RootLayout({
               border: '3px solid #fff',
             }
           }]}
-        />
+        /> */}
         <MantineProvider>
           <StyledComponentsRegistry>
             {children}

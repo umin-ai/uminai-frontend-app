@@ -44,13 +44,13 @@ const FloaterInsider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 650px;
+  width: 90%;
+  // max-width: 1050px;
   padding: 16px 45px;
-  background-color: #020202;
+  // background-color: #020202;
   border-radius: 12px;
   justify-content: space-between;
-  box-shadow: 0px 0px 5px 0px #000;
+  // box-shadow: 0px 0px 5px 0px #000;
   
   @media (max-width: 768px) {
     padding: 16px 25px;
@@ -149,6 +149,68 @@ const FloaterWrapperTopCA = styled.div`
   }
 `;
 
+const TopLeftFlex = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TopLeftGif = styled(Image)``;
+const TopLeftImage = styled(Image)`
+  max-width: 160px;
+  // height: 100%;
+`;
+
+const FlexEndMenu = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 50px;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
+
+  @media (max-width: 1200px) {
+    gap: 20px;
+  }
+
+  span {
+    // font shadow
+    text-shadow: 0px 2px 3px #000;
+    font-size: 32px;
+    font-weight: 700;
+    cursor: pointer;
+
+    @media (max-width: 1200px) {
+      font-size: 22px;
+    }
+  }
+`;
+
+const ButtonStyled = styled.button`
+  padding: 5px 14px;
+  background-color: transparent;
+  color: #fff;
+  border: 4px solid #fff;
+  border-radius: 22px;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0px 2px 3px #000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+
+  @media (max-width: 1200px) {
+    font-size: 22px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, .25);
+  }
+`;
+
 export default function Floater() {
   // check current page location nextjs
   const [currentLocation, setCurrentLocation] = useState("");
@@ -163,21 +225,32 @@ export default function Floater() {
     <>
       <FloaterWrapperTop>
         <FloaterInsider>
-          <span
+          {/* <span
             onClick={() => nextNavigate.push("/")}
             className={currentLocation === "/" ? "active" : "null"}
-          >Ticket</span>
-          <span
-            onClick={() => nextNavigate.push("/value")}
-            className={currentLocation === "/value" ? "active" : "null"}
-          >Value</span>
-          <span
-            onClick={() => nextNavigate.push("/ultimate-goal")}
-            className={currentLocation === "/ultimate-goal" ? "active" : "null"}
-          >Ultimate Goal</span>
+          >Ticket</span> */}
+          <TopLeftFlex>
+            <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
+            <TopLeftImage src='/images/StanleyLogo.png' alt='stanley' width={700} height={0}/>
+          </TopLeftFlex>
+          <FlexEndMenu>
+            <span
+              onClick={() => nextNavigate.push("/about")}
+              className={currentLocation === "/about" ? "active" : "null"}
+            >About</span>
+            <span
+              onClick={() => nextNavigate.push("/ultimate-goal")}
+              className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+            >Where to buy</span>
+            <span
+              onClick={() => nextNavigate.push("/ultimate-goal")}
+              className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+            >Socials</span>
+            <ButtonStyled>Join Telegram</ButtonStyled>
+          </FlexEndMenu>
         </FloaterInsider>
       </FloaterWrapperTop>
-      <FloaterWrapper>
+      {/* <FloaterWrapper>
         <FloaterInsiderSocial>
           <span>Official Links:</span>
           <ImageIcon
@@ -188,7 +261,7 @@ export default function Floater() {
             src="/icons/x.png" alt='x' width={36} height={0}/>
           <span className="more">More to come</span>
         </FloaterInsiderSocial>
-      </FloaterWrapper>
+      </FloaterWrapper> */}
     </>
   )
 }

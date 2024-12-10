@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Orbitron } from "next/font/google";
+import { Grandstander } from "next/font/google";
 import { MantineProvider } from '@mantine/core';
 import "./globals.css";
 import '@mantine/core/styles.css';
@@ -12,7 +12,7 @@ import CallToActionFloater from "@ap/components/CallToActionFloater";
 import Head from "next/head";
 import CAFloater from "@ap/components/CAFloater";
 
-const orbitron = Orbitron({ subsets: ['latin'] });
+const grandstander = Grandstander({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Official HODL100K",
@@ -75,7 +75,7 @@ export default function RootLayout({
         <link rel='icon' href='/icons/icon32.png' type='image/png' sizes='32x32' />
       </Head>
       <body
-        className={orbitron.className}
+        className={grandstander.className}
       >
         <AnimatedCursor       
           innerSize={8}
@@ -118,12 +118,13 @@ export default function RootLayout({
         />
         <MantineProvider>
           <StyledComponentsRegistry>
-            <Repeater children={children}/>
-            <Siders />
+            {children}
+            {/* <Repeater children={children}/> */}
+            {/* <Siders /> */}
             <Floater />
-            <CAFloater />
-            <CallToActionFloater />
-          {/* <Notifications /> */}
+            {/* <CAFloater /> */}
+            {/* <CallToActionFloater /> */}
+            {/* <Notifications /> */}
           </StyledComponentsRegistry>
         </MantineProvider>
       </body>

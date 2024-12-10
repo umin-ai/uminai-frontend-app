@@ -1,18 +1,9 @@
 'use client';
-import { Siders } from "@ap/components/FixedSiders";
-import { MidCard } from "@ap/components/MidCard";
-import { MidCardTest } from "@ap/components/MidCardTest";
+import StanleyCardMid from "@ap/components/StanleyCardMid";
 import { Space } from "@mantine/core";
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import styled from "styled-components";
 
-const Starter = () => {
-  return (
-    <div className="flex flex-col items-center py-4 w-full bg-[#00075E] text-white mb-0 mt-0">
-      <span className="text-[32px] font-extrabold">Hot Deals!</span>
-    </div>
-  );
-}
 // Astro Promotions One Page Web Design
 
 const Spacer = styled(Space)`
@@ -23,14 +14,21 @@ const Spacer = styled(Space)`
   };
 `;
 
+const BGStyleImg = styled(Image)`
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+`;
 
 export default function Home() {
   return (
     <div className="flex flex-col w-full h-[100vh] relative">
-
-
+      <BGStyleImg src='/images/BGBlueGrad.png' width={1920} height={0} alt='bg'/>
+      <StanleyCardMid />
       {/* <MidCard /> */}
-      <MidCardTest />
+      {/* <MidCardTest /> */}
     </div>
   )
 };

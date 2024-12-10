@@ -355,11 +355,9 @@ export default function StanleyCardMid() {
           </Video>
         }
 
-        {isMobile &&
-          <PlayerPosition>
-            <MP3PlayButton audioSrc="/audio/tellmewhy.mp3" isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
-          </PlayerPosition>
-        }
+        <PlayerPosition>
+          <MP3PlayButton audioSrc="/audio/tellmewhy.mp3" isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+        </PlayerPosition>
 
 
         <StanleyCardImg src='/images/StanleyLogoXL.png' alt='stanley-logo' width={1920} height={1080}/>

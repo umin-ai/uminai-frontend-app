@@ -349,10 +349,12 @@ export default function StanleyCardMid() {
 
       <MidCardWrapper>
         {!isMobile && <TopGif src='/images/stanleyanim.gif' alt='stanley-anim' width={250} height={0}/>}
-
+        {isMobile &&
           <Video key={stanleyVidMobile} autoPlay loop muted playsInline style={{ width: '100%', height: 'auto' }}>
             <source src={stanleyVidMobile} type="video/mp4" />
           </Video>
+        }
+
         {isMobile &&
           <PlayerPosition>
             <MP3PlayButton audioSrc="/audio/tellmewhy.mp3" isPlaying={isPlaying} setIsPlaying={setIsPlaying} />

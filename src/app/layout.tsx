@@ -4,13 +4,8 @@ import { MantineProvider } from '@mantine/core';
 import "./globals.css";
 import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
-import AnimatedCursor from "react-animated-cursor";
-import Repeater from "@ap/components/Repeater";
 import Floater from "@ap/components/Floater";
-import { Siders } from "@ap/components/FixedSiders";
-import CallToActionFloater from "@ap/components/CallToActionFloater";
 import Head from "next/head";
-import CAFloater from "@ap/components/CAFloater";
 
 const grandstander = Grandstander({ subsets: ['latin'] });
 

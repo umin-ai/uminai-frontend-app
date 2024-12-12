@@ -1,6 +1,6 @@
 'use client';
 import useIsMobile from "@ap/hooks/useIsMobile";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
@@ -212,24 +212,33 @@ export default function Game() {
   
   const [badMode, setBadMode] = useState(false);
 
-  const stanleyRecord = useAtomValue(stanleyRecordAtom);
+  const [stanleyRecord, setStanleyRecord] = useAtom(stanleyRecordAtom);
   const [username, setUsername] = useState<string>('');
   const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
-    if (stanleyRecord.username === 'NOT_FOUND') {
+    if (!stanleyRecord) {
       open();
     } else {
-      setCounter(stanleyRecord.count);
+      setUsername(stanleyRecord.username);
+      // close();
+      // setCounter(stanleyRecord.count);
     }
   }, [stanleyRecord]);
 
-  const { getRecordState, userData, newUUID } = useGetRecord({ username: username, setCount: setCounter });
+  const { getRecordState, newUUID, userIsExist, userIsExistCounter } = useGetRecord({ username: username, setCount: setCounter });
+
+  useEffect(() => {
+    if (userIsExist) {
+      setStanleyRecord({ username: username, count: userIsExistCounter });
+    }
+  }, [userIsExist]);
+
   const [isCopied, setIsCopied] = useState(false);
   // console.log('userData', userData)
   const { saveAndCreateUsername } = useSaveOrCreateUsername({ username, uuidProof: newUUID, close: close, setCount: setCounter });
 
-  const { updateCount } = useUpdateCount({ username: userData.username });
+  const { updateCount } = useUpdateCount({ username: stanleyRecord ? stanleyRecord.username : undefined });
 
   const handleMouseDown = async () => {
     setMouseClick(true);
@@ -266,6 +275,8 @@ export default function Game() {
   }, [counter]);
 
   const { logOut } = useLogOut();
+
+  const [openedLeaderboard, { open: openLeaderboard, close: closeLeaderboard }] = useDisclosure(false);
 
   return (
     <>
@@ -310,12 +321,14 @@ export default function Game() {
         />
       </BallContainer>
       <GamePanel>
-        <LeaderboardButton>Leaderboard</LeaderboardButton>
+        <LeaderboardButton
+          onClick={() => openLeaderboard()}
+        >Leaderboard</LeaderboardButton>
         <YourAccountButton>
           <span>Username:&nbsp;</span>
-          <span>{userData.username === 'NOT_FOUND' ? 'Not Set' : userData.username}</span>
+          <span>{!stanleyRecord ? 'Not Set' : stanleyRecord.username}</span>
         </YourAccountButton>
-        {stanleyRecord.username !== 'NOT_FOUND' && (
+        {stanleyRecord && (
           <LogOutButton
             onClick={() => {
               logOut();
@@ -335,9 +348,14 @@ export default function Game() {
       <div>Enter your username</div>
       <StyledWalletInput
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => {
+          // dont more than 50 characters
+          if (e.target.value.length <= 26) {
+            setUsername(e.target.value)}
+          }
+        }
       />
-      {stanleyRecord.username === 'NOT_FOUND' &&
+      {!stanleyRecord &&
         <CopyButton
           disabled={username.length === 0}
           className="mt-2"
@@ -356,7 +374,7 @@ export default function Game() {
       <SaveButton className="mt-2"
         disabled={username.length === 0}
         onClick={() => {
-          if (userData.username === 'NOT_FOUND') {
+          if (!stanleyRecord) {
             // create
             saveAndCreateUsername();
           } else {
@@ -364,9 +382,9 @@ export default function Game() {
           }
         }}
       >
-        {userData.username === 'NOT_FOUND' ? 'Create' : 'Continue'}
+        {!stanleyRecord ? 'Create' : 'Continue'}
       </SaveButton>
-      {stanleyRecord.username === 'NOT_FOUND' && (
+      {!stanleyRecord && (
         <div className="flex flex-col mt-2">
           <span>1. Enter your username</span>
           <span>2. Copy Proof (Keep it somewhere safe!)</span>
@@ -375,6 +393,12 @@ export default function Game() {
         </div>
       )}
     </CustomModal>
+    {openedLeaderboard &&
+    <CustomModal opened={openedLeaderboard} open={openLeaderboard} close={closeLeaderboard} type="leaderboard">
+      <></>
+    </CustomModal>
+    }
+
     </>
   )
 }

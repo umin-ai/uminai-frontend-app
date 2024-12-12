@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { atomWithStorage } from 'jotai/utils';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import * as UUID from 'uuid';
 interface GeneralState {
   isSuccess: boolean;
@@ -12,10 +12,7 @@ const initialState: GeneralState = {
   isError: false,
   isLoading: false,
 }
-export const stanleyRecordAtom = atomWithStorage<{ username: string; count: number }>('stanleyrecord', {
-  username: 'NOT_FOUND',
-  count: 0,
-});
+export const stanleyRecordAtom = atomWithStorage<{ username: string; count: number } | null>('stanleyRecord', null);
 
 export const useGetRecord = ({
   username,
@@ -27,10 +24,12 @@ export const useGetRecord = ({
   const [userData, setUserData] = useAtom(stanleyRecordAtom);
   const [getRecordState, setGetRecordState] = useState<GeneralState>(initialState);
   const [newUUID, setNewUUID] = useState<string>('');
-
+  const [isExist, setIsExist] = useState<boolean>(false);
+  const [isExistUserCounter, setIsExistUserCounter] = useState<number>(0);
   const fetchUserByUsername = async () => {
     try {
-      setUserData({ username: 'NOT_FOUND', count: 0 });
+      setIsExist(false);
+      // setUserData({ username: 'NOT_FOUND', count: 0 });
       setGetRecordState((s) => ({ ...s, isLoading: true }));
       if (username === 'NOT_FOUND') throw new Error('Username is required');
       const response = await fetch(`https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/?username=${username}`, {
@@ -43,12 +42,14 @@ export const useGetRecord = ({
       console.log('result', result);
       if (result.username === 'NOT_FOUND') {
         console.log('User not found');
-        setUserData({ username: 'NOT_FOUND', count: 0 });
+        setUserData(null);
         const UUIDStr = UUID.v4();
         console.log('UUIDStr', UUIDStr);
         setNewUUID(UUIDStr);
       } else {
-        setUserData(result);
+        // setUserData(result);
+        setIsExist(true);
+        setIsExistUserCounter(result.count);
         setCount(result.count);
       }
     } catch (error: any) {
@@ -64,9 +65,29 @@ export const useGetRecord = ({
 
   return {
     newUUID,
+    userIsExist: isExist,
+    userIsExistCounter: isExistUserCounter,
     userData,
     getRecordState,
     fetchUserByUsername,
+  }
+}
+
+export const useGetInitialRecordFromStorage = () => {
+  const [userData, setUserData] = useAtom(stanleyRecordAtom);
+
+  const onInit = async () => {
+    try {
+      if (userData && userData.username === 'NOT_FOUND') return;
+      const response = await fetch(`https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/?username=${''}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    } catch (error) {
+      
+    }
   }
 }
 
@@ -141,11 +162,12 @@ const saveAndCreateUsername = async ({
 export const useUpdateCount = ({
   username,
 }: {
-  username: string,
+  username: string | undefined,
 }) => {
   const [userData, setUserData] = useAtom(stanleyRecordAtom);
   const updateCount = async (count: number) => {
     try {
+      if (!userData || !username) return;
       const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/update', {
         method: 'POST',
         headers: {
@@ -173,10 +195,42 @@ export const useUpdateCount = ({
 export const useLogOut = () => {
   const [userData, setUserData] = useAtom(stanleyRecordAtom);
   const logOut = () => {
-    setUserData({ username: 'NOT_FOUND', count: 0 });
+    setUserData(null);
   }
 
   return {
     logOut,
+  }
+}
+
+interface LeaderboardState {
+  username: string;
+  count: number;
+  lastUpdated: string;
+}
+export const useGetLeaderboard = () => {
+  const [leaderboard, setLeaderboard] = useState<LeaderboardState[]>([]);
+
+  const onGetLeaderboard = async () => {
+    console.log('onGetLeaderboard');
+    try {
+      setLeaderboard([]);
+      const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/leaderboard', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const result = await response.json() as LeaderboardState[];
+      setLeaderboard([...result]);
+    } catch (error) {
+      console.error('Error fetching leaderboard', error);
+    }
+  }
+
+  return {
+    leaderboard,
+    onGetLeaderboard
   }
 }

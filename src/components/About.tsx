@@ -78,7 +78,7 @@ const StanleyTongueImg = styled(Image)`
 
 export default function About() {
   return (
-    <AboutWrapper>
+    <AboutWrapper id="about">
       <FlexRowTextInfo className="justify-evenly">
         <FlexColumnTextInfo>
           <AboutTextArea>

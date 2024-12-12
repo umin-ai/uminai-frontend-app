@@ -367,7 +367,7 @@ export default function StanleyCardMid() {
           <span>The No. 1 Twerking Cat, Riding on Robot Vacuum and Trick Shot Master</span>
         </Words>
       </MidCardWrapper>
-      <ButtonArea>
+      <ButtonArea id='where-to-buy'>
         <ButtonStyled>Buy on Birdeye</ButtonStyled>
         <ButtonStyled>Buy on Pump.fun</ButtonStyled>
       </ButtonArea>

@@ -205,39 +205,39 @@ export default function Floater() {
   }, [nextRouter]);
 
   return (
-    <>
+    <>{currentLocation !== '/game' &&
       <FloaterWrapperTop>
         <FloaterInsider>
-          {/* <span
-            onClick={() => nextNavigate.push("/")}
-            className={currentLocation === "/" ? "active" : "null"}
-          >Ticket</span> */}
-          <TopLeftFlex>
-            {!isMobile &&
-              <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
-            }
-            <TopLeftImage src='/images/StanleyLogo.png' alt='stanley' width={700} height={0}/>
-          </TopLeftFlex>
+        {/* <span
+          onClick={() => nextNavigate.push("/")}
+          className={currentLocation === "/" ? "active" : "null"}
+        >Ticket</span> */}
+        <TopLeftFlex>
           {!isMobile &&
-            <FlexEndMenu>
-              <span
-                onClick={() => nextNavigate.push("/about")}
-                className={currentLocation === "/about" ? "active" : "null"}
-              >About</span>
-              <span
-                onClick={() => nextNavigate.push("/ultimate-goal")}
-                className={currentLocation === "/ultimate-goal" ? "active" : "null"}
-              >Where to buy</span>
-              <span
-                onClick={() => nextNavigate.push("/ultimate-goal")}
-                className={currentLocation === "/ultimate-goal" ? "active" : "null"}
-              >Socials</span>
-              <ButtonStyled>Join Telegram</ButtonStyled>
-            </FlexEndMenu>       
+            <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
           }
-
+          <TopLeftImage src='/images/StanleyLogo.png' alt='stanley' width={700} height={0}/>
+        </TopLeftFlex>
+        {!isMobile &&
+          <FlexEndMenu>
+            <span
+              onClick={() => nextNavigate.push("#about")}
+              className={currentLocation === "/about" ? "active" : "null"}
+            >About</span>
+            <span
+              onClick={() => nextNavigate.push("#where-to-buy")}
+              className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+            >Where to buy</span>
+            <span
+              onClick={() => nextNavigate.push("#socials")}
+              className={currentLocation === "/ultimate-goal" ? "active" : "null"}
+            >Socials</span>
+            <ButtonStyled>Join Telegram</ButtonStyled>
+          </FlexEndMenu>       
+        }
         </FloaterInsider>
       </FloaterWrapperTop>
+    }
       {/* <FloaterWrapper>
         <FloaterInsiderSocial>
           <span>Official Links:</span>

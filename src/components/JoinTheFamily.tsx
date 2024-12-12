@@ -76,6 +76,11 @@ const CircleSocial = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const SocialImg = styled(Image)``;
@@ -103,7 +108,7 @@ const SupportTheCreator = styled.div`
 export default function JoinTheFamily() {
 
   return (
-    <JoinTheFamilyWrapper>
+    <JoinTheFamilyWrapper id='socials'>
       <FlexColumnArea>
         <BigTitle>Be part of Stanley Community!</BigTitle>
         <SmallTitle>Embrace the Pawsitive Vibes and Connect with everyone on crypto space</SmallTitle>

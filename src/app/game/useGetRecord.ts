@@ -1,0 +1,182 @@
+import { useEffect, useState } from "react";
+import { atomWithStorage } from 'jotai/utils';
+import { useAtom } from 'jotai';
+import * as UUID from 'uuid';
+interface GeneralState {
+  isSuccess: boolean;
+  isError: boolean;
+  isLoading: boolean;
+}
+const initialState: GeneralState = {
+  isSuccess: false,
+  isError: false,
+  isLoading: false,
+}
+export const stanleyRecordAtom = atomWithStorage<{ username: string; count: number }>('stanleyrecord', {
+  username: 'NOT_FOUND',
+  count: 0,
+});
+
+export const useGetRecord = ({
+  username,
+  setCount,
+}: {
+  username: string;
+  setCount: (count: number) => void;
+}) => {
+  const [userData, setUserData] = useAtom(stanleyRecordAtom);
+  const [getRecordState, setGetRecordState] = useState<GeneralState>(initialState);
+  const [newUUID, setNewUUID] = useState<string>('');
+
+  const fetchUserByUsername = async () => {
+    try {
+      setUserData({ username: 'NOT_FOUND', count: 0 });
+      setGetRecordState((s) => ({ ...s, isLoading: true }));
+      if (username === 'NOT_FOUND') throw new Error('Username is required');
+      const response = await fetch(`https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/?username=${username}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const result = await response.json();
+      console.log('result', result);
+      if (result.username === 'NOT_FOUND') {
+        console.log('User not found');
+        setUserData({ username: 'NOT_FOUND', count: 0 });
+        const UUIDStr = UUID.v4();
+        console.log('UUIDStr', UUIDStr);
+        setNewUUID(UUIDStr);
+      } else {
+        setUserData(result);
+        setCount(result.count);
+      }
+    } catch (error: any) {
+      throw new Error('Error fetching user by username', error);
+    }
+  }
+
+  useEffect(() => {
+    if (username.length > 0) {
+      fetchUserByUsername();
+    }
+  }, [username]);
+
+  return {
+    newUUID,
+    userData,
+    getRecordState,
+    fetchUserByUsername,
+  }
+}
+
+export const useSaveOrCreateUsername = ({
+  username,
+  uuidProof,
+  close,
+  setCount,
+}: {
+  username: string;
+  uuidProof: string;
+  close: () => void;
+  setCount: (count: number) => void;
+}) => {
+  const [userData, setUserData] = useAtom(stanleyRecordAtom);
+  const [saveState, setSaveState] = useState<GeneralState>(initialState);
+  const saveAndCreateUsername = async () => {
+    try {
+      if (username === '') throw new Error('Username is required');
+
+      setSaveState((s) => ({ ...s, isLoading: true }));
+      await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          uuidProof,
+        }),
+      })
+      setUserData({ username, count: 0 });
+      setCount(0);
+      close();
+      setSaveState((s) => ({ ...s, isLoading: false, isSuccess: true }));
+    } catch (error) {
+      setSaveState((s) => ({ ...s, isError: true }));
+      console.error(error);
+    } finally {
+      setSaveState((s) => ({ ...s, isLoading: false }));
+    }
+  }
+
+  return {
+    saveState,
+    saveAndCreateUsername,
+  }
+}
+const saveAndCreateUsername = async ({
+  username,
+  uuidProof,
+}: {
+  username: string;
+  uuidProof: string;
+}) => {
+  try {
+    const onSave = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        uuidProof,
+      }),
+    })
+  } catch (error) {
+    throw new Error('Error saving or creating username');
+  }
+}
+
+export const useUpdateCount = ({
+  username,
+}: {
+  username: string,
+}) => {
+  const [userData, setUserData] = useAtom(stanleyRecordAtom);
+  const updateCount = async (count: number) => {
+    try {
+      const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          count,
+        }),
+      })
+      setUserData({
+        username,
+        count,
+      })
+    } catch (error) {
+      console.error('Error updating count', error);
+    }
+  }
+
+  return {
+    updateCount,
+  }
+}
+
+export const useLogOut = () => {
+  const [userData, setUserData] = useAtom(stanleyRecordAtom);
+  const logOut = () => {
+    setUserData({ username: 'NOT_FOUND', count: 0 });
+  }
+
+  return {
+    logOut,
+  }
+}

@@ -5,6 +5,7 @@
 :root {
   --background: #fff;
   --foreground: #000;
+  scroll-behavior: smooth;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -26,5 +27,12 @@ body {
   /* cool scrollbar */
   scrollbar-width: thin;
   scrollbar-color: var(--foreground) var(--background);
-  
+  scroll-behavior: smooth;
+  scroll-margin-top: 150px;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
 }

@@ -355,7 +355,7 @@ export default function Game() {
           }
         }
       />
-      {!stanleyRecord &&
+      {username.length > 0 && !stanleyRecord &&
         <CopyButton
           disabled={username.length === 0}
           className="mt-2"

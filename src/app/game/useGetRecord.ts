@@ -168,7 +168,7 @@ export const useUpdateCount = ({
   const updateCount = async (count: number) => {
     try {
       if (!userData || !username) return;
-      const response = await fetch('http://localhost:3001/update', {
+      const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/update', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

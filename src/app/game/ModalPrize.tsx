@@ -62,7 +62,7 @@ export const PrizeModal = ({ children,
       <BigSpan>Position</BigSpan>
       <BigSpan>Payout</BigSpan>
       <BigSpan>
-        {!isMobile ? 'Bonus (Hodl $STANLEY > 1,000,000)'
+        {!isMobile ? 'Bonus (HODL 1,000,000 $STANLEY!)'
         : 'HODL 1,000,000 $STANLEY'}
       </BigSpan>
     </PrizeGrid>

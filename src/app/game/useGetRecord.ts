@@ -168,7 +168,7 @@ export const useUpdateCount = ({
   const updateCount = async (count: number) => {
     try {
       if (!userData || !username) return;
-      const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/update', {
+      const response = await fetch('http://localhost:3001/update', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -232,5 +232,56 @@ export const useGetLeaderboard = () => {
   return {
     leaderboard,
     onGetLeaderboard
+  }
+}
+
+const useSubmitBoost = ({
+  proofId,
+  walletId,
+}: {
+  proofId: string;
+  walletId: string;
+}) => {
+  
+  const submitBoost = async () => {
+    try {
+      const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/boost', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          proofId,
+          walletId,
+        }),
+      });
+    } catch (error) {
+      
+    }
+  }
+}
+
+const useIsBoosted = () => {
+  const [isBoosted, setIsBoosted] = useState<boolean>(false);
+
+  const onCheckBoosted = async () => {
+    try {
+      const response = await fetch('https://crucial-ernaline-3700rpm-6319f6ee.koyeb.app/boosted', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const result = await response.json();
+      setIsBoosted(result.isBoosted);
+    } catch (error) {
+      console.error('Error checking if boosted', error);
+    }
+  }
+
+  return {
+    isBoosted,
+    onCheckBoosted,
   }
 }

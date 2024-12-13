@@ -2,13 +2,16 @@
 import useIsMobile from "@ap/hooks/useIsMobile";
 import { useAtom, useAtomValue } from "jotai";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { stanleyRecordAtom, useGetRecord, useLogOut, useSaveOrCreateUsername, useUpdateCount } from "./useGetRecord";
 import { CustomModal } from "./Modal";
 import { useDisclosure } from "@mantine/hooks";
 import * as UUID from 'uuid';
-const StanleyImg = styled(Image)`
+import { useRouter } from "next/navigation";
+import { PrizeModal } from "./ModalPrize";
+
+const StanleyImg = styled(Image)<{ badMode: boolean }>`
   cursor: pointer;
   draggable: false;
   user-select: none;
@@ -19,6 +22,23 @@ const StanleyImg = styled(Image)`
   -ms-user-select: none;
   -webkit-touch-callout: none;
   
+  // alternate mode
+`;
+
+const FingerIndexPosition = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 210px;
+  z-index: 3;
+  pointer-events: all;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const FingerIndexImg = styled(Image)`
+  max-width: 90px;
 `;
 
 const GameWrapper = styled.div<{ isAlternate: boolean }>`
@@ -59,7 +79,24 @@ const ModeButtonPosition = styled.div`
   top: 0;
   right: 0;
   padding: 18px;
+  z-index: 2;
+  pointer-events: all;
+`;
+
+const GoToHomePosition = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 18px;
   z-index: 100;
+  span {
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const ModeButton = styled.button<{ isAlternate: boolean }>`
   font-size: 24px;
@@ -99,6 +136,7 @@ const BallContainer = styled.div`
   overflow: none;
   background-color: #FFFBD2;
   box-shadow: 0px 0px 12px 0px #000;
+  z-index: 4;
   @media (max-width: 768px) {
     background-color: #FFFBD2;
     width: 100%;
@@ -138,20 +176,23 @@ export default function Game() {
   }, []);
 
   const isMobile = useIsMobile();
+
+  const [badMode, setBadMode] = useState(false);
   const [mouseClick, setMouseClick] = useState(false);
   const [counter, setCounter] = useState(0);
 
   const ballRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 100, y: 100 });
   const [velocity, setVelocity] = useState<{ dx: number, dy: number } | undefined> ({ dx: 1, dy: 1 }); // Adjust these for speed
+  const [size, setSize] = useState(0);
 
-  const size = useMemo(() => {
+  useEffect(() => {
     if (isMobile) {
-      return 200;
+      setSize(200);
     } else {
-      return 400;
+      setSize(400);
     }
-  }, [isMobile]);
+  } , [isMobile]);
 
   useEffect(() => {
     if (isMobile) {
@@ -210,8 +251,71 @@ export default function Game() {
     return () => clearInterval(interval);
   }, [position, velocity, size, responsiveContainerWidth, responsiveContainerHeight]);
   
-  const [badMode, setBadMode] = useState(false);
+  const [speedFactor, setSpeedFactor] = useState(1);
 
+  const resetStanleyPosition = () => {
+    // Math random for random position
+    // setPosition({ x: 100, y: 100 }); // Reset to initial position
+    setPosition({ x: Math.random() * responsiveContainerWidth, y: Math.random() * responsiveContainerHeight }); // Reset to random position
+    // setVelocity({ dx: 1, dy: 1 });  // Reset velocity if needed
+    setVelocity({
+      dx: (Math.random() * 2) * speedFactor, // Adjust minimum speed
+      dy: (Math.random() * 2) * speedFactor,
+    });
+    // Random size between 200 and 400
+    if (!isMobile) {
+      setSize(Math.floor(Math.random() * (300 - 200 + 1) + 200));
+    } else {
+      setSize(Math.floor(Math.random() * (140 - 100 + 1) + 100));
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isMobile) {
+        setSpeedFactor(2); // Max speed factor of 5
+      } else {
+        setSpeedFactor(4); // Max speed
+      }
+    }, 1000); // Every 10 seconds
+    return () => clearInterval(interval);
+  }, [
+    speedFactor,
+  ]);
+
+  const resetToOriginalPosition = () => {
+    setPosition({ x: 100, y: 100 }); // Reset to initial position
+    setVelocity({ dx: 1, dy: 1 });  // Reset velocity if needed
+    if (!isMobile) {
+      setSize(400);
+    } else {
+      setSize(200);
+    }
+  }
+
+  const intervalRef = useRef<number | null>(null); // Store the interval ID
+
+  useEffect(() => {
+    if (badMode) {
+      resetStanleyPosition(); // Reset once immediately
+      intervalRef.current = window.setInterval(() => {
+        resetStanleyPosition();
+      }, 1500); // Start the interval
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current); // Clear the interval
+        intervalRef.current = null; // Reset the reference
+      }
+      resetToOriginalPosition(); // Reset to original
+    }
+
+    // Cleanup function
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current); // Ensure interval is cleared on unmount
+      }
+    };
+  }, [badMode]);
   const [stanleyRecord, setStanleyRecord] = useAtom(stanleyRecordAtom);
   const [username, setUsername] = useState<string>('');
   const [opened, { open, close }] = useDisclosure(false);
@@ -242,7 +346,12 @@ export default function Game() {
 
   const handleMouseDown = async () => {
     setMouseClick(true);
-    setCounter((c) => c + 1);
+    if (!badMode) {
+      setCounter((c) => c + 1);
+    } else {
+      setCounter((c) => c + 2);
+    }
+
 
     if (clickSoundSetter) {
       clickSoundSetter.currentTime = 0;
@@ -277,31 +386,44 @@ export default function Game() {
   const { logOut } = useLogOut();
 
   const [openedLeaderboard, { open: openLeaderboard, close: closeLeaderboard }] = useDisclosure(false);
+  const navigate = useRouter();
+
+  const [openedViewPrize, { open: openViewPrize, close: closeViewPrize }] = useDisclosure(false);
 
   return (
     <>
     <GameWrapper isAlternate={badMode}>
-        <ModeButtonPosition>
-          {/* <ModeButton isAlternate={badMode} onClick={() => setBadMode(!badMode)}>Mode: {!badMode ? 'Good boi' : 'Bad boi'}</ModeButton> */}
-          <MP3PlayButton isMobile={isMobile} audioSrc="nothing" isPlaying={badMode} setIsPlaying={setBadMode} />
-        </ModeButtonPosition>
-      
+      <FingerIndexPosition>
+        <FingerIndexImg src='/game/finger-index.gif' alt='fingerindex' width={160} height={0}/>
+      </FingerIndexPosition>
+      <ModeButtonPosition>
+        {/* <ModeButton isAlternate={badMode} onClick={() => setBadMode(!badMode)}>Mode: {!badMode ? 'Good boi' : 'Bad boi'}</ModeButton> */}
+        <MP3PlayButton isMobile={isMobile} audioSrc="nothing" isPlaying={badMode} setIsPlaying={setBadMode} />
+      </ModeButtonPosition>
+      <GoToHomePosition>
+        <span onClick={() => {
+          navigate.push('/');
+        }}>Go Back to Homepage</span>
+      </GoToHomePosition>
 
       <CenterLogo>
-        <LogoImg src='/images/StanleyLogo.png' alt='stanley' width={180} height={0}/>
+        <LogoImg
+          onClick={() => navigate.push('/')}
+          src='/images/StanleyLogo.png' alt='stanley' width={180} height={0}/>
       </CenterLogo>
       <BallContainer>
         {!badMode ? (
           <BgImage src='/game/BgMobile.png' alt='bg' width={1000} height={1000}/>
         ) : (
-          <BgVideo autoPlay loop muted>
+          <BgVideo autoPlay loop muted playsInline>
             <source src="/game/BgVideo.mp4" type="video/mp4" />
           </BgVideo>
         )}
 
         <AbsoluteCounter>Counter: {counter <= 0 ? 0 : counter}</AbsoluteCounter>
+        <MultiplierText>Multiplier 2X!</MultiplierText>
         {/* @ts-ignore */}
-        <StanleyImg ref={ballRef} src={!mouseClick ? '/game/stanleyup.png' : '/game/stanleydown.png'} alt="StanleyUpDown" width={size} height={size}
+        <StanleyImg badMode={badMode} ref={ballRef} src={!mouseClick ? '/game/stanleyup.png' : '/game/stanleydown.png'} alt="StanleyUpDown" width={size} height={size}
           style={{
             transform: `translate(${position.x}px, ${position.y}px)`,
           }}
@@ -321,6 +443,11 @@ export default function Game() {
         />
       </BallContainer>
       <GamePanel>
+        <LeaderboardButton
+          onClick={() => openViewPrize()}
+        >
+          View Prize
+        </LeaderboardButton>
         <LeaderboardButton
           onClick={() => openLeaderboard()}
         >Leaderboard</LeaderboardButton>
@@ -398,7 +525,11 @@ export default function Game() {
       <></>
     </CustomModal>
     }
-
+    {openedViewPrize &&
+      <PrizeModal opened={openedViewPrize} open={openViewPrize} close={closeViewPrize} type="prize">
+        <></>
+      </PrizeModal>
+    }
     </>
   )
 }
@@ -422,6 +553,20 @@ const AbsoluteCounter = styled.div`
     font-size: 32px;
   }
 `;
+
+const MultiplierText = styled(AbsoluteCounter)`
+  // green
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 64px;
+  color: #00FF00;
+  @media (max-width: 768px) {
+    font-size: 48px;
+  }
+`
 const CenterLogo = styled.div`
   position: relative;
   display: flex;
@@ -433,6 +578,8 @@ const CenterLogo = styled.div`
   @media (max-width: 768px) {
     justify-content: start;
   }
+  pointer-events: all;
+  z-index: 1;
 `;
 
 const LogoImg = styled(Image)`
@@ -448,7 +595,7 @@ const GamePanel = styled.div`
   align-items: center;
   padding: 12px;
   width: 100%;
-  min-height: 200px;
+  min-height: 230px;
   border-radius: 12px;
   background: #FFFBD2;
   box-shadow: 0px 0px 12px 0px #000;

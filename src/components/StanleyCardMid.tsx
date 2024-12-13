@@ -2,6 +2,7 @@
 
 import useIsMobile from "@ap/hooks/useIsMobile";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
@@ -79,7 +80,7 @@ const ButtonArea = styled.div`
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
-  z-index: 999;
+  z-index: 10;
 
   @media (max-width: 768px) {
     padding: 0 20px;
@@ -289,6 +290,45 @@ const MobilePositionStanleyDiscos = styled.div`
   margin-top: 500px;
   margin-left: 0px;
 `;
+
+const SmashToWinPosition = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  margin-bottom: 130px;
+  margin-left: 70px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    z-index: 11;
+  }
+`;
+
+const SmashToWinImg = styled(Image)`
+  // tilting animation infite left right
+  animation: tilt 1s infinite;
+  @keyframes tilt {
+    0% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+    100% {
+      transform: rotate(-3deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 150px;
+  }
+
+  cursor: pointer;
+`;
+
+
 export default function StanleyCardMid() {
   const [isPlaying, setIsPlaying] = useState(false);
   const isMobile = useIsMobile();
@@ -303,6 +343,8 @@ export default function StanleyCardMid() {
     }
   }, [isPlaying]);
 
+  const navigate = useRouter();
+
   return (
     <MidCardRoot isPlay={isPlaying}>
       <PawPosition>
@@ -311,6 +353,12 @@ export default function StanleyCardMid() {
       <PawPosition2>
         <PawImg src='/images/paws2-e.png' alt='pawprint' width={500} height={0}/>
       </PawPosition2>
+      {/* GAME */}
+      <SmashToWinPosition>
+        <SmashToWinImg src='/game/smashtowin.png' alt='smash-to-win' width={250} height={0}
+          onClick={() => navigate.push('/game')}
+        />
+      </SmashToWinPosition>
       {isPlaying &&
         <>
           <DiscoBall1Position>

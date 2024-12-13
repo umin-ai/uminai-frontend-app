@@ -1,8 +1,9 @@
 import { Modal } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { useGetLeaderboard } from "./useGetRecord";
+import { stanleyRecordAtom, useGetLeaderboard } from "./useGetRecord";
 import Image from "next/image";
+import { useAtomValue } from "jotai";
 
 const ModalStyled = styled(Modal)`
   .mantine-Paper-root, .mantine-Modal-header {
@@ -13,10 +14,27 @@ const ModalStyled = styled(Modal)`
     font-weight: 500 !important;
   }
   background-color: #FFFBD2 !important;
-
   @media (max-width: 768px) {
     .mantine-Modal-body {
       max-height: 500px;
+    }
+  }
+`;
+
+const ModalStyledLeaderboard = styled(Modal)`
+  .mantine-Paper-root, .mantine-Modal-header {
+    background-color: #FFFBD2;
+  }
+  .mantine-Modal-title {
+    font-size: 24px !important;
+    font-weight: 500 !important;
+  }
+  background-color: #FFFBD2 !important;
+  @media (max-width: 768px) {
+    .mantine-Modal-body {
+      max-height: 500px;
+      width: 430px;
+      // max-width: 100%;
     }
   }
 `;
@@ -55,19 +73,31 @@ export const CustomModal = ({ children,
       </ModalStyled>
     );
   } else if (type === 'leaderboard'){
+    const stanleyRecord = useAtomValue(stanleyRecordAtom);
+    const isUserConnected = useCallback((username: string) => {
+      return stanleyRecord && stanleyRecord.username === username ? true : false;
+    }, []);
+    const myRanking = useMemo(() => {
+      if (leaderboard) {
+        const myRank = leaderboard.findIndex((item) => item.username === stanleyRecord?.username);
+        return myRank + 1;
+      }
+    }, [leaderboard, stanleyRecord]);
+
     return (
-      <ModalStyled
+      <ModalStyledLeaderboard
         withCloseButton={false}
         opened={opened}
         onClose={close}
         closeOnClickOutside={true}
-        title="Leaderboard"
+        // title={<HeaderLeaderboard />}
         size="xl"
         radius={'lg'}
         centered
       >
           {children}
           <>
+          <HeaderLeaderboard myRanking={myRanking}/>
           <LeaderboardGrid>
             <span>Rank</span>
             <span>Username</span>
@@ -75,7 +105,7 @@ export const CustomModal = ({ children,
           </LeaderboardGrid>
             {leaderboard && leaderboard.map((item, index) => {
               return (
-                <LeaderboardGrid key={index}>
+                <LeaderboardGrid key={index} isUserConnected={isUserConnected(item.username)}>
                   <span>{index + 1}
                   </span>
                   <span className="flex gap-2 items-center">{item.username}
@@ -88,7 +118,7 @@ export const CustomModal = ({ children,
               )
             })}
           </>
-      </ModalStyled>
+      </ModalStyledLeaderboard>
     );
   } else {
     return (
@@ -97,7 +127,29 @@ export const CustomModal = ({ children,
   }
 }
 
-const LeaderboardGrid = styled.div`
+const HeaderLeaderboardWrapper = styled.div`
+    font-size: 24px !important;
+    font-weight: 500 !important;
+    display: flex;
+    justify-content: space-between;
+    // padding: 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #000;
+`;
+const HeaderLeaderboard = ({
+  myRanking
+}: {
+  myRanking?: number;
+}) => {
+  return (
+    <HeaderLeaderboardWrapper>
+      <span>Leaderboard</span>
+      <span>My Rank: {myRanking ? myRanking : 'Unranked'}</span>
+    </HeaderLeaderboardWrapper>
+  )
+}
+
+const LeaderboardGrid = styled.div<{ isUserConnected?: boolean }>`
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   gap: 16px;
@@ -114,6 +166,11 @@ const LeaderboardGrid = styled.div`
   span {
     margin: 4px 0px;
   }
+
+  ${props => props.isUserConnected && `
+    background-color: #FFECAA;
+    font-weight: 700;
+  `}
 `;
 
 const Top3Icon = styled(Image)``;

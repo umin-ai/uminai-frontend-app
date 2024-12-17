@@ -214,7 +214,8 @@ export default function Floater() {
         >Ticket</span> */}
         <TopLeftFlex>
           {!isMobile &&
-            <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
+            // <TopLeftGif src='/images/stanleyanim.gif' alt='stanley-anim' width={100} height={0}/>
+            <TopLeftGif src='/images/stanleyanimxmas.gif' alt='stanley-anim' width={100} height={0}/>
           }
           <TopLeftImage src='/images/StanleyLogo.png' alt='stanley' width={700} height={0}/>
         </TopLeftFlex>

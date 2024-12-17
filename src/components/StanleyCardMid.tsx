@@ -333,13 +333,13 @@ export default function StanleyCardMid() {
   const [isPlaying, setIsPlaying] = useState(false);
   const isMobile = useIsMobile();
 
-  const [stanleyVidMobile, setStanleyVidMobile] = useState('/video/stanleysmash.mp4');
+  const [stanleyVidMobile, setStanleyVidMobile] = useState('/video/stanleyplayxmas.mp4');
 
   useEffect(() => {
     if (isPlaying) {
-      setStanleyVidMobile('/video/stanleyplay.mp4');
+      setStanleyVidMobile('/video/stanleyplayxmas.mp4');
     } else {
-      setStanleyVidMobile('/video/stanleyplay.mp4');
+      setStanleyVidMobile('/video/stanleyplayxmas.mp4');
     }
   }, [isPlaying]);
 
@@ -399,7 +399,10 @@ export default function StanleyCardMid() {
       }
 
       <MidCardWrapper>
-        {!isMobile && <TopGif src='/images/stanleyanim.gif' alt='stanley-anim' width={250} height={0}/>}
+        {!isMobile && 
+          // <TopGif src='/images/stanleyanim.gif' alt='stanley-anim' width={250} height={0}/>
+          <TopGif src='/images/stanleyanimxmas.gif' alt='stanley-anim' width={250} height={0}/>
+        }
         {isMobile &&
           <Video key={stanleyVidMobile} autoPlay loop muted playsInline style={{ width: '100%', height: 'auto' }}>
             <source src={stanleyVidMobile} type="video/mp4" />

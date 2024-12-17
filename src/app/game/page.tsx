@@ -421,7 +421,9 @@ export default function Game() {
         )}
 
         <AbsoluteCounter>Counter: {counter <= 0 ? 0 : counter}</AbsoluteCounter>
-        <MultiplierText>Multiplier 2X!</MultiplierText>
+        {badMode &&
+          <MultiplierText>Multiplier 2X!</MultiplierText>
+        }
         {/* @ts-ignore */}
         <StanleyImg badMode={badMode} ref={ballRef} src={!mouseClick ? '/game/stanleyup.png' : '/game/stanleydown.png'} alt="StanleyUpDown" width={size} height={size}
           style={{

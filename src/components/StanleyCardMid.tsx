@@ -419,8 +419,12 @@ export default function StanleyCardMid() {
         </Words>
       </MidCardWrapper>
       <ButtonArea id='where-to-buy'>
-        <ButtonStyled>Buy on Birdeye</ButtonStyled>
-        <ButtonStyled>Buy on Pump.fun</ButtonStyled>
+        <ButtonStyled
+          onClick={() => window.open('https://www.birdeye.so/token/CJ7UE972qVjaZpPfP1qb79XrtXL35JFSrdVFAMa3pump?chain=solana', '_blank')}
+        >Buy on Birdeye</ButtonStyled>
+        <ButtonStyled
+          onClick={() => window.open('https://pump.fun/coin/CJ7UE972qVjaZpPfP1qb79XrtXL35JFSrdVFAMa3pump', '_blank')}
+        >Buy on Pump.fun</ButtonStyled>
       </ButtonArea>
     </MidCardRoot>
   )

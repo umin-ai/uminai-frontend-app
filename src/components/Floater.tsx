@@ -233,7 +233,9 @@ export default function Floater() {
               onClick={() => nextNavigate.push("#socials")}
               className={currentLocation === "/ultimate-goal" ? "active" : "null"}
             >Socials</span>
-            <ButtonStyled>Join Telegram</ButtonStyled>
+            <ButtonStyled
+              onClick={() => window.open('https://t.me/stanleythecatcto', '_blank')}
+            >Join Telegram</ButtonStyled>
           </FlexEndMenu>       
         }
         </FloaterInsider>

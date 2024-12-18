@@ -114,13 +114,18 @@ export default function JoinTheFamily() {
         <SmallTitle>Embrace the Pawsitive Vibes and Connect with everyone on crypto space</SmallTitle>
       </FlexColumnArea>
       <RowSocials>
-        <SocialWrapper>
+        <SocialWrapper onClick={() => 
+          window.open('https://x.com/StanleyTheCat_', '_blank')} 
+        >
           <CircleSocial>
             <SocialImg src='/images/x.png' alt='x' width={50} height={0}/>
           </CircleSocial>
           <span>Twitter</span>
         </SocialWrapper>
-        <SocialWrapper>
+        <SocialWrapper
+          onClick={() => 
+            window.open('https://t.me/stanleythecatcto', '_blank')}
+        >
           <CircleSocial>
             <SocialImg src='/images/telegram.png' alt='x' width={50} height={0}/>
           </CircleSocial>
@@ -129,7 +134,11 @@ export default function JoinTheFamily() {
       </RowSocials>
       <SupportTheCreator>
         <span>Support The Stanley Creator!</span>
-        <SocialWrapper>
+        <SocialWrapper
+          onClick={() => 
+            window.open('https://www.tiktok.com/@stanleythestanman?lang=en', '_blank')
+          }
+        >
           <CircleSocial>
             <SocialImg src='/images/tiktok.png' alt='x' width={50} height={0}/>
           </CircleSocial>

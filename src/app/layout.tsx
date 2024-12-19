@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
-    title: "Official Website of HODL100K",
+    title: "Official Community Website of Stanley The Cat",
     description: "Community Takeover of Stanley The Cat",
     url: "https://stanleythecat.com",
     siteName: "Stanley The Cat",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: "https://hodl100k.xyz/images/Sample.png",
         width: 1184,
         height: 709,
-        alt: "Official Website of HODL100K",
+        alt: "Official Community Website of Stanley The Cat",
       },
     ],
     type: "website",

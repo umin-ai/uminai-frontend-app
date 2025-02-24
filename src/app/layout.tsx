@@ -1,54 +1,38 @@
 import type { Metadata } from "next";
-import { Grandstander } from "next/font/google";
+import { Grandstander, Poppins } from "next/font/google";
 import { MantineProvider } from '@mantine/core';
 import "./globals.css";
 import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
-import Floater from "@ap/components/Floater";
 import Head from "next/head";
 
-const grandstander = Grandstander({ subsets: ['latin'] });
+const grandstander = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
 export const metadata: Metadata = {
-  title: "Stanley The Cat Community Takeover",
-  description: "Community Site of Stanley The Cat",
-  keywords: "Stanley The Cat on Solana",
-  authors: { name: "Stanley The Cat" },
+  title: "LLM",
+  description: "LLM",
+  keywords: "LLM",
+  authors: { name: "LLM" },
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
-    title: "Official Community Website of Stanley The Cat",
-    description: "Community Takeover of Stanley The Cat",
+    title: "LLM",
+    description: "LLM",
     url: "https://stanleythecat.com",
-    siteName: "Stanley The Cat",
+    siteName: "LLM",
     images: [
       {
         url: "https://hodl100k.xyz/images/Sample.png",
         width: 1184,
         height: 709,
-        alt: "Official Community Website of Stanley The Cat",
+        alt: "LLM",
       },
     ],
     type: "website",
   },
   icons: [
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      url: '/icons/icon32.png'
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      url: '/icons/icon16.png'
-    },
-    {
-      rel: 'mask-icon',
-      color: '#e6007d',
-      url: '/icons/safari-pinned-tab.svg',
-    }
   ]
 };
 
@@ -119,7 +103,7 @@ export default function RootLayout({
             {children}
             {/* <Repeater children={children}/> */}
             {/* <Siders /> */}
-            <Floater />
+            {/* <Floater /> */}
             {/* <CAFloater /> */}
             {/* <CallToActionFloater /> */}
             {/* <Notifications /> */}

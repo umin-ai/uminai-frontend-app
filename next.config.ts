@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*js',
+        }
+      }
+    }
+  },
   /* config options here */
   compiler: {
     styledComponents: true,
@@ -21,6 +31,7 @@ const nextConfig: NextConfig = {
         filename: "static/media/[name].[hash][ext]",
       },
     });
+
     return config;
   },
 };

@@ -1,8 +1,6 @@
+import { BASE_SERVER_URL } from "@ap/shared/consts";
 import { atom, useAtom } from "jotai";
 import { useEffect, useState } from "react";
-
-const BASE_SERVER_URL = 'http://localhost:8000';
-
 interface IProduct {
   identity: number,
   label: string[],

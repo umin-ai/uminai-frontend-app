@@ -11,7 +11,7 @@ const xrpEvmTestnet = defineChain({
   nativeCurrency: { name: 'XRP', symbol: 'XRP', decimals: 18 },
   rpcUrls: {
     default: {
-      http: ['https://eth.merkle.io'],
+      http: ['https://rpc-evm-sidechain.xrpl.org/'],
     },
   },
   blockExplorers: {
@@ -22,7 +22,7 @@ const xrpEvmTestnet = defineChain({
     },
   }
 })
-const config = createConfig(
+export const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
     chains: [xrpEvmTestnet],
@@ -32,7 +32,7 @@ const config = createConfig(
       //   `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
       // ),
       [1440002]: http(
-        `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
+        `https://rpc-evm-sidechain.xrpl.org`,
       ),
     },
 

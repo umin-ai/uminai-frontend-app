@@ -1,5 +1,5 @@
 'use client';
-import { StyledButton, StyledReadOnlyTextArea } from "@ap/components/general";
+import { Spacer, StyledButton, StyledReadOnlyTextArea } from "@ap/components/general";
 import { chatLLMMsgAtom, chatLoadingAtom, useChatLLMV2, useGetAllProductsWithTileLocation } from "@ap/hooks/api.hooks";
 import { Space } from "@mantine/core";
 import { useAtom, useAtomValue } from "jotai";
@@ -8,14 +8,6 @@ import { useMemo, useState } from "react";
 import styled from "styled-components";
 
 // Astro Promotions One Page Web Design
-
-const Spacer = styled(Space)`
-  height: 80px;
-  @media (max-width: 768px) {
-    height: 95px !important;
-    min-height: 95px !important;
-  };
-`;
 
 const Tile = [{
   id: 1,

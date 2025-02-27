@@ -5,6 +5,7 @@ import "./globals.css";
 import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
 import Head from "next/head";
+import { Web3Provider } from "@ap/components/WalletProvider";
 
 const grandstander = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -100,7 +101,9 @@ export default function RootLayout({
         /> */}
         <MantineProvider>
           <StyledComponentsRegistry>
-            {children}
+            <Web3Provider>
+              {children}
+            </Web3Provider>
             {/* <Repeater children={children}/> */}
             {/* <Siders /> */}
             {/* <Floater /> */}

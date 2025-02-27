@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
         filename: "static/media/[name].[hash][ext]",
       },
     });
+    config.resolve.fallback = { fs: false, net: false, tls: false };
 
     return config;
   },

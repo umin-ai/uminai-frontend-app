@@ -1,3 +1,4 @@
+import { Space } from "@mantine/core";
 import styled from "styled-components";
 
 export const FlexRow = styled.div`
@@ -117,3 +118,10 @@ export const DefaultButton = styled(Button)`
   }
 `;
 
+export const Spacer = styled(Space)`
+  height: 80px;
+  @media (max-width: 768px) {
+    height: 95px !important;
+    min-height: 95px !important;
+  };
+`;

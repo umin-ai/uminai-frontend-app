@@ -17,7 +17,7 @@ export const SearchWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   width: 535px;
-  overflow: hidden;
+  // overflow: hidden;
 `
 export const SearchInput = styled.input`
   border: 1px solid #e2e8f0;

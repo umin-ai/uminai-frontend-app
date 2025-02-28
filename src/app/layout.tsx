@@ -6,9 +6,11 @@ import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
 import Head from "next/head";
 import { Web3Provider } from "@ap/components/WalletProvider";
+import { Suspense } from "react";
 
 const grandstander = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -102,7 +104,9 @@ export default function RootLayout({
         <MantineProvider>
           <StyledComponentsRegistry>
             <Web3Provider>
-              {children}
+              <Suspense>
+                {children}
+              </Suspense>
             </Web3Provider>
             {/* <Repeater children={children}/> */}
             {/* <Siders /> */}

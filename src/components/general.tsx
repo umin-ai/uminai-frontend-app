@@ -125,3 +125,23 @@ export const Spacer = styled(Space)`
     min-height: 95px !important;
   };
 `;
+
+export const FooterBox = styled.div`
+  background-color: #f8fafc;
+  padding: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+`
+
+export const Footer = () => {
+  return (
+    <FooterBox>
+        <span>Copyright © 2025 uminai. All Rights Reserved.</span>
+        <span
+          className="text-blue-500"
+        >Powered by XRPL EVM</span>
+    </FooterBox>
+  )
+}

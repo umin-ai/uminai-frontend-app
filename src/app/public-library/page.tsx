@@ -2,7 +2,6 @@
 import { Button, DefaultButton, FlexColumn, FlexRow, PrimaryButton, Spacer } from "@ap/components/general";
 import { SearchInput, SearchLogo, SearchWrapper, Text, TopHeader } from "./components/styled"
 import { Category, Graphics, Icons } from "/public/svgs";
-import { useState } from "react";
 import { useSearch } from "@ap/hooks/search.hooks";
 
 export default function PublicLibrary() {
@@ -49,8 +48,8 @@ export default function PublicLibrary() {
   )
 }
 
-export const Search = () => {
-  const { searchInput, setSearchInput, searchResults } = useSearch();
+const Search = () => {
+  const { searchInput, setSearchInput } = useSearch();
   return (
     <SearchWrapper>
       <SearchInput placeholder="Enter something to explore"
@@ -79,7 +78,7 @@ const CategoryCardXL = ({ category }: { category: string }) => {
     </FlexColumn>
   )
 }
-export const CategoryCards = () => {
+const CategoryCards = () => {
   return (
     <FlexRow className="gap-5
       // need to be flexible

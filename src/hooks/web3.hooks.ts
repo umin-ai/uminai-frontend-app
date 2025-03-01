@@ -92,6 +92,7 @@ interface IReadDIDPointers {
 }
 const useReadDIDPointers = () => {
   const [dIDPointers, setDIDPointers] = useState<GeneralState>(InitialGeneralState);
+  const [targetDID, setTargetDID] = useState<string>('');
   const [didPointers, setDidPointers] = useState<IReadDIDPointers | null>(null);
   const client = useClient();
   const { connector } = useAccount();
@@ -100,6 +101,7 @@ const useReadDIDPointers = () => {
 
   const getDidPointers_Contract = async (did: string) => {
     try {
+      setTargetDID(did);
       if (!connector) throw 'Please connect your wallet';
       if (!signer) throw 'Please connect your wallet';
 
@@ -118,6 +120,7 @@ const useReadDIDPointers = () => {
     }
   }
   return {
+    targetDID,
     didPointers,
     getDidPointers_Contract
   }

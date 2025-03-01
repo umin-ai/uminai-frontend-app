@@ -8,6 +8,7 @@ const useResolveDIDIpfs = () => {
   const [didDoc, setDidDoc] = useState<any | null>(null);
   const onResolveIPFS = async (cid: string) => {
     try {
+      setResolveIPFSState({ ...resolveIPFSState, isLoading: true });
       const response = await axios.get(`${IPFS_URL}/${cid}`, {
         headers: {
           'Content-Type': 'application/json',
@@ -16,8 +17,12 @@ const useResolveDIDIpfs = () => {
 
       console.log('response', response);
       setDidDoc(response.data);
+      setResolveIPFSState((prevState) => ({ ...prevState, isLoading: false, isSuccess: true }));
     } catch (error) {
       console.error('Error resolving DID', error);
+      setResolveIPFSState((prevState) => ({ ...prevState, isLoading: false, error }));
+    } finally {
+      setResolveIPFSState((prevState) => ({ ...prevState, isLoading: false }));
     }
   }
 

@@ -30,7 +30,7 @@ export default function UDID () {
   }
 
   return (
-    <FlexColumn className="justify-between h-[100vh]">
+    <FlexColumn className="justify-between">
     <FlexColumn className="h-full">
       <TopUDIDHeader>
         <FlexColumn className="w-[60%]">
@@ -125,16 +125,18 @@ export default function UDID () {
 const ResolveDIDIPFS = () => {
   const [inputDID, setInputDID] = useState('');
   const [opened, { open, close }] = useDisclosure(false);
-  const { didPointers, getDidPointers_Contract } = useReadDIDPointers();
+  const { didPointers, getDidPointers_Contract, targetDID } = useReadDIDPointers();
 
   const onHandleResolve = async () => {
     if (inputDID.length === 0) return;
-    else {
+    else if (inputDID === targetDID) {
+      open();
+    } else {
       await getDidPointers_Contract(inputDID);
     }
   }
 
-  const { onResolveIPFS, didDoc } = useResolveDIDIpfs()
+  const { onResolveIPFS, didDoc, resolveIPFSState } = useResolveDIDIpfs()
 
   useEffect(() => {
     if (didPointers && didPointers.exists) {
@@ -161,10 +163,12 @@ const ResolveDIDIPFS = () => {
           >Resolve</DefaultButton>
         </FlexRow>
         <div className="mt-3 h-[30px]">
-          {didPointers && didPointers.exists ? 
+          {resolveIPFSState.isSuccess && didPointers && didPointers.exists &&
             <Text
               className="cursor-pointer text-blue-400"
-            >{didPointers.ipfsCID}</Text> :
+            >{didPointers.ipfsCID}</Text>
+          }
+          {didPointers && !didPointers.exists &&
             <Text
               className="text-red-400"
             >uDID not found</Text>
@@ -182,7 +186,7 @@ const ResolveDIDIPFS = () => {
         </FlexColumn>
       </FlexColumn>
       <>
-        <Modal opened={opened} onClose={close} title="Authentication"
+        <Modal opened={opened} onClose={close} title="uDID Document"
           size={'lg'}
           centered={true}
         >

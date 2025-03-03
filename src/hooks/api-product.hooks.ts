@@ -201,3 +201,37 @@ export const useGetAllUDPD = () => {
     onGetAllUDPD
   }
 }
+
+export const useQueryProducts = () => {
+  const [query, setQuery] = useState<string>('');
+  const [queryState, setQueryState] = useState<GeneralState>(InitialGeneralState);
+  const [queryResult, setQueryResult] = useState<IProduct[] | null>(null);
+
+  const onQuery = async () => {
+    try {
+      setQueryState({ ...queryState, isLoading: true });
+      const response = await axios.get(`${BASE_SERVER_URL}/product/query?search=${query}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = response.data.result;
+      setQueryResult(result);
+      setQueryState({ ...queryState, isSuccess: true });
+    } catch (error) {
+      console.error('Error querying products', error);
+      setQueryState({ ...queryState, error });
+    } finally {
+      setQueryState({ ...queryState, isLoading: false });
+    }
+  }
+
+  return {
+    query,
+    setQuery,
+    queryResult,
+    queryState,
+    onQuery
+  }
+}

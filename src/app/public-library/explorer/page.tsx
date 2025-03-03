@@ -6,6 +6,7 @@ import { useGetAllUDPD } from "@ap/hooks/api-product.hooks";
 import { IProduct } from "@ap/shared/product.interface";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { descriptionShortener } from "@ap/shared/consts";
 
 const Grid2Sides = styled.div`
   display: grid;
@@ -146,12 +147,7 @@ const FlexColumnCard = styled(FlexColumn)`
   cursor: pointer;
 `;
 
-const descriptionShortener = (description: string) => {
-  if (description.length > 100) {
-    return description.slice(0, 100) + '...';
-  }
-  return description;
-}
+
 
 const CategoryCard = styled.div`
   background-color: #c1d2f7;

@@ -4,6 +4,10 @@ import { SearchInput, SearchLogo, SearchWrapper, Text, TopHeader } from "./compo
 import { Category, Graphics, Icons } from "/public/svgs";
 import { useSearch } from "@ap/hooks/search.hooks";
 import { useRouter } from "next/navigation";
+import { useDisclosure } from "@mantine/hooks";
+import { Modal } from "@mantine/core";
+import { useQueryProducts } from "@ap/hooks/api-product.hooks";
+import styled from "styled-components";
 
 export default function PublicLibrary() {
   return (
@@ -49,38 +53,75 @@ export default function PublicLibrary() {
   )
 }
 
+const ResultCard = styled(FlexRow)`
+  background-color: #f1f1f1;
+  padding: 8px 8px;
+  border-radius: 8px;
+`
+
 const Search = () => {
-  const { searchInput, setSearchInput } = useSearch();
+  // const { searchInput, setSearchInput } = useSearch();
+  const { query, setQuery, queryResult, queryState, onQuery } = useQueryProducts();
   const navigate = useRouter();
+  const [opened, { open, close }] = useDisclosure();
+  console.log('queryResult', queryResult);
   return (
     <SearchWrapper>
       <SearchInput placeholder="Enter something to explore"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
       />
       <SearchLogo
-        onClick={
-          () => navigate.push(`/public-library/view?did=${searchInput}`)
+        onClick={() => 
+          {
+            onQuery();
+            open();
+          }
         }
       >
         <Icons.SearchIcon/>
       </SearchLogo>
-      {/* {searchInput.length > 0 &&
-        <FlexColumn className="absolute bottom-[-56px] left-0 bg-white rounded-[.375rem] w-full">
-          {searchResults.length > 0 ? 'Results' : 'No results found'}
-          <FlexRow>hello</FlexRow>
+
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Search Results"
+        size="xl"
+      >
+        <FlexColumn className="gap-3">
+          {queryState.isLoading && <Text>Loading...</Text>}
+          {queryState.error && <Text>Error: {queryState.error}</Text>}
+          {queryState.isSuccess && queryResult?.length === 0 && <Text>No results found</Text>}
+          {!queryResult && <Text>No results found</Text>}
+          {queryResult && queryResult.length > 0 && queryResult.map((product, idx) => (
+            <ResultCard key={idx} className="justify-between items-center">
+              <FlexColumn>
+                <Text>{product.identity.find((i) => i.type.toLowerCase() === 'did')?.value}</Text>
+                <Text>{product.name}</Text>
+              </FlexColumn>
+              <Text
+                className="text-blue-400 cursor-pointer"
+                onClick={() => navigate.push(`/public-library/view?did=${product.identity.find((i) => i.type.toLowerCase() === 'did')?.value}`)}>
+                View
+              </Text>
+            </ResultCard>
+          ))}
         </FlexColumn>
-      } */}
+      </Modal>
     </SearchWrapper>
   )
 }
 
 const CategoryCardXL = ({ category }: { category: string }) => {
   return (
-    <FlexColumn className="bg-white p-4 rounded-md shadow-md w-full min-w-[150px] max-w-[200px]">
-      <Category.Arts />
-      <Text className="text-2xl font-semibold text-center mt-4">{category}</Text>
-      <Button className="mt-4">Explore {category}</Button>
+    <FlexColumn className="bg-white p-4 rounded-md shadow-md w-full min-w-[150px] max-w-[200px]
+      items-center justify-center
+    ">
+      <FlexRow className="items-center gap-2">
+        <Category.Education />
+        <Text className="text-xl font-semibold">{category}</Text>
+      </FlexRow>
+      <Text className="mt-2 text-center w-full">Explore {category}</Text>
     </FlexColumn>
   )
 }

@@ -7,10 +7,11 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { constructUDIDForProductText, useCreateUDPD, useGenerateToJson, useGetIndexedUdid, useUDPDByUDID } from "@ap/hooks/api-product.hooks";
 import { Select } from "@mantine/core";
-import { GeneralState } from "@ap/shared/consts";
+import { descriptionShortener, GeneralState } from "@ap/shared/consts";
 import Image from "next/image";
 import { ConnectKitButton } from "connectkit";
 import { useAccount, useClient } from "wagmi";
+import { useRouter } from "next/navigation";
 
 const Grid2Col = styled.div`
   display: grid;
@@ -88,6 +89,12 @@ const TabOptionButton = styled(DefaultButton)<{ active: boolean }>`
   border-radius: 4px;
   cursor: pointer;
 `
+
+const FoundCard = styled.div`
+  background-color: #f8fafc;
+  padding: 24px;
+  border-radius: 8px;
+`;
 const ContentInput = ({
   text,
   setText,
@@ -108,7 +115,7 @@ const ContentInput = ({
   setSelectedUdid: (udid: string) => void
 }) => {
   const [tabOption, setTabOption] = useState<TabOption>('Unstructured');
-  console.log('indexedUdids', indexedUdids);
+  const navigate = useRouter();
 
   const client = useAccount();
 
@@ -155,15 +162,23 @@ const ContentInput = ({
       {/* Text area for product data */}
 
       {udpdByUdid && (
-        <Text className="mt-4">
-          Found {udpdByUdid.name} uDPD for selected uDID
-        </Text>
+        <FoundCard className="mt-4">
+          <Text>
+            Found {udpdByUdid.name} uDPD for selected uDID
+          </Text>
+          <FlexRow className="gap-2 mt-2 justify-between items-end">
+            <Text className="text-slate-500">{descriptionShortener(udpdByUdid.description)}</Text>
+            <Text className="text-md text-blue-400 cursor-pointer"
+              onClick={() => navigate.push(`/public-library/view?did=${selectedUdid}`)}
+            >View</Text>
+          </FlexRow>
+        </FoundCard>
       )}
       <TextAreaStyled
         placeholder={selectedUdid === null ? "Please select uDID" : "Describe your product here..."}
         value={text}
         onChange={(e) => setText(e.target.value)}
-        disabled={selectedUdid === null}
+        disabled={selectedUdid === null || udpdByUdid}
       />
       <PrimaryButton
         onClick={() => onGenerateToJson(text)}

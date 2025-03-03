@@ -3,6 +3,7 @@ import { Button, DefaultButton, FlexColumn, FlexRow, PrimaryButton, Spacer } fro
 import { SearchInput, SearchLogo, SearchWrapper, Text, TopHeader } from "./components/styled"
 import { Category, Graphics, Icons } from "/public/svgs";
 import { useSearch } from "@ap/hooks/search.hooks";
+import { useRouter } from "next/navigation";
 
 export default function PublicLibrary() {
   return (
@@ -50,14 +51,19 @@ export default function PublicLibrary() {
 
 const Search = () => {
   const { searchInput, setSearchInput } = useSearch();
+  const navigate = useRouter();
   return (
     <SearchWrapper>
       <SearchInput placeholder="Enter something to explore"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
       />
-      <SearchLogo>
-        <Icons.SearchIcon />
+      <SearchLogo
+        onClick={
+          () => navigate.push(`/public-library/view?did=${searchInput}`)
+        }
+      >
+        <Icons.SearchIcon/>
       </SearchLogo>
       {/* {searchInput.length > 0 &&
         <FlexColumn className="absolute bottom-[-56px] left-0 bg-white rounded-[.375rem] w-full">

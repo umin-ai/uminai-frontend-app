@@ -18,9 +18,11 @@ const useResolveDIDIpfs = () => {
       console.log('response', response);
       setDidDoc(response.data);
       setResolveIPFSState((prevState) => ({ ...prevState, isLoading: false, isSuccess: true }));
+      return response.data;
     } catch (error) {
       console.error('Error resolving DID', error);
       setResolveIPFSState((prevState) => ({ ...prevState, isLoading: false, error }));
+      return null;
     } finally {
       setResolveIPFSState((prevState) => ({ ...prevState, isLoading: false }));
     }

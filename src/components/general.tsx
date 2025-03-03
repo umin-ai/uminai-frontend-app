@@ -1,6 +1,16 @@
 import { Space } from "@mantine/core";
 import styled from "styled-components";
 
+export const TopHeaderDefault = styled.div`
+  background-color: #f8fafc;
+  // background-image: radial-gradient(59.1% 166.02% at 50% -66.02%, 1);
+  background-image: linear-gradient(180deg, #f8fafc 50%, #e2e8f0  100%);
+  padding: 24px;
+
+  display: flex;
+  flex-direction: row;
+`
+
 export const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -101,6 +111,13 @@ export const PrimaryButton = styled(Button)`
     //  linear to top a little bit whiter
     background-image: linear-gradient(to top, #3e7aff var(--tw-gradient-from-position), #487ef7 var(--tw-gradient-to-position));
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  // disabled
+  &:disabled {
+    background-color: #cccccc;
+    background-image: none;
+    color: white;
   }
 `;
 

@@ -30,7 +30,7 @@ export default function UDID () {
   }
 
   return (
-    <FlexColumn className="justify-between">
+    <FlexColumn className="justify-between min-h-[100vh]">
     <FlexColumn className="h-full">
       <TopUDIDHeader>
         <FlexColumn className="w-[60%]">
@@ -136,6 +136,8 @@ const ResolveDIDIPFS = () => {
     }
   }
 
+  console.log('didPointers', didPointers);
+
   const { onResolveIPFS, didDoc, resolveIPFSState } = useResolveDIDIpfs()
 
   useEffect(() => {
@@ -151,7 +153,7 @@ const ResolveDIDIPFS = () => {
         border-t border-gray-400
       ">
         <Text className="font-bold text-3xl">
-          Resolve your uDID
+          Resolve uDID
         </Text>
         <FlexRow className="gap-3 mt-6 max-w-[453px] w-full">
           <StyledInput placeholder="Enter your uDID"

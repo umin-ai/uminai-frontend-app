@@ -8,11 +8,18 @@ import styled from "styled-components";
 import { JsonView, allExpanded, darkStyles, defaultStyles } from 'react-json-view-lite';
 import "react-json-view-lite/dist/index.css";
 import { sampleJson } from "./sample.json";
+import { useReadDIDPointerDocument } from "@ap/hooks/web3.hooks";
+import { useUDPDByUDID } from "@ap/hooks/api-product.hooks";
+import { useEffect } from "react";
 
 export default function View() {
   const searchParams = useSearchParams();
   const did = searchParams.get('did');
-  console.log('did', did);
+  // console.log('did', did);
+
+  const { didDoc } = useReadDIDPointerDocument({
+    didFromQuery: did
+  });
   
   return (
     <FlexColumn>
@@ -30,8 +37,8 @@ export default function View() {
         </TopViewHeader>
 
         <GridLayout>
-          <LeftCard></LeftCard>
-          <RightCard></RightCard>
+          <LeftCard udid={did} jsonDocument={didDoc}/>
+          <RightCard udid={did}/>
         </GridLayout>
       </FlexColumn>
     </FlexColumn>
@@ -59,19 +66,28 @@ const RawFileJsonBox = styled.div`
   overflow-y: scroll;
 `
 
-const LeftCard = () => {
+const LeftCard = ({
+  udid,
+  jsonDocument
+}: {
+  udid: string | null;
+  jsonDocument: any;
+}) => {
+  console.log('jsonDocument', jsonDocument);
   return (
-    <LeftCardLayout>
-      <FlexRow className="items-center">
+    <LeftCardLayout className="max-w-[500px]">
+      <FlexRow className="items-start">
         <Text className="text-[#2563EB] font-semibold text-lg">
           uDID:&nbsp;{" "}
         </Text>
         <Text className="text-[#71717a] font-semibold text-lg">
-          did:uminai:0x1234567890abcdef
+          {udid}
         </Text>
       </FlexRow>
       <RawFileJsonBox className="mt-6">
-        <JsonView data={sampleJson} style={defaultStyles} shouldExpandNode={allExpanded} />
+        {jsonDocument &&
+          <JsonView data={jsonDocument} style={defaultStyles} shouldExpandNode={allExpanded}/>
+        }
       </RawFileJsonBox>
     </LeftCardLayout>
   )
@@ -83,7 +99,19 @@ const RightCardLayout = styled.div`
   border-radius: 8px;
 `;
 
-const RightCard = () => {
+const RightCard = ({
+  udid,
+}: {
+  udid: string | null;
+}) => {
+  const { onGetUDPDByUDID, udpdByUdid, udpdByUdidState } = useUDPDByUDID();
+  useEffect(() => {
+    if (udid || udid && !udpdByUdid) {
+      onGetUDPDByUDID(udid);
+    }
+  }, [udid]);
+
+  // console.log('hello', udpdByUdid);
   return (
     <RightCardLayout>
       <FlexRow className="items-center">
@@ -91,7 +119,8 @@ const RightCard = () => {
           Information:&nbsp;{" "}
         </Text>
       </FlexRow>
-      <p>
+      {udpdByUdid && <ProductSpecs product={udpdByUdid} />}
+      {/* <p>
       {`1. Product Module (ID: did:uminai:container-unique-id)
     2. Product Details
        - Name: Container
@@ -123,10 +152,83 @@ const RightCard = () => {
           - Step 3: Place your items inside, making sure to organize them properly.
           - Step 4: Close the lid securely to keep the contents safe.
           - Step 5: Store the container in a cool, dry place to maintain its condition`}
-      </p>
+      </p> */}
       {/*  */}
     </RightCardLayout>
   )
 }
 
-// const 
+type HeadingTitleProps = {
+  children: React.ReactNode;
+};
+const HeadingTitle: React.FC<HeadingTitleProps> = ({ children }) => (
+  <div style={{ fontWeight: 'bold', marginRight: '16px' }}>{children}</div>
+);
+
+type ValueDataProps = {
+  children: React.ReactNode;
+};
+const ValueData: React.FC<ValueDataProps> = ({ children }) => (
+  <div>{children}</div>
+);
+
+interface RenderSpecProps {
+  label: string;
+  data: any;
+}
+
+const RenderSpec: React.FC<RenderSpecProps> = ({ label, data }) => {
+  // If data is an array, render each item inside a collapsible section.
+  if (Array.isArray(data)) {
+    return (
+      <details style={{ paddingLeft: '16px', marginBottom: '8px', textTransform: 'capitalize' }}>
+        <summary>{label} (Array: {data.length} items)</summary>
+        {data.map((item, index) => (
+          <RenderSpec key={index} label={`${label} ${index + 1}`} data={item} />
+        ))}
+      </details>
+    );
+  }
+
+  // If data is an object (and not null), iterate over its properties.
+  if (typeof data === 'object' && data !== null) {
+    return (
+      <details style={{ paddingLeft: '16px', marginBottom: '8px' }}>
+        <summary className="capitalize">{label} (Object)</summary>
+        {Object.entries(data).map(([key, value]) => (
+          <RenderSpec key={key} label={key} data={value} />
+        ))}
+      </details>
+    );
+  }
+
+  // Otherwise, render the primitive value directly.
+  return <InfoFlexRow label={label} value={data.toString()} />;
+};
+
+interface InfoFlexRowProps {
+  label: string;
+  value: React.ReactNode;
+}
+
+const InfoFlexRow: React.FC<InfoFlexRowProps> = ({ label, value }) => (
+  <div style={{ display: 'flex', padding: '4px 0' }}>
+    <div style={{ fontWeight: 'bold', marginRight: '8px', minWidth: '150px', textTransform: 'capitalize' }}>
+      {label}:
+    </div>
+    <div>{value}</div>
+  </div>
+);
+interface ProductSpecsProps {
+  product: any; // You can define a more specific type if needed
+}
+
+const ProductSpecs: React.FC<ProductSpecsProps> = ({ product }) => {
+  return (
+    <div>
+      {Object.entries(product).map(([key, value]) => (
+        <RenderSpec key={key} label={key} data={value} />
+      ))}
+    </div>
+  );
+};

@@ -4,8 +4,8 @@ import { DefaultButton, FlexColumn, FlexRow, Footer, PrimaryButton } from "@ap/c
 import { TopUDPDHeader } from "./components/styled";
 import { Text } from "../public-library/components/styled";
 import styled from "styled-components";
-import { useState } from "react";
-import { constructUDIDForProductText, useCreateUDPD, useGenerateToJson, useGetIndexedUdid } from "@ap/hooks/api-product.hooks";
+import { useEffect, useState } from "react";
+import { constructUDIDForProductText, useCreateUDPD, useGenerateToJson, useGetIndexedUdid, useUDPDByUDID } from "@ap/hooks/api-product.hooks";
 import { Select } from "@mantine/core";
 import { GeneralState } from "@ap/shared/consts";
 import Image from "next/image";
@@ -111,7 +111,14 @@ const ContentInput = ({
   console.log('indexedUdids', indexedUdids);
 
   const client = useAccount();
+
+  const { udpdByUdid, udpdByUdidState, onGetUDPDByUDID } = useUDPDByUDID(); 
   
+  useEffect(() => {
+    if (selectedUdid) {
+      onGetUDPDByUDID(selectedUdid);
+    }
+  }, [selectedUdid]);
   return (
     <FlexColumn className="px-12 py-8">
       <Text className="text-[#000] font-semibold text-2xl uppercase">
@@ -146,6 +153,12 @@ const ContentInput = ({
         >Image Processing (Upcoming)</TabOptionButton>
       </FlexRow>
       {/* Text area for product data */}
+
+      {udpdByUdid && (
+        <Text className="mt-4">
+          Found {udpdByUdid.name} uDPD for selected uDID
+        </Text>
+      )}
       <TextAreaStyled
         placeholder={selectedUdid === null ? "Please select uDID" : "Describe your product here..."}
         value={text}

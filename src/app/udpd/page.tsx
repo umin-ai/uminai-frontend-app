@@ -9,6 +9,8 @@ import { constructUDIDForProductText, useCreateUDPD, useGenerateToJson, useGetIn
 import { Select } from "@mantine/core";
 import { GeneralState } from "@ap/shared/consts";
 import Image from "next/image";
+import { ConnectKitButton } from "connectkit";
+import { useAccount, useClient } from "wagmi";
 
 const Grid2Col = styled.div`
   display: grid;
@@ -107,6 +109,9 @@ const ContentInput = ({
 }) => {
   const [tabOption, setTabOption] = useState<TabOption>('Unstructured');
   console.log('indexedUdids', indexedUdids);
+
+  const client = useAccount();
+  
   return (
     <FlexColumn className="px-12 py-8">
       <Text className="text-[#000] font-semibold text-2xl uppercase">
@@ -115,11 +120,18 @@ const ContentInput = ({
       <Text>
         Insert your product data and let uminai Agent handle the rest.
       </Text>
+
+      <Text className="mt-4">
+        Connect wallet to get started
+      </Text>
+      <ConnectKitButton theme="soft" mode="light" showAvatar={false} />
+
       <Text className="mt-4">
         Select uDID
         <Select
           data={indexedUdids}
           value={selectedUdid}
+          disabled={!client.isConnected}
           onChange={(value) => value && setSelectedUdid(value)}  
         />
       </Text>

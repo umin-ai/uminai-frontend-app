@@ -203,7 +203,13 @@ const RenderSpec: React.FC<RenderSpecProps> = ({ label, data }) => {
   }
 
   // Otherwise, render the primitive value directly.
-  return <InfoFlexRow label={label} value={data.toString()} />;
+  if (typeof data === 'string' && data !== null) {
+    return <InfoFlexRow label={label} value={data} />;
+  } else if (data !== null) {
+    return <InfoFlexRow label={label} value={data.toString()} />;
+  } else {
+    return <></>
+  }
 };
 
 interface InfoFlexRowProps {

@@ -37,6 +37,12 @@ export default function Home() {
             image="/images/udpd.png"
             link="/udpd"
           />
+          <Card
+            title="4. AI in Action"
+            description="View uminais AI in action. Explore AI models and engage with uminai Agent"
+            image="/images/udpd.png"
+            link="/ai"
+          />
         </Grid3Col>
         </FlexColumn>
     </FlexColumn>

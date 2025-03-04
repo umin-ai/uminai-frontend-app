@@ -1,14 +1,10 @@
 import { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://astro-promotions.com';
+const BASE_URL = 'https://umin.ai';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
-    '#promotions',
-    '#astro-packages',
-    '#contactus',
-    '#astr-fibre',
   ];
 
   return routes.map((route) => ({

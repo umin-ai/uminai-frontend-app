@@ -69,3 +69,35 @@ export const Category = () => {
     </CategoryBox>
   )
 }
+
+export const StyledLLMInput = styled.input`
+  border: 1px solid #e2e8f0;
+  padding: 8px 48px 8px 18px;
+  border-radius: 24px;
+  display: flex;
+  z-index: 1;
+  width: inherit;
+
+  // change the border color when focused
+  &:focus {
+    border-color: #2563eb !important;
+    outline: #2563eb !important;
+  }
+`
+
+export const StyledOpenAIResponseTextArea = styled.div`
+  width: 100%;
+  // the height is auto adjusted
+  scroll-behavior: smooth;
+  // background-color: #f8fafc;
+  // need nice and darker abit
+  background-color: #f0f0f0;
+  padding: 8px;
+  min-height: 50px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: start;
+  display: flex;
+`
+
+// export const Style

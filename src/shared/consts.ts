@@ -15,7 +15,7 @@ export const InitialGeneralState: GeneralState = {
 
 export const descriptionShortener = (description: string) => {
   if (description.length > 100) {
-    return description.slice(0, 100) + '...';
+    return description.slice(0, 180) + '...';
   }
   return description;
 }

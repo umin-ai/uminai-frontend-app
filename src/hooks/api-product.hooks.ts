@@ -218,12 +218,12 @@ export const useQueryProducts = () => {
 
       const result = response.data.result;
       setQueryResult(result);
-      setQueryState({ ...queryState, isSuccess: true });
+      setQueryState((prevState) => ({ ...prevState, isSuccess: true }));
     } catch (error) {
       console.error('Error querying products', error);
-      setQueryState({ ...queryState, error });
+      setQueryState((prevState) => ({ ...prevState, error }));
     } finally {
-      setQueryState({ ...queryState, isLoading: false });
+      setQueryState((prevState) => ({ ...prevState, isLoading: false }));
     }
   }
 
@@ -233,5 +233,39 @@ export const useQueryProducts = () => {
     queryResult,
     queryState,
     onQuery
+  }
+}
+
+export const useAskUAgentLLM = () => {
+  const [askUAgentLLMState, setAskUAgentLLMState] = useState<GeneralState>(InitialGeneralState);
+  const [askUAgentLLMResult, setAskUAgentLLMResult] = useState<string | null>(null);
+
+  const onAskUAgentLLM = async (question: string) => {
+    try {
+      setAskUAgentLLMResult(null);
+      setAskUAgentLLMState({ ...askUAgentLLMState, error: null, isLoading: true });
+      const response = await axios.post(`${BASE_SERVER_URL}/product/chat-product`, {
+        question
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const result = response.data.result;
+      setAskUAgentLLMResult(result);
+      setAskUAgentLLMState((prevState) => ({ ...prevState, isSuccess: true }));
+    } catch (error) {
+      console.error('Error asking UAgent LLM', error);
+      setAskUAgentLLMState((prevState) => ({ ...prevState, error }));
+    } finally {
+      setAskUAgentLLMState((prevState) => ({ ...prevState, isLoading: false }));
+    }
+  }
+
+  return {
+    askUAgentLLMResult,
+    askUAgentLLMState,
+    onAskUAgentLLM
   }
 }

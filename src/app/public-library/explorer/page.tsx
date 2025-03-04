@@ -7,6 +7,7 @@ import { IProduct } from "@ap/shared/product.interface";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { descriptionShortener } from "@ap/shared/consts";
+import { CategoryCard, FlexColumnCard, TagCard } from "./components/styled";
 
 const Grid2Sides = styled.div`
   display: grid;
@@ -131,29 +132,16 @@ const Panel2 = ({
                 </CategoryCard>
               ))}
             </FlexRow>
+            <FlexRow className="gap-2 mt-2">
+              {udpd.tags.map((tag) => (
+                <TagCard key={tag}>
+                  <Text>{tag}</Text>
+                </TagCard>
+              ))}
+            </FlexRow>
           </FlexColumnCard>
         ))}
       </FlexColumn>
     </FlexColumn>
   )
 }
-
-const FlexColumnCard = styled(FlexColumn)`
-  background-color: #f8fafc;
-  padding: 24px;
-  margin-top: 10px;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-`;
-
-
-
-const CategoryCard = styled.div`
-  background-color: #c1d2f7;
-  padding: 6px;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  font-size: 12px;
-  font-weight: 500;
-`

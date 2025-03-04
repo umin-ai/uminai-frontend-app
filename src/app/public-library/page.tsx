@@ -2,14 +2,42 @@
 import { Button, DefaultButton, FlexColumn, FlexRow, PrimaryButton, Spacer } from "@ap/components/general";
 import { SearchInput, SearchLogo, SearchWrapper, Text, TopHeader } from "./components/styled"
 import { Category, Graphics, Icons } from "/public/svgs";
-import { useSearch } from "@ap/hooks/search.hooks";
 import { useRouter } from "next/navigation";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import { useQueryProducts } from "@ap/hooks/api-product.hooks";
 import styled from "styled-components";
+import { AskUAgentComponent } from "@ap/shared/components";
+
+
+
+const AskUAgentButton = () => {
+  const [openedPanel, { open: openPanel, close: closePanel }] = useDisclosure();
+  return (
+    <>
+      <FlexColumn className="bg-white p-2 rounded-md shadow-md w-full min-w-[150px] max-w-[200px] items-center justify-center cursor-pointer"
+        onClick={openPanel}
+      >
+        <FlexRow className="items-center gap-2">
+          <Category.Social />
+          <Text className="text-md font-semibold">Ask uAgent</Text>
+        </FlexRow>
+      </FlexColumn>
+      <Modal
+          opened={openedPanel}
+          onClose={closePanel}
+          title="Ask uAgent"
+          size="xl"
+          centered
+        >
+        <AskUAgentComponent />
+      </Modal>
+    </>
+  )
+}
 
 export default function PublicLibrary() {
+  const navigate = useRouter();
   return (
     <div>
       <TopHeader>
@@ -25,16 +53,21 @@ export default function PublicLibrary() {
             Station for researchers, developers, and enthusiasts to access and contribute to product information.
           </Text>
           <FlexRow className="gap-3 mt-5">
-            <PrimaryButton>Read more</PrimaryButton>
+            <PrimaryButton
+              onClick={() => navigate.push('/public-library/explorer')}
+            >Product Explorer</PrimaryButton>
             <DefaultButton>Contribute</DefaultButton>
           </FlexRow>
         </FlexColumn>
       </TopHeader>
-      <FlexColumn className="relative items-center h-[250px] overflow-hidden gap-6">
+      <FlexColumn className="relative items-center h-[300px] overflow-hidden gap-6">
         <Text className="font-bold text-3xl text-center w-[635px] mt-10">
           Tap into uminai's Public Library of Product Information
         </Text>
         <Search />
+
+        <AskUAgentButton />
+
         <div className="absolute bottom-[-32px] left-0 z-[-1]
           filter opacity-60
         ">

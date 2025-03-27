@@ -28,7 +28,7 @@
     "**/*.ts", 
     "**/*.tsx", 
     ".next/types/**/*.ts",
-    "svgr.d.ts",
+    "svgr.d.ts", "src/app/llm.page.tsx.bak",
   ],
   "exclude": ["node_modules"]
 }

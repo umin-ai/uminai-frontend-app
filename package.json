@@ -14,7 +14,7 @@
     "@mantine/form": "^7.13.4",
     "@mantine/hooks": "^7.13.4",
     "@mantine/modals": "^7.13.4",
-    "@next/third-parties": "^15.0.2",
+    "@next/third-parties": "15.2.4",
     "@tanstack/react-query": "^5.66.9",
     "@types/uuid": "^10.0.0",
     "axios": "^1.8.1",
@@ -24,11 +24,11 @@
     "ethers": "^5.7.2",
     "hodl100k": "file:",
     "jotai": "^2.10.3",
-    "next": "15.0.1",
-    "react": "19.0.0-rc-69d4b800-20241021",
+    "next": "15.2.4",
+    "react": "19.0.0",
     "react-animated-cursor": "^2.11.2",
     "react-audio-player": "^0.17.0",
-    "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "react-dom": "19.0.0",
     "react-json-view-lite": "^2.3.0",
     "react-qr-code": "^2.0.15",
     "react-screentype-hook": "^1.0.18",
@@ -39,12 +39,16 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4",
     "postcss": "^8.4.47",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4"
   }
 }

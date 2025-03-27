@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Grandstander, Poppins } from "next/font/google";
-import { MantineProvider } from '@mantine/core';
+import { createTheme, MantineProvider } from '@mantine/core';
 import "./globals.css";
 import '@mantine/core/styles.css';
 import StyledComponentsRegistry from "@ap/lib/registry";
@@ -14,23 +14,23 @@ const grandstander = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "LLM",
-  description: "LLM",
-  keywords: "LLM",
-  authors: { name: "LLM" },
+  title: "Public Library",
+  description: "Public Library",
+  keywords: "Public Library",
+  authors: { name: "Public Library" },
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   openGraph: {
-    title: "LLM",
-    description: "LLM",
+    title: "Public Library",
+    description: "Public Library",
     url: "https://stanleythecat.com",
-    siteName: "LLM",
+    siteName: "Public Library",
     images: [
       {
         url: "https://hodl100k.xyz/images/Sample.png",
         width: 1184,
         height: 709,
-        alt: "LLM",
+        alt: "Public Library",
       },
     ],
     type: "website",
@@ -38,12 +38,6 @@ export const metadata: Metadata = {
   icons: [
   ]
 };
-
-const ExtendedMetadata = () => (
-  <>
-    <meta name='googlebot' content="NOODP"></meta>
-  </>
-)
 
 export default function RootLayout({
   children,
@@ -62,45 +56,6 @@ export default function RootLayout({
       <body
         className={grandstander.className}
       >
-        {/* <AnimatedCursor       
-          innerSize={8}
-          outerSize={35}
-          innerScale={1}
-          outerScale={2}
-          outerAlpha={0}
-          showSystemCursor={false}
-          outerStyle={{
-            border: '3px solid #E7AE35'
-          }}
-          innerStyle={{
-            backgroundColor: '#E7AE35',
-          }}
-          clickables={[{
-            target: '.lefter',
-            innerSize: 10,
-            innerScale: 1,
-            outerScale: 1,
-            outerAlpha: 0,
-            innerStyle: {
-              backgroundColor: '#fff',
-            },
-            outerStyle: {
-              border: '3px solid #fff',
-            }
-          }, {
-            target: '.righter',
-            innerSize: 10,
-            innerScale: 1,
-            outerScale: 1,
-            outerAlpha: 0,
-            innerStyle: {
-              backgroundColor: '#fff',
-            },
-            outerStyle: {
-              border: '3px solid #fff',
-            }
-          }]}
-        /> */}
         <MantineProvider>
           <StyledComponentsRegistry>
             <Web3Provider>
@@ -108,12 +63,6 @@ export default function RootLayout({
                 {children}
               </Suspense>
             </Web3Provider>
-            {/* <Repeater children={children}/> */}
-            {/* <Siders /> */}
-            {/* <Floater /> */}
-            {/* <CAFloater /> */}
-            {/* <CallToActionFloater /> */}
-            {/* <Notifications /> */}
           </StyledComponentsRegistry>
         </MantineProvider>
       </body>
